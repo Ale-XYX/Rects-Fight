@@ -338,7 +338,7 @@ class Game():
                     player2.toggle = False
                     confirm = False
                     time = True
-                    for bullet in bullets1 and bullet:
+                    for bullet in bullets1:
                         bullet.toggle = False
                     for bullet in bullets2:
                         bullet.toggle = False
