@@ -158,7 +158,7 @@ class Game():
                 screen.blit(txt1, (260, 150))
                 screen.blit(textS4, (135, 250))
                 screen.blit(txt2, (260, 250))
-                screen.blit(textS2, (150, 400))
+                screen.blit(textS2, (125, 400))
                 pygame.display.flip()
                 clock.tick(60)                
         # Main Game
@@ -395,8 +395,6 @@ class Game():
                 screen.fill(Game.black)
                 if confirm:
                     screen.blit(Game.Media.paused, (145, 210))
-                if egg:
-                    screen.blit(Game.Media.egg, (195, 100))
                 screen.blit(Game.Media.wall, (0, 0))
                 screen.blit(txt, (textlocal))
                 all_sprites.draw(screen)
@@ -409,13 +407,3 @@ if __name__ == '__main__':
     Game.Engine.Main()
     pygame.quit()
 # SnivyDroid
-            
-                
-                
-                        
-                    
-                        
-                    
-        
-    
-    
