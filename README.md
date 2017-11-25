@@ -1,4 +1,4 @@
-# Rects-Fight V1.3   
+# Rects-Fight   
 
 Version 1.3 : SnivyDroid
 
