@@ -1,0 +1,5 @@
+HOW TO INSTALL:
+1. Download and Run the python installer [If you dont have it yet]
+2. Select the "ADD TO PATH" option
+3. Click the install button and wait until installer is finished
+4. Run the pygame.bat file and let it install, install is finished when window is closed
