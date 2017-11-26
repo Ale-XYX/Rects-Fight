@@ -253,8 +253,7 @@ class Game():
             screen.blit(Fetch('player', 'player2', 'image'), (355, 310))
             pygame.display.flip()
             clock.tick(60)
-    def Main():
-
+    def Main()
         # Functions
         def MainFetch(typeOf, player):
             if typeOf == 'time':                
