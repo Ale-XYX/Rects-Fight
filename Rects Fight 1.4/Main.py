@@ -211,16 +211,20 @@ class Game():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_w:
                         Global.P1Char += 1
-                        Media.select.play()
-                    elif event.key == pygame.K_w:
+                        if Global.P1Char <= 5:
+                            Media.select.play()
+                    elif event.key == pygame.K_s:
                         Global.P1Char -= 1
-                        Media.select.play()
+                        if Global.P1Char >= 1:
+                            Media.select.play()
                     if event.key == pygame.K_UP:
                         Global.P2Char += 1
-                        Media.select.play()
+                        if Global.P2Char <= 5:
+                            Media.select.play()
                     elif event.key == pygame.K_DOWN:
                         Global.P2Char -= 1
-                        Media.select.play()
+                        if Global.P2Char >= 1:
+                            Media.select.play()
                     if event.key == pygame.K_SPACE:
                         loop = False
             if Global.P1Char == 6:
@@ -269,7 +273,7 @@ class Game():
         vel_reset = 0
         timer = 30
         dt = clock.tick(60) / 1000
-        textlocal = (220, 520)
+        textlocal = (230, 520)
         def MainFetch(typeOf, player):
             if typeOf == 'time':                
                 if timer < 10:
@@ -467,11 +471,3 @@ if __name__ == '__main__':
     Game.CharSelect()
     Game.Main()
     pygame.quit()
-            
-            
-        
-        
-
-        
-    
-    
