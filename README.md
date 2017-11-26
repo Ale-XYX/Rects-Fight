@@ -20,8 +20,10 @@ ESC to leave
 
 Game Ends when one player dies [After taking three hits]
 
-# Changelog 1.3:
-- Character Select!
-- New Character: Green
-- Added Game Soundtrack
-- Random fixes/optimizations
+# Changelog 1.4:
+Changelog 1.4:
+- New Characters: Green, Purple, And Red!
+- Images now show in character select screen
+- New Sound Effects
+- HP Bars!
+- Egg 20s
