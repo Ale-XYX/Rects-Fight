@@ -254,31 +254,8 @@ class Game():
             pygame.display.flip()
             clock.tick(60)
     def Main():
-<<<<<<< HEAD
+
         # Functions
-=======
-        # Game Variables
-        all_sprites = pygame.sprite.Group()
-        bullets1 = pygame.sprite.Group()
-        bullets2 = pygame.sprite.Group()
-        player1 = Sprites.Player((35, 35), bullets2, Fetch('player', 'player1', 'image'), (8, 0), all_sprites)
-        player2 = Sprites.Player((465, 465), bullets1, Fetch('player', 'player2', 'image'), (-8, 0), all_sprites)
-        clock = pygame.time.Clock()
-        textstatic1 = Global.font2.render('Player 1', True, Global.white)
-        textstatic2 = Global.font2.render('Player 2', True, Global.white)
-        # Conditionals
-        loop = True
-        time = True
-        onStart = True
-        onEnd = True
-        confirm = False
-        # Integers
-        vel = 8
-        vel_reset = 0
-        timer = 30
-        dt = clock.tick(60) / 1000
-        textlocal = (230, 520)
->>>>>>> 66a740e420b9b11b4716ea2249c4e3654f93d1c6
         def MainFetch(typeOf, player):
             if typeOf == 'time':                
                 if timer < 10:
@@ -327,6 +304,27 @@ class Game():
                         return Media.hp3
                     if player2.health == 0:
                         return Media.dead
+        # Game Variables
+        all_sprites = pygame.sprite.Group()
+        bullets1 = pygame.sprite.Group()
+        bullets2 = pygame.sprite.Group()
+        player1 = Sprites.Player((35, 35), bullets2, Fetch('player', 'player1', 'image'), (8, 0), all_sprites)
+        player2 = Sprites.Player((465, 465), bullets1, Fetch('player', 'player2', 'image'), (-8, 0), all_sprites)
+        clock = pygame.time.Clock()
+        textstatic1 = Global.font2.render('Player 1', True, Global.white)
+        textstatic2 = Global.font2.render('Player 2', True, Global.white)
+        # Conditionals
+        loop = True
+        time = True
+        onStart = True
+        onEnd = True
+        confirm = False
+        # Integers
+        vel = 8
+        vel_reset = 0
+        timer = 30
+        dt = clock.tick(60) / 1000
+        textlocal = (230, 520)
         # Game Variables
         all_sprites = pygame.sprite.Group()
         bullets1 = pygame.sprite.Group()
@@ -510,11 +508,6 @@ class Game():
 if __name__ == '__main__':
     Game.Title()
     Game.CharSelect()
-<<<<<<< HEAD
     while Global.superloop == True:
         Game.Main()
     pygame.quit()                                                   
-=======
-    Game.Main()
-    pygame.quit()
->>>>>>> 66a740e420b9b11b4716ea2249c4e3654f93d1c6
