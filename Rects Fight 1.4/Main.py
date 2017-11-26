@@ -15,6 +15,7 @@ class Global():
     purple = (205, 43, 255)
     P1Char = 1
     P2Char = 2
+    superloop = True
     font = pygame.font.Font(None, 40)
     font2 = pygame.font.Font(None, 20)
     playarea = pygame.Rect(5, 5, 490, 490)
@@ -211,16 +212,20 @@ class Game():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_w:
                         Global.P1Char += 1
-                        Media.select.play()
-                    elif event.key == pygame.K_w:
+                        if Global.P1Char <= 5:
+                            Media.select.play()
+                    elif event.key == pygame.K_s:
                         Global.P1Char -= 1
-                        Media.select.play()
+                        if Global.P1Char >= 1:
+                            Media.select.play()
                     if event.key == pygame.K_UP:
                         Global.P2Char += 1
-                        Media.select.play()
+                        if Global.P2Char <= 5:
+                            Media.select.play()
                     elif event.key == pygame.K_DOWN:
                         Global.P2Char -= 1
-                        Media.select.play()
+                        if Global.P2Char >= 1:
+                            Media.select.play()
                     if event.key == pygame.K_SPACE:
                         loop = False
             if Global.P1Char == 6:
@@ -249,27 +254,7 @@ class Game():
             pygame.display.flip()
             clock.tick(60)
     def Main():
-        # Game Variables
-        all_sprites = pygame.sprite.Group()
-        bullets1 = pygame.sprite.Group()
-        bullets2 = pygame.sprite.Group()
-        player1 = Sprites.Player((35, 35), bullets2, Fetch('player', 'player1', 'image'), (8, 0), all_sprites)
-        player2 = Sprites.Player((465, 465), bullets1, Fetch('player', 'player2', 'image'), (-8, 0), all_sprites)
-        clock = pygame.time.Clock()
-        textstatic1 = Global.font2.render('Player 1', True, Global.white)
-        textstatic2 = Global.font2.render('Player 2', True, Global.white)
-        # Conditionals
-        loop = True
-        time = True
-        onStart = True
-        onEnd = True
-        confirm = False
-        # Integers
-        vel = 8
-        vel_reset = 0
-        timer = 30
-        dt = clock.tick(60) / 1000
-        textlocal = (220, 520)
+        # Functions
         def MainFetch(typeOf, player):
             if typeOf == 'time':                
                 if timer < 10:
@@ -318,6 +303,27 @@ class Game():
                         return Media.hp3
                     if player2.health == 0:
                         return Media.dead
+        # Game Variables
+        all_sprites = pygame.sprite.Group()
+        bullets1 = pygame.sprite.Group()
+        bullets2 = pygame.sprite.Group()
+        player1 = Sprites.Player((35, 35), bullets2, Fetch('player', 'player1', 'image'), (8, 0), all_sprites)
+        player2 = Sprites.Player((465, 465), bullets1, Fetch('player', 'player2', 'image'), (-8, 0), all_sprites)
+        clock = pygame.time.Clock()
+        textstatic1 = Global.font2.render('Player 1', True, Global.white)
+        textstatic2 = Global.font2.render('Player 2', True, Global.white)
+        # Conditionals
+        loop = True
+        time = True
+        onStart = True
+        onEnd = True
+        confirm = False
+        # Integers
+        vel = 8
+        vel_reset = 0
+        timer = 30
+        dt = clock.tick(60) / 1000
+        textlocal = (230, 520)
         while loop:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -402,6 +408,9 @@ class Game():
                 pygame.mixer.unpause()
                 Media.pause.play()
             elif keys[pygame.K_ESCAPE] and confirm:
+                Global.superloop = False
+                loop = False
+            elif keys[pygame.K_SPACE] and confirm:
                 loop = False
             if time:
                 timer -= dt
@@ -420,7 +429,10 @@ class Game():
                     textlocal = (190, 520)
                     txt = Global.font.render('Times Up!', True, Global.grey)
             if not time and keys[pygame.K_ESCAPE]:
+                Global.superloop = False
                 loop = False
+            elif not time and keys[pygame.K_SPACE] and not confirm:
+                    loop = False
             # Player 1 Outcome
             if player1.health == 0:
                 txt = Global.font.render('Player 2 Wins!', True, MainFetch('player', None))
@@ -429,6 +441,9 @@ class Game():
                 onEnd = False
                 Media.music.stop()
                 if keys[pygame.K_ESCAPE] and not confirm:
+                    Global.superloop = False
+                    loop = False
+                elif keys[pygame.K_SPACE] and not confirm:
                     loop = False
             # Player 2 Outcome
             if player2.health == 0:
@@ -438,6 +453,9 @@ class Game():
                 onEnd = False
                 Media.music.stop()
                 if keys[pygame.K_ESCAPE] and not confirm:
+                    Global.superloop = False
+                    loop = False
+                elif keys[pygame.K_SPACE] and not confirm:
                     loop = False
             # Draw Outcome
             if player1.health == 0 and player2.health == 0:
@@ -447,6 +465,9 @@ class Game():
                 onEnd = False
                 Media.music.stop()
                 if keys[pygame.K_ESCAPE] and not confirm:
+                    Global.superloop = False
+                    loop = False
+                elif keys[pygame.K_SPACE] and not confirm:
                     loop = False
             # Drawing
             all_sprites.update()
@@ -465,13 +486,6 @@ class Game():
 if __name__ == '__main__':
     Game.Title()
     Game.CharSelect()
-    Game.Main()
-    pygame.quit()
-            
-            
-        
-        
-
-        
-    
-    
+    while Global.superloop == True:
+        Game.Main()
+    pygame.quit()                                                   
