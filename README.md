@@ -19,21 +19,21 @@ LSHIFT to Unpause
 ESC to leave
 
 Game Ends when one player dies [After taking three hits]
-![Title](Rects-Fight/Rects Fight 1.4/media/readmeimg/img1.png "Title Screen")
+![Title](https://i.imgur.com/GpAOhpL.png "Title Screen")
 
-![Character Select](Rects-Fight/Rects Fight 1.4/media/readmeimg/img2.png "Character Select")
+![Character Select](https://i.imgur.com/bOiU3hj.png "Character Select")
 
-![Game](Rects-Fight/Rects Fight 1.4/media/readmeimg/img3.png "Game in Action")
+![Game](https://i.imgur.com/gzPQYPm.png "Game in Action")
 
-![Blue](Rects-Fight/Rects Fight 1.4/media/blue.png "Blue")
+![Blue](https://i.imgur.com/pD5AZqO.png "Blue")
 
-![Green](Rects-Fight/Rects Fight 1.4/media/green.png "Green")
+![Green](https://i.imgur.com/xsTXprV.png "Green")
 
-![Orange](Rects-Fight/Rects Fight 1.4/media/orange.png "Orange")
+![Orange](https://i.imgur.com/LDyIXrp.png "Orange")
 
-![Red](Rects-Fight/Rects Fight 1.4/media/red.png "Red")
+![Red](https://i.imgur.com/UcZDa4W.png "Red")
 
-![Purple](Rects-Fight/Rects Fight 1.4/media/purple.png "Purple")
+![Purple](https://i.imgur.com/hOSbbuM.png "Purple")
 
 # Changelog 1.4:
 Changelog 1.4:
