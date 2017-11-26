@@ -20,12 +20,19 @@ ESC to leave
 
 Game Ends when one player dies [After taking three hits]
 ![Title](Rects-Fight/Rects Fight 1.4/media/readmeimg/img1.png "Title Screen")
+
 ![Character Select](Rects-Fight/Rects Fight 1.4/media/readmeimg/img2.png "Character Select")
-![Game](Rects-Fight/Rects Fight 1.4/media/readmeimg/img3.png  "Game in Action")
+
+![Game](Rects-Fight/Rects Fight 1.4/media/readmeimg/img3.png "Game in Action")
+
 ![Blue](Rects-Fight/Rects Fight 1.4/media/blue.png "Blue")
+
 ![Green](Rects-Fight/Rects Fight 1.4/media/green.png "Green")
+
 ![Orange](Rects-Fight/Rects Fight 1.4/media/orange.png "Orange")
+
 ![Red](Rects-Fight/Rects Fight 1.4/media/red.png "Red")
+
 ![Purple](Rects-Fight/Rects Fight 1.4/media/purple.png "Purple")
 
 # Changelog 1.4:
