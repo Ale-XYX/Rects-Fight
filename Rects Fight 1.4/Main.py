@@ -512,8 +512,8 @@ class Game():
             screen.blit(textstatic1, (19, 515))
             screen.blit(textstatic2, (429, 515))
             if not onEnd:
-                screen.blit(textstatic3, (200, 505))
-                screen.blit(textstatic4, (200, 520))
+                screen.blit(textstatic3, (200, 502))
+                screen.blit(textstatic4, (200, 517))
             all_sprites.draw(screen)
             pygame.display.flip()
             clock.tick(60)
