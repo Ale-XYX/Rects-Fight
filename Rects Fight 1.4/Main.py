@@ -4,6 +4,7 @@ import os
 import sys
 pygame.init()
 screen = pygame.display.set_mode((500, 600))
+# Global[ish] Variables
 class Global():
     black = (0, 0, 0)
     grey = (192, 192, 192)
