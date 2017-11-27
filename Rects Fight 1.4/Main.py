@@ -500,18 +500,18 @@ class Game():
             # Drawing
             all_sprites.update()
             screen.fill(Global.black)
-            if confirm:
-                screen.blit(Media.paused, (150, 180))
             screen.blit(Media.wall,(0, 0))
             screen.blit(MainFetch('hp', 'player1'), (20, 530))
             screen.blit(MainFetch('hp', 'player2'), (380, 530))
             screen.blit(txt, (textlocal))
             screen.blit(textstatic1, (19, 515))
             screen.blit(textstatic2, (429, 515))
-            if not onEnd:
-                screen.blit(textstatic3, (200, 502))
-                screen.blit(textstatic4, (203, 517))
             all_sprites.draw(screen)
+            if not onEnd:
+                screen.blit(textstatic3, (395, 10))
+                screen.blit(textstatic4, (10, 10))
+            if confirm:
+                screen.blit(Media.paused, (154, 165))
             pygame.display.flip()
             clock.tick(60)
 if __name__ == '__main__':
