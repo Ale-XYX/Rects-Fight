@@ -43,7 +43,7 @@ class Media():
     hp5 = pygame.image.load(os.path.join('media', 'hp5.png')).convert_alpha()
     hp6 = pygame.image.load(os.path.join('media', 'hp6.png'))
     dead1 = pygame.image.load(os.path.join('media', 'dead1.png')).convert_alpha()
-    dead2 = pygame.image.lod(os.path.join('media', 'dead2.png')).convert_alpha()
+    dead2 = pygame.image.load(os.path.join('media', 'dead2.png')).convert_alpha()
     # Player Soundlist
     shoot = pygame.mixer.Sound(os.path.join('media', 'shoot.wav'))
     hit = pygame.mixer.Sound(os.path.join('media', 'hit.wav'))
