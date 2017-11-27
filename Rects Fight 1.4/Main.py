@@ -435,7 +435,7 @@ class Game():
                 Global.superloop = False
                 loop = False
             elif keys[pygame.K_RETURN] and confirm:
-                music.stop()
+                Media.music.stop()
                 loop = False
             if time:
                 timer -= dt
@@ -457,7 +457,7 @@ class Game():
                 Global.superloop = False
                 loop = False
             elif not time and keys[pygame.K_RETURN] and not confirm:
-                music.stop()
+                Media.music.stop()
                 loop = False
             # Player 1 Outcome
             if player1.health == 0:
@@ -470,7 +470,7 @@ class Game():
                     Global.superloop = False
                     loop = False
                 elif keys[pygame.K_RETURN] and not confirm:
-                    music.stop()
+                    Media.music.stop()
                     loop = False
             # Player 2 Outcome
             if player2.health == 0:
@@ -483,7 +483,7 @@ class Game():
                     Global.superloop = False
                     loop = False
                 elif keys[pygame.K_RETURN] and not confirm:
-                    music.stop()
+                    Media.music.stop()
                     loop = False
             # Draw Outcome
             if player1.health == 0 and player2.health == 0:
@@ -496,7 +496,7 @@ class Game():
                     Global.superloop = False
                     loop = False
                 elif keys[pygame.K_RETURN] and not confirm:
-                    music.stop()
+                    Media.music.stop()
                     loop = False
             # Drawing
             all_sprites.update()
