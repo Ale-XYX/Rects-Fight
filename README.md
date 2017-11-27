@@ -42,4 +42,5 @@ Changelog 1.4:
 - Images now show in character select screen
 - New Sound Effects
 - HP Bars!
+- Plenty Of Random Fixes
 - Egg 20s
