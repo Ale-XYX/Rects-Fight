@@ -432,7 +432,7 @@ class Game():
             elif keys[pygame.K_ESCAPE] and confirm:
                 Global.superloop = False
                 loop = False
-            elif keys[pygame.K_ENTER] and confirm:
+            elif keys[pygame.K_RETURN] and confirm:
                 loop = False
             if time:
                 timer -= dt
@@ -453,7 +453,7 @@ class Game():
             if not time and keys[pygame.K_ESCAPE]:
                 Global.superloop = False
                 loop = False
-            elif not time and keys[pygame.K_ENTER] and not confirm:
+            elif not time and keys[pygame.K_RETURN] and not confirm:
                     loop = False
             # Player 1 Outcome
             if player1.health == 0:
@@ -465,7 +465,7 @@ class Game():
                 if keys[pygame.K_ESCAPE] and not confirm:
                     Global.superloop = False
                     loop = False
-                elif keys[pygame.K_ENTER] and not confirm:
+                elif keys[pygame.K_RETURN] and not confirm:
                     loop = False
             # Player 2 Outcome
             if player2.health == 0:
@@ -477,7 +477,7 @@ class Game():
                 if keys[pygame.K_ESCAPE] and not confirm:
                     Global.superloop = False
                     loop = False
-                elif keys[pygame.K_ENTER] and not confirm:
+                elif keys[pygame.K_RETURN] and not confirm:
                     loop = False
             # Draw Outcome
             if player1.health == 0 and player2.health == 0:
@@ -489,7 +489,7 @@ class Game():
                 if keys[pygame.K_ESCAPE] and not confirm:
                     Global.superloop = False
                     loop = False
-                elif keys[pygame.K_ENTER] and not confirm:
+                elif keys[pygame.K_RETURN] and not confirm:
                     loop = False
             # Drawing
             all_sprites.update()
