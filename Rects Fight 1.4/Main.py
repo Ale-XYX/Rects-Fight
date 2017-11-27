@@ -495,7 +495,7 @@ class Game():
             all_sprites.update()
             screen.fill(Global.black)
             if confirm:
-                screen.blit(Media.paused, (145, 150))
+                screen.blit(Media.paused, (145, 170))
             screen.blit(Media.wall,(0, 0))
             screen.blit(MainFetch('hp', 'player1'), (20, 520))
             screen.blit(MainFetch('hp', 'player2'), (380, 520))
