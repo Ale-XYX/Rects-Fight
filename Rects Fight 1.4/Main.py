@@ -345,7 +345,7 @@ class Game():
         vel_reset = 0
         timer = 30
         dt = clock.tick(60) / 1000
-        textlocal = (222, 540)
+        textlocal = (222, 530)
         while loop:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -449,7 +449,7 @@ class Game():
                     Media.music.stop()
                     time = False
                     onEnd = False
-                    textlocal = (190, 540)
+                    textlocal = (190, 530)
                     txt = Global.font.render('Times Up!', True, Global.grey)
             if not time and keys[pygame.K_ESCAPE]:
                 Global.superloop = False
@@ -459,7 +459,7 @@ class Game():
             # Player 1 Outcome
             if player1.health == 0:
                 txt = Global.font.render('Player 2 Wins!', True, MainFetch('player', None))
-                textlocal = (155, 540)
+                textlocal = (155, 530)
                 time = False
                 onEnd = False
                 Media.music.stop()
@@ -471,7 +471,7 @@ class Game():
             # Player 2 Outcome
             if player2.health == 0:
                 txt = Global.font.render('Player 1 Wins!', True, MainFetch('player', None))
-                textlocal = (155, 540)
+                textlocal = (155, 530)
                 time = False
                 onEnd = False
                 Media.music.stop()
@@ -483,7 +483,7 @@ class Game():
             # Draw Outcome
             if player1.health == 0 and player2.health == 0:
                 txt = Global.font.render('Draw!', True, Global.grey)
-                textlocal = (210, 540)
+                textlocal = (210, 530)
                 time = False
                 onEnd = False
                 Media.music.stop()
@@ -498,11 +498,11 @@ class Game():
             if confirm:
                 screen.blit(Media.paused, (150, 180))
             screen.blit(Media.wall,(0, 0))
-            screen.blit(MainFetch('hp', 'player1'), (20, 540))
-            screen.blit(MainFetch('hp', 'player2'), (380, 540))
+            screen.blit(MainFetch('hp', 'player1'), (20, 530))
+            screen.blit(MainFetch('hp', 'player2'), (380, 530))
             screen.blit(txt, (textlocal))
-            screen.blit(textstatic1, (19, 525))
-            screen.blit(textstatic2, (429, 525))
+            screen.blit(textstatic1, (19, 515))
+            screen.blit(textstatic2, (429, 515))
             all_sprites.draw(screen)
             pygame.display.flip()
             clock.tick(60)
