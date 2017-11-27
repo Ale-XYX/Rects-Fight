@@ -107,7 +107,7 @@ def Fetch(typeOfFetch, playerType, toReturn):
                 elif Global.P2Char == 4:
                     return Media.bulletpurple
                 elif Global.P2Char == 5:
-                    return Media.bulletred      
+                    return Media.bulletred
     elif typeOfFetch == 'text':
         if playerType == 'player1':
             if Global.P1Char == 1:
@@ -130,7 +130,7 @@ def Fetch(typeOfFetch, playerType, toReturn):
             elif Global.P2Char == 4:
                 return Global.font.render('Purple', True, Global.purple)
             elif Global.P2Char == 5:
-                return Global.font.render('Red', True, Global.red)    
+                return Global.font.render('Red', True, Global.red)
 # Sprites
 class Sprites():
     # Player Sprite
@@ -256,7 +256,7 @@ class Game():
     def Main():
         # Functions
         def MainFetch(typeOf, player):
-            if typeOf == 'time':                
+            if typeOf == 'time':
                 if timer < 10:
                     return (196, 0, 0)
                 else:
@@ -372,7 +372,7 @@ class Game():
                         player1.fire_direction = pygame.math.Vector2(0, vel)
                     if event.key == pygame.K_w and player1.toggle == False:
                         player1.vel.y = -5
-                        player1.fire_direction = pygame.math.Vector2(0, -vel)                             
+                        player1.fire_direction = pygame.math.Vector2(0, -vel)
                     if event.key == pygame.K_RIGHT and player2.toggle == False:
                         player2.vel.x = 5
                         player2.fire_direction = pygame.math.Vector2(vel, 0)
@@ -501,13 +501,13 @@ class Game():
             screen.blit(MainFetch('hp', 'player2'), (380, 520))
             screen.blit(txt, (textlocal))
             screen.blit(textstatic1, (20, 505))
-            screen.blit(textstatic2, (425, 505))
+            screen.blit(textstatic2, (430, 505))
             all_sprites.draw(screen)
             pygame.display.flip()
-            clock.tick(60)                                        
+            clock.tick(60)
 if __name__ == '__main__':
     Game.Title()
     Game.CharSelect()
     while Global.superloop == True:
         Game.Main()
-    pygame.quit()                                                   
+    pygame.quit()
