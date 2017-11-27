@@ -344,7 +344,7 @@ class Game():
         vel_reset = 0
         timer = 30
         dt = clock.tick(60) / 1000
-        textlocal = (215, 520)
+        textlocal = (217, 520)
         while loop:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
