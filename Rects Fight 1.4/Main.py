@@ -348,8 +348,8 @@ class Game():
         while loop:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    pygame.quit()
-                    sys.exit()
+                    Global.superloop = False
+                    loop = False
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_e and player1.toggle == False:
                         bullet = Sprites.Bullet(player1.rect.center, pygame.math.Vector2(player1.fire_direction), Fetch('player', 'player1', 'bullet'))
