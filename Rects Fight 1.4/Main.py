@@ -520,7 +520,7 @@ class Game():
             clock.tick(60)
 if __name__ == '__main__':
     Game.Title()
-    Game.CharSelect()
-    while Global.superloop == True:
+    while Global.superloop:
+        Game.CharSelect()
         Game.Main()
     pygame.quit()
