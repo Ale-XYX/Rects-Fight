@@ -3,7 +3,6 @@
 Version 1.4 : SnivyDroid
 
 ***REQUIRES PYTHON/PYGAME LIBRARY***
-**Github messed up old repository so heres the new one**
 
 # CONTROLS:
 W/S To Select Player 1 Character
@@ -15,9 +14,10 @@ Arrow keys to move Player 2
 E to shoot from Player 1
 SPACE to shoot from Player 2
 
-TAB to pause 
-LSHIFT to Unpause 
+TAB to pause
+LSHIFT to Unpause
 ESC to leave
+ENTER to restart game [Paused, At end, etc.]
 
 Game Ends when one player dies [After taking three hits]
 ![Title](https://i.imgur.com/GpAOhpL.png "Title Screen")
