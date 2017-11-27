@@ -344,7 +344,7 @@ class Game():
         vel_reset = 0
         timer = 30
         dt = clock.tick(60) / 1000
-        textlocal = (219, 520)
+        textlocal = (222, 520)
         while loop:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -500,7 +500,7 @@ class Game():
             screen.blit(MainFetch('hp', 'player1'), (20, 520))
             screen.blit(MainFetch('hp', 'player2'), (380, 520))
             screen.blit(txt, (textlocal))
-            screen.blit(textstatic1, (20, 505))
+            screen.blit(textstatic1, (19, 505))
             screen.blit(textstatic2, (429, 505))
             all_sprites.draw(screen)
             pygame.display.flip()
