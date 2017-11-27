@@ -41,6 +41,7 @@ class Media():
     hp3 = pygame.image.load(os.path.join('media', 'hp3.png')).convert_alpha()
     hp4 = pygame.image.load(os.path.join('media', 'hp4.png')).convert_alpha()
     hp5 = pygame.image.load(os.path.join('media', 'hp5.png')).convert_alpha()
+    hp6 = pygame.image.load(os.path.join('media', 'hp6.png'))
     dead = pygame.image.load(os.path.join('media', 'dead.png')).convert_alpha()
     # Player Soundlist
     shoot = pygame.mixer.Sound(os.path.join('media', 'shoot.wav'))
@@ -287,11 +288,11 @@ class Game():
             elif typeOf == 'hp':
                 if player == 'player1':
                     if player1.health == 3:
-                        return Media.hp1
-                    if player1.health == 2:
                         return Media.hp4
-                    if player1.health == 1:
+                    if player1.health == 2:
                         return Media.hp5
+                    if player1.health == 1:
+                        return Media.hp6
                     if player1.health == 0:
                         return Media.dead
                 if player == 'player2':
