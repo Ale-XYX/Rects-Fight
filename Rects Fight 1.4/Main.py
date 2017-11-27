@@ -323,7 +323,7 @@ class Game():
         vel_reset = 0
         timer = 30
         dt = clock.tick(60) / 1000
-        textlocal = (215, 520)
+        textlocal = (222, 520)
         # Game Variables
         all_sprites = pygame.sprite.Group()
         bullets1 = pygame.sprite.Group()
