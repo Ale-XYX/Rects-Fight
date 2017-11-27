@@ -314,6 +314,8 @@ class Game():
         clock = pygame.time.Clock()
         textstatic1 = Global.font2.render('Player 1', True, Global.white)
         textstatic2 = Global.font2.render('Player 2', True, Global.white)
+        textstatic3 = Global.font2.render('Escape to leave', True, Global.white)
+        textstatic4 = Global.font2.render('Enter to restart', True, Global.white)
         # Conditionals
         loop = True
         time = True
@@ -509,6 +511,9 @@ class Game():
             screen.blit(txt, (textlocal))
             screen.blit(textstatic1, (19, 515))
             screen.blit(textstatic2, (429, 515))
+            if onEnd = True:
+                screen.blit(textstatic3, (200, 510))
+                screen.blit(textstatic4, (200, 515))
             all_sprites.draw(screen)
             pygame.display.flip()
             clock.tick(60)
