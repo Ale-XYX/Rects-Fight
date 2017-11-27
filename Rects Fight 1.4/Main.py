@@ -42,7 +42,8 @@ class Media():
     hp4 = pygame.image.load(os.path.join('media', 'hp4.png')).convert_alpha()
     hp5 = pygame.image.load(os.path.join('media', 'hp5.png')).convert_alpha()
     hp6 = pygame.image.load(os.path.join('media', 'hp6.png'))
-    dead = pygame.image.load(os.path.join('media', 'dead.png')).convert_alpha()
+    dead1 = pygame.image.load(os.path.join('media', 'dead1.png')).convert_alpha()
+    dead2 = pygame.image.lod(os.path.join('media', 'dead2.png')).convert_alpha()
     # Player Soundlist
     shoot = pygame.mixer.Sound(os.path.join('media', 'shoot.wav'))
     hit = pygame.mixer.Sound(os.path.join('media', 'hit.wav'))
@@ -294,7 +295,7 @@ class Game():
                     if player1.health == 1:
                         return Media.hp6
                     if player1.health == 0:
-                        return Media.dead
+                        return Media.dead2
                 if player == 'player2':
                     if player2.health == 3:
                         return Media.hp1
@@ -303,7 +304,7 @@ class Game():
                     if player2.health == 1:
                         return Media.hp3
                     if player2.health == 0:
-                        return Media.dead
+                        return Media.dead1
         # Game Variables
         all_sprites = pygame.sprite.Group()
         bullets1 = pygame.sprite.Group()
