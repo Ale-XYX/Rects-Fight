@@ -501,7 +501,7 @@ class Game():
             screen.blit(MainFetch('hp', 'player2'), (380, 520))
             screen.blit(txt, (textlocal))
             screen.blit(textstatic1, (20, 505))
-            screen.blit(textstatic2, (430, 505))
+            screen.blit(textstatic2, (429, 505))
             all_sprites.draw(screen)
             pygame.display.flip()
             clock.tick(60)
