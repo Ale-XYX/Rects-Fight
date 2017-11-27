@@ -40,11 +40,7 @@ class Media():
     hp1 = pygame.image.load(os.path.join('media', 'hp1.png')).convert_alpha()
     hp2 = pygame.image.load(os.path.join('media', 'hp2.png')).convert_alpha()
     hp3 = pygame.image.load(os.path.join('media', 'hp3.png')).convert_alpha()
-    hp4 = pygame.image.load(os.path.join('media', 'hp4.png')).convert_alpha()
-    hp5 = pygame.image.load(os.path.join('media', 'hp5.png')).convert_alpha()
-    hp6 = pygame.image.load(os.path.join('media', 'hp6.png'))
-    dead1 = pygame.image.load(os.path.join('media', 'dead1.png')).convert_alpha()
-    dead2 = pygame.image.load(os.path.join('media', 'dead2.png')).convert_alpha()
+    dead = pygame.image.load(os.path.join('media', 'dead.png')).convert_alpha()
     # Player Soundlist
     shoot = pygame.mixer.Sound(os.path.join('media', 'shoot.wav'))
     hit = pygame.mixer.Sound(os.path.join('media', 'hit.wav'))
@@ -290,13 +286,13 @@ class Game():
             elif typeOf == 'hp':
                 if player == 'player1':
                     if player1.health == 3:
-                        return Media.hp4
+                        return pygame.transform.flip(Media.hp1, True, False)
                     if player1.health == 2:
-                        return Media.hp5
+                        return pygame.transform.flip(Media.hp2, True, False)
                     if player1.health == 1:
-                        return Media.hp6
+                        return pygame.transform.flip(Media.hp3, True, False)
                     if player1.health == 0:
-                        return Media.dead2
+                        return pygame.transform.flip(Media.dead, True, False)
                 if player == 'player2':
                     if player2.health == 3:
                         return Media.hp1
@@ -305,7 +301,7 @@ class Game():
                     if player2.health == 1:
                         return Media.hp3
                     if player2.health == 0:
-                        return Media.dead1
+                        return Media.dead
         # Game Variables
         all_sprites = pygame.sprite.Group()
         bullets1 = pygame.sprite.Group()
