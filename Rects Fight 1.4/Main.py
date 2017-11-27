@@ -514,13 +514,13 @@ class Game():
             screen.blit(textstatic2, (429, 515))
             if not onEnd:
                 screen.blit(textstatic3, (200, 502))
-                screen.blit(textstatic4, (200, 517))
+                screen.blit(textstatic4, (203, 517))
             all_sprites.draw(screen)
             pygame.display.flip()
             clock.tick(60)
 if __name__ == '__main__':
     Game.Title()
+    Game.CharSelect()
     while Global.superloop:
-        Game.CharSelect()
         Game.Main()
     pygame.quit()
