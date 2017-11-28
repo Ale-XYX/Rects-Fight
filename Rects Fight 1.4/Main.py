@@ -59,7 +59,7 @@ class Media():
     start = pygame.mixer.Sound(os.path.join('media', 'start.wav'))
 pygame.display.set_caption('Rects Fight!')
 pygame.display.set_icon(Media.icon)
-def Fetch(typeOfFetch, playerType, toReturn):
+def Fetch(typeOfFetch, playerType, toReturn, fill1, fill2):
     if typeOfFetch == 'player':
         if playerType == 'player1':
             if toReturn == 'image':
@@ -130,6 +130,54 @@ def Fetch(typeOfFetch, playerType, toReturn):
                 return Global.font.render('Purple', True, Global.purple)
             elif Global.P2Char == 5:
                 return Global.font.render('Red', True, Global.red)
+    elif typeOfFetch == 'playerColor':
+        if fill1.health == 0:
+            if Global.P1Char == 1:
+                return (91, 154, 255)
+            if Global.P1Char == 2:
+                return (247, 157, 66)
+            if Global.P1Char == 3:
+                return (0, 159, 18)
+            if Global.P1Char == 4:
+                return (205, 43, 255)
+            if Global.P1Char == 5:
+                return (196, 0, 0)
+        if fill2.health == 0:
+            if Global.P2Char == 1:
+                return (91, 154, 255)
+            if Global.P2Char == 2:
+                return (247, 157, 66)
+            if Global.P2Char == 3:
+                return (0, 159, 18)
+            if Global.P2Char == 4:
+                return (205, 43, 255)
+            if Global.P2Char == 5:
+                return (196, 0, 0)
+    elif typeOfFetch == 'hp':
+        if playerType == 'player1':
+            if fill1.health == 3:
+                return pygame.transform.flip(Media.hp1, True, False)
+            if fill1.health == 2:
+                return pygame.transform.flip(Media.hp2, True, False)
+            if fill1.health == 1:
+                return pygame.transform.flip(Media.hp3, True, False)
+            if fill1.health == 0:
+                return pygame.transform.flip(Media.dead, True, False)
+        if playerType == 'player2':
+            if fill2.health == 3:
+                return Media.hp1
+            if fill2.health == 2:
+                return Media.hp2
+            if fill2.health == 1:
+                return Media.hp3
+            if fill2.health == 0:
+                return Media.dead
+    elif typeOfFetch == 'timer':        
+        if fill1 < 10:
+            return (196, 0, 0)
+        else:
+            return (255, 255, 255)
+        
 # Sprites
 class Sprites():
     # Player Sprite
@@ -235,8 +283,8 @@ class Game():
                 Global.P2Char -= 1
             elif Global.P2Char == 0:
                 Global.P2Char += 1
-            text1 = Fetch('text', 'player1', None)
-            text2 = Fetch('text', 'player2', None)
+            text1 = Fetch('text', 'player1', None, None, None)
+            text2 = Fetch('text', 'player2', None, None, None)
             textS1 = Global.font.render('Choose Your Character', True, Global.white)
             textS2 = Global.font.render('Space To Continue', True, Global.white)
             textS3 = Global.font.render('Player 1: ', True, Global.white)
@@ -248,66 +296,17 @@ class Game():
             screen.blit(textS4, (115, 325))
             screen.blit(text1, (240, 225))
             screen.blit(text2, (240, 325))
-            screen.blit(Fetch('player', 'player1', 'image'), (355, 210))
-            screen.blit(Fetch('player', 'player2', 'image'), (355, 310))
+            screen.blit(Fetch('player', 'player1', 'image', None, None), (355, 210))
+            screen.blit(Fetch('player', 'player2', 'image', None, None), (355, 310))
             pygame.display.flip()
             clock.tick(60)
     def Main():
-        # Functions
-        def MainFetch(typeOf, player):
-            if typeOf == 'time':
-                if timer < 10:
-                    return (196, 0, 0)
-                else:
-                    return (255, 255, 255)
-            elif typeOf == 'player':
-                if player2.health == 0:
-                    if Global.P1Char == 1:
-                        return (91, 154, 255)
-                    if Global.P1Char == 2:
-                        return (247, 157, 66)
-                    if Global.P1Char == 3:
-                        return (0, 159, 18)
-                    if Global.P1Char == 4:
-                        return (205, 43, 255)
-                    if Global.P1Char == 5:
-                        return (196, 0, 0)
-                if player1.health == 0:
-                    if Global.P2Char == 1:
-                        return (91, 154, 255)
-                    if Global.P2Char == 2:
-                        return (247, 157, 66)
-                    if Global.P2Char == 3:
-                        return (0, 159, 18)
-                    if Global.P2Char == 4:
-                        return (205, 43, 255)
-                    if Global.P2Char == 5:
-                        return (196, 0, 0)
-            elif typeOf == 'hp':
-                if player == 'player1':
-                    if player1.health == 3:
-                        return pygame.transform.flip(Media.hp1, True, False)
-                    if player1.health == 2:
-                        return pygame.transform.flip(Media.hp2, True, False)
-                    if player1.health == 1:
-                        return pygame.transform.flip(Media.hp3, True, False)
-                    if player1.health == 0:
-                        return pygame.transform.flip(Media.dead, True, False)
-                if player == 'player2':
-                    if player2.health == 3:
-                        return Media.hp1
-                    if player2.health == 2:
-                        return Media.hp2
-                    if player2.health == 1:
-                        return Media.hp3
-                    if player2.health == 0:
-                        return Media.dead
         # Game Variables
         all_sprites = pygame.sprite.Group()
         bullets1 = pygame.sprite.Group()
         bullets2 = pygame.sprite.Group()
-        player1 = Sprites.Player((35, 35), bullets2, Fetch('player', 'player1', 'image'), (8, 0), all_sprites)
-        player2 = Sprites.Player((465, 465), bullets1, Fetch('player', 'player2', 'image'), (-8, 0), all_sprites)
+        player1 = Sprites.Player((35, 35), bullets2, Fetch('player', 'player1', 'image', None, None), (8, 0), all_sprites)
+        player2 = Sprites.Player((465, 465), bullets1, Fetch('player', 'player2', 'image', None, None), (-8, 0), all_sprites)
         clock = pygame.time.Clock()
         textstatic1 = Global.font2.render('Player 1', True, Global.white)
         textstatic2 = Global.font2.render('Player 2', True, Global.white)
@@ -325,27 +324,6 @@ class Game():
         timer = 30
         dt = clock.tick(60) / 1000
         textlocal = (222, 520)
-        # Game Variables
-        all_sprites = pygame.sprite.Group()
-        bullets1 = pygame.sprite.Group()
-        bullets2 = pygame.sprite.Group()
-        player1 = Sprites.Player((35, 35), bullets2, Fetch('player', 'player1', 'image'), (8, 0), all_sprites)
-        player2 = Sprites.Player((465, 465), bullets1, Fetch('player', 'player2', 'image'), (-8, 0), all_sprites)
-        clock = pygame.time.Clock()
-        textstatic1 = Global.font2.render('Player 1', True, Global.white)
-        textstatic2 = Global.font2.render('Player 2', True, Global.white)
-        # Conditionals
-        loop = True
-        time = True
-        onStart = True
-        onEnd = True
-        confirm = False
-        # Integers
-        vel = 8
-        vel_reset = 0
-        timer = 30
-        dt = clock.tick(60) / 1000
-        textlocal = (222, 530)
         while loop:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -353,12 +331,12 @@ class Game():
                     loop = False
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_e and player1.toggle == False:
-                        bullet = Sprites.Bullet(player1.rect.center, pygame.math.Vector2(player1.fire_direction), Fetch('player', 'player1', 'bullet'))
+                        bullet = Sprites.Bullet(player1.rect.center, pygame.math.Vector2(player1.fire_direction), Fetch('player', 'player1', 'bullet', None, None))
                         Media.shoot.play()
                         bullets1.add(bullet)
                         all_sprites.add(bullet)
                     if event.key == pygame.K_SPACE and player2.toggle == False:
-                        bullet = Sprites.Bullet(player2.rect.center, pygame.math.Vector2(player2.fire_direction), Fetch('player', 'player2', 'bullet'))
+                        bullet = Sprites.Bullet(player2.rect.center, pygame.math.Vector2(player2.fire_direction), Fetch('player', 'player2', 'bullet', None, None))
                         Media.shoot.play()
                         bullets2.add(bullet)
                         all_sprites.add(bullet)
@@ -438,7 +416,7 @@ class Game():
                 loop = False
             if time:
                 timer -= dt
-                txt = Global.font.render(str(round(timer, 1)), True, MainFetch('time', None))
+                txt = Global.font.render(str(round(timer, 1)), True, Fetch('timer', None, None, timer, None))
                 if timer <= 0:
                     player1.toggle = True
                     player2.toggle = True
@@ -460,7 +438,8 @@ class Game():
                 loop = False
             # Player 1 Outcome
             if player1.health == 0:
-                txt = Global.font.render('Player 2 Wins!', True, MainFetch('player', None))
+                # typeOfFetch 1 playerType 2 toReturn 3 playerFill1 4, playerFill2 5)
+                txt = Global.font.render('Player 2 Wins!', True, Fetch('playerColor', None, None, player2, player1))
                 textlocal = (155, 530)
                 time = False
                 onEnd = False
@@ -473,7 +452,7 @@ class Game():
                     loop = False
             # Player 2 Outcome
             if player2.health == 0:
-                txt = Global.font.render('Player 1 Wins!', True, MainFetch('player', None))
+                txt = Global.font.render('Player 1 Wins!', True, Fetch('playerColor', None, None, player2, player1))
                 textlocal = (155, 530)
                 time = False
                 onEnd = False
@@ -501,8 +480,8 @@ class Game():
             all_sprites.update()
             screen.fill(Global.black)
             screen.blit(Media.wall,(0, 0))
-            screen.blit(MainFetch('hp', 'player1'), (20, 530))
-            screen.blit(MainFetch('hp', 'player2'), (380, 530))
+            screen.blit(Fetch('hp', 'player1', None, player1, player2), (20, 530))
+            screen.blit(Fetch('hp', 'player2', None, player1, player2), (380, 530))
             screen.blit(txt, (textlocal))
             screen.blit(textstatic1, (19, 515))
             screen.blit(textstatic2, (429, 515))
