@@ -36,6 +36,9 @@ class Media():
     # Red Medialist
     red = pygame.image.load(os.path.join('media', 'red.png')).convert_alpha()
     bulletred = pygame.image.load(os.path.join('media', 'bulletred.png')).convert_alpha()
+    # Grey Medialist
+    grey = pygame.image.load(os.path.join('media', 'grey.png')).convert_alpha()
+    bulletgrey = pygame.image.load(os.path.join('media', 'bulletgrey.png')).convert_alpha()
     # HP Medialist
     hp1 = pygame.image.load(os.path.join('media', 'hp1.png')).convert_alpha()
     hp2 = pygame.image.load(os.path.join('media', 'hp2.png')).convert_alpha()
@@ -73,6 +76,8 @@ def Fetch(typeOfFetch, playerType, toReturn, fill1, fill2):
                     return Media.purple
                 elif Global.P1Char == 5:
                     return Media.red
+                elif Global.P1Char == 6:
+                    return Media.grey
             elif toReturn == 'bullet':
                 if Global.P1Char == 1:
                     return Media.bulletblue
@@ -84,6 +89,8 @@ def Fetch(typeOfFetch, playerType, toReturn, fill1, fill2):
                     return Media.bulletpurple
                 elif Global.P1Char == 5:
                     return Media.bulletred
+                elif Global.P1Char == 6:
+                    return Media.bulletgrey
         elif playerType == 'player2':
             if toReturn == 'image':
                 if Global.P2Char == 1:
@@ -96,6 +103,8 @@ def Fetch(typeOfFetch, playerType, toReturn, fill1, fill2):
                     return Media.purple
                 elif Global.P2Char == 5:
                     return Media.red
+                elif Global.P2Char == 6:
+                    return Media.grey
             elif toReturn == 'bullet':
                 if Global.P2Char == 1:
                     return Media.bulletblue
@@ -107,6 +116,8 @@ def Fetch(typeOfFetch, playerType, toReturn, fill1, fill2):
                     return Media.bulletpurple
                 elif Global.P2Char == 5:
                     return Media.bulletred
+                elif Global.P2Char == 6:
+                    return Media.bulletgrey
     elif typeOfFetch == 'text':
         if playerType == 'player1':
             if Global.P1Char == 1:
@@ -119,6 +130,8 @@ def Fetch(typeOfFetch, playerType, toReturn, fill1, fill2):
                 return Global.font.render('Purple', True, Global.purple)
             elif Global.P1Char == 5:
                 return Global.font.render('Red', True, Global.red)
+            elif Global.P1Char == 6:
+                return Global.font.render('Grey', True, Global.grey)
         elif playerType == 'player2':
             if Global.P2Char == 1:
                 return Global.font.render('Blue', True, Global.blue)
@@ -130,29 +143,35 @@ def Fetch(typeOfFetch, playerType, toReturn, fill1, fill2):
                 return Global.font.render('Purple', True, Global.purple)
             elif Global.P2Char == 5:
                 return Global.font.render('Red', True, Global.red)
+            elif Global.P2Char == 6:
+                return Global.font.render('Grey', True, Global.grey)
     elif typeOfFetch == 'playerColor':
         if fill1.health == 0:
             if Global.P1Char == 1:
-                return (91, 154, 255)
+                return Global.blue
             if Global.P1Char == 2:
-                return (247, 157, 66)
+                return Global.orange
             if Global.P1Char == 3:
-                return (0, 159, 18)
+                return Global.green
             if Global.P1Char == 4:
-                return (205, 43, 255)
+                return Global.purple
             if Global.P1Char == 5:
-                return (196, 0, 0)
+                return Global.red
+            if Global.P1Char == 6:
+                return Global.grey
         if fill2.health == 0:
             if Global.P2Char == 1:
-                return (91, 154, 255)
+                return Global.blue
             if Global.P2Char == 2:
-                return (247, 157, 66)
+                return Global.orange
             if Global.P2Char == 3:
-                return (0, 159, 18)
+                return Global.green
             if Global.P2Char == 4:
-                return (205, 43, 255)
+                return Global.purple
             if Global.P2Char == 5:
-                return (196, 0, 0)
+                return Global.red
+            if Global.P2Char == 6:
+                return Global.grey
     elif typeOfFetch == 'hp':
         if playerType == 'player1':
             if fill1.health == 3:
@@ -174,10 +193,9 @@ def Fetch(typeOfFetch, playerType, toReturn, fill1, fill2):
                 return Media.dead
     elif typeOfFetch == 'timer':        
         if fill1 < 10:
-            return (196, 0, 0)
+            return Global.red
         else:
-            return (255, 255, 255)
-        
+            return Global.white       
 # Sprites
 class Sprites():
     # Player Sprite
@@ -256,30 +274,30 @@ class Game():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                if event.type == pygame.KEYDOWN:
+                elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_w:
                         Global.P1Char += 1
-                        if Global.P1Char <= 5:
+                        if Global.P1Char <= 6:
                             Media.select.play()
                     elif event.key == pygame.K_s:
                         Global.P1Char -= 1
-                        if Global.P1Char >= 1:
+                        if Global.P1Char >= 6:
                             Media.select.play()
                     if event.key == pygame.K_UP:
                         Global.P2Char += 1
-                        if Global.P2Char <= 5:
+                        if Global.P2Char <= 6:
                             Media.select.play()
                     elif event.key == pygame.K_DOWN:
                         Global.P2Char -= 1
-                        if Global.P2Char >= 1:
+                        if Global.P2Char >= 6:
                             Media.select.play()
                     if event.key == pygame.K_SPACE:
                         loop = False
-            if Global.P1Char == 6:
+            if Global.P1Char == 7:
                 Global.P1Char -= 1
             elif Global.P1Char == 0:
                 Global.P1Char += 1
-            if Global.P2Char == 6:
+            if Global.P2Char == 7:
                 Global.P2Char -= 1
             elif Global.P2Char == 0:
                 Global.P2Char += 1
@@ -329,7 +347,7 @@ class Game():
                 if event.type == pygame.QUIT:
                     Global.superloop = False
                     loop = False
-                if event.type == pygame.KEYDOWN:
+                elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_e and player1.toggle == False:
                         bullet = Sprites.Bullet(player1.rect.center, pygame.math.Vector2(player1.fire_direction), Fetch('player', 'player1', 'bullet', None, None))
                         Media.shoot.play()
@@ -438,7 +456,6 @@ class Game():
                 loop = False
             # Player 1 Outcome
             if player1.health == 0:
-                # typeOfFetch 1 playerType 2 toReturn 3 playerFill1 4, playerFill2 5)
                 txt = Global.font.render('Player 2 Wins!', True, Fetch('playerColor', None, None, player2, player1))
                 textlocal = (155, 530)
                 time = False
