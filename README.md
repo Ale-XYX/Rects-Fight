@@ -36,6 +36,10 @@ Game Ends when one player dies [After taking three hits]
 
 ![Purple](https://i.imgur.com/hOSbbuM.png "Purple")
 
+![Grey](https://i.imgur.com/fFwBq3y.png "Grey")
+
+![Yellow](https://i.imgur.com/rXCyQo1.png "Yellow")
+
 # Changelog 1.4:
 Changelog 1.4:
 - New Characters: Green, Purple, And Red!
