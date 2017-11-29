@@ -54,6 +54,7 @@ class Media():
     wall = pygame.image.load(os.path.join('media', 'wall.png')).convert_alpha()
     icon = pygame.image.load(os.path.join('media', 'icon.png')).convert_alpha()
     etge = pygame.image.load(os.path.join('media', 'egtg.png')).convert_alpha()
+    error = pygame.image.load(os.path.join('media', 'error.png')).convert_alpha()
     # Game Soundlist
     pause = pygame.mixer.Sound(os.path.join('media', 'pause.wav'))
     fight = pygame.mixer.Sound(os.path.join('media', 'fight.wav'))
@@ -62,10 +63,10 @@ class Media():
     start = pygame.mixer.Sound(os.path.join('media', 'start.wav'))
 pygame.display.set_caption('Rects Fight!')
 pygame.display.set_icon(Media.icon)
-def Fetch(typeOfFetch, playerType, toReturn, fill1, fill2):
-    if typeOfFetch == 'player':
-        if playerType == 'player1':
-            if toReturn == 'image':
+def Fetch(type1, type2, type3, insert1, insert2):
+    if type1 == 'player':
+        if type2 == 'player1':
+            if type3 == 'image':
                 if Global.P1Char == 1:
                     return Media.blue
                 elif Global.P1Char == 2:
@@ -78,7 +79,9 @@ def Fetch(typeOfFetch, playerType, toReturn, fill1, fill2):
                     return Media.red
                 elif Global.P1Char == 6:
                     return Media.grey
-            elif toReturn == 'bullet':
+                else:
+                    return Media.error
+            elif type3 == 'bullet':
                 if Global.P1Char == 1:
                     return Media.bulletblue
                 elif Global.P1Char == 2:
@@ -91,8 +94,23 @@ def Fetch(typeOfFetch, playerType, toReturn, fill1, fill2):
                     return Media.bulletred
                 elif Global.P1Char == 6:
                     return Media.bulletgrey
-        elif playerType == 'player2':
-            if toReturn == 'image':
+                else:
+                    return Media.error
+            elif type3 == 'hp':
+                if insert1.health == 3:
+                    return pygame.transform.flip(Media.hp1, True, False)
+                elif insert1.health == 2:
+                    return pygame.transform.flip(Media.hp2, True, False)
+                elif insert1.health == 1:
+                    return pygame.transform.flip(Media.hp3, True, False)
+                elif insert1.health <= 0:
+                    return pygame.transform.flip(Media.dead, True, False)
+                else:
+                    return Media.error
+            else:
+                return Media.error
+        elif type2 == 'player2':
+            if type3 == 'image':
                 if Global.P2Char == 1:
                     return Media.blue
                 elif Global.P2Char == 2:
@@ -105,7 +123,9 @@ def Fetch(typeOfFetch, playerType, toReturn, fill1, fill2):
                     return Media.red
                 elif Global.P2Char == 6:
                     return Media.grey
-            elif toReturn == 'bullet':
+                else:
+                    return Media.error
+            elif type3 == 'bullet':
                 if Global.P2Char == 1:
                     return Media.bulletblue
                 elif Global.P2Char == 2:
@@ -118,84 +138,96 @@ def Fetch(typeOfFetch, playerType, toReturn, fill1, fill2):
                     return Media.bulletred
                 elif Global.P2Char == 6:
                     return Media.bulletgrey
-    elif typeOfFetch == 'text':
-        if playerType == 'player1':
-            if Global.P1Char == 1:
-                return Global.font.render('Blue', True, Global.blue)
-            elif Global.P1Char == 2:
-                return Global.font.render('Orange', True, Global.orange)
-            elif Global.P1Char == 3:
-                return Global.font.render('Green', True, Global.green)
-            elif Global.P1Char == 4:
-                return Global.font.render('Purple', True, Global.purple)
-            elif Global.P1Char == 5:
-                return Global.font.render('Red', True, Global.red)
-            elif Global.P1Char == 6:
-                return Global.font.render('Grey', True, Global.grey)
-        elif playerType == 'player2':
-            if Global.P2Char == 1:
-                return Global.font.render('Blue', True, Global.blue)
-            elif Global.P2Char == 2:
-                return Global.font.render('Orange', True, Global.orange)
-            elif Global.P2Char == 3:
-                return Global.font.render('Green', True, Global.green)
-            elif Global.P2Char == 4:
-                return Global.font.render('Purple', True, Global.purple)
-            elif Global.P2Char == 5:
-                return Global.font.render('Red', True, Global.red)
-            elif Global.P2Char == 6:
-                return Global.font.render('Grey', True, Global.grey)
-    elif typeOfFetch == 'playerColor':
-        if fill1.health == 0:
-            if Global.P1Char == 1:
-                return Global.blue
-            if Global.P1Char == 2:
-                return Global.orange
-            if Global.P1Char == 3:
-                return Global.green
-            if Global.P1Char == 4:
-                return Global.purple
-            if Global.P1Char == 5:
+                else:
+                    return Media.error
+            elif type3 == 'hp':
+                if insert2.health == 3:
+                    return Media.hp1
+                if insert2.health == 2:
+                    return Media.hp2
+                if insert2.health == 1:
+                    return Media.hp3
+                if insert2.health <= 0:
+                    return Media.dead
+                else:
+                    return Media.error
+            else:
+                return Media.error
+    elif type1 == 'text':
+        if type2 == 'player':
+            if type3 == 'player1':
+                if Global.P1Char == 1:
+                    return Global.font.render('Blue', True, Global.blue)
+                elif Global.P1Char == 2:
+                    return Global.font.render('Orange', True, Global.orange)
+                elif Global.P1Char == 3:
+                    return Global.font.render('Green', True, Global.green)
+                elif Global.P1Char == 4:
+                    return Global.font.render('Purple', True, Global.purple)
+                elif Global.P1Char == 5:
+                    return Global.font.render('Red', True, Global.red)
+                elif Global.P1Char == 6:
+                    return Global.font.render('Grey', True, Global.grey)
+                else:
+                    return Global.font.render('NotFound', True, Global.white)
+            elif type3 == 'player2':
+                if Global.P2Char == 1:
+                    return Global.font.render('Blue', True, Global.blue)
+                elif Global.P2Char == 2:
+                    return Global.font.render('Orange', True, Global.orange)
+                elif Global.P2Char == 3:
+                    return Global.font.render('Green', True, Global.green)
+                elif Global.P2Char == 4:
+                    return Global.font.render('Purple', True, Global.purple)
+                elif Global.P2Char == 5:
+                    return Global.font.render('Red', True, Global.red)
+                elif Global.P2Char == 6:
+                    return Global.font.render('Grey', True, Global.grey)
+                else:
+                    return Global.font.render('NotFound', True, Global.white)
+            else:
+                return Global.font.render('NotFound', True, Global.white)
+        elif type2 == 'playerColor':
+            if insert1.health == 0:
+                if Global.P1Char == 1:
+                    return Global.blue
+                elif Global.P1Char == 2:
+                    return Global.orange
+                elif Global.P1Char == 3:
+                    return Global.green
+                elif Global.P1Char == 4:
+                    return Global.purple
+                elif Global.P1Char == 5:
+                    return Global.red
+                elif Global.P1Char == 6:
+                    return Global.grey
+                else:
+                    return Global.white
+            elif insert2.health == 0:
+                if Global.P2Char == 1:
+                    return Global.blue
+                elif Global.P2Char == 2:
+                    return Global.orange
+                elif Global.P2Char == 3:
+                    return Global.green
+                elif Global.P2Char == 4:
+                    return Global.purple
+                elif Global.P2Char == 5:
+                    return Global.red
+                elif Global.P2Char == 6:
+                    return Global.grey
+                else:
+                    return Global.white
+            else:
+                return Global.white
+        elif type2 == 'timer':
+            if insert1 < 10:
                 return Global.red
-            if Global.P1Char == 6:
-                return Global.grey
-        if fill2.health == 0:
-            if Global.P2Char == 1:
-                return Global.blue
-            if Global.P2Char == 2:
-                return Global.orange
-            if Global.P2Char == 3:
-                return Global.green
-            if Global.P2Char == 4:
-                return Global.purple
-            if Global.P2Char == 5:
-                return Global.red
-            if Global.P2Char == 6:
-                return Global.grey
-    elif typeOfFetch == 'hp':
-        if playerType == 'player1':
-            if fill1.health == 3:
-                return pygame.transform.flip(Media.hp1, True, False)
-            if fill1.health == 2:
-                return pygame.transform.flip(Media.hp2, True, False)
-            if fill1.health == 1:
-                return pygame.transform.flip(Media.hp3, True, False)
-            if fill1.health == 0:
-                return pygame.transform.flip(Media.dead, True, False)
-        if playerType == 'player2':
-            if fill2.health == 3:
-                return Media.hp1
-            if fill2.health == 2:
-                return Media.hp2
-            if fill2.health == 1:
-                return Media.hp3
-            if fill2.health == 0:
-                return Media.dead
-    elif typeOfFetch == 'timer':        
-        if fill1 < 10:
-            return Global.red
+            else:
+                return Global.white
         else:
-            return Global.white       
+            print('Fetch() has encountered an error, Aborting Game')
+            sys.exit()
 # Sprites
 class Sprites():
     # Player Sprite
@@ -277,19 +309,19 @@ class Game():
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_w:
                         Global.P1Char += 1
-                        if Global.P1Char <= 6:
+                        if not Global.P1Char == 7:
                             Media.select.play()
                     elif event.key == pygame.K_s:
                         Global.P1Char -= 1
-                        if Global.P1Char >= 6:
+                        if not Global.P1Char == 0:
                             Media.select.play()
                     if event.key == pygame.K_UP:
                         Global.P2Char += 1
-                        if Global.P2Char <= 6:
+                        if not Global.P2Char == 7:
                             Media.select.play()
                     elif event.key == pygame.K_DOWN:
                         Global.P2Char -= 1
-                        if Global.P2Char >= 6:
+                        if not Global.P2Char == 0:
                             Media.select.play()
                     if event.key == pygame.K_SPACE:
                         loop = False
@@ -301,8 +333,8 @@ class Game():
                 Global.P2Char -= 1
             elif Global.P2Char == 0:
                 Global.P2Char += 1
-            text1 = Fetch('text', 'player1', None, None, None)
-            text2 = Fetch('text', 'player2', None, None, None)
+            text1 = Fetch('text', 'player', 'player1', None, None)
+            text2 = Fetch('text', 'player', 'player2', None, None)
             textS1 = Global.font.render('Choose Your Character', True, Global.white)
             textS2 = Global.font.render('Space To Continue', True, Global.white)
             textS3 = Global.font.render('Player 1: ', True, Global.white)
@@ -434,7 +466,7 @@ class Game():
                 loop = False
             if time:
                 timer -= dt
-                txt = Global.font.render(str(round(timer, 1)), True, Fetch('timer', None, None, timer, None))
+                txt = Global.font.render(str(round(timer, 1)), True, Fetch('text', 'timer', None, timer, None))
                 if timer <= 0:
                     player1.toggle = True
                     player2.toggle = True
@@ -456,7 +488,7 @@ class Game():
                 loop = False
             # Player 1 Outcome
             if player1.health == 0:
-                txt = Global.font.render('Player 2 Wins!', True, Fetch('playerColor', None, None, player2, player1))
+                txt = Global.font.render('Player 2 Wins!', True, Fetch('text', 'playerColor', None, player2, player1))
                 textlocal = (155, 530)
                 time = False
                 onEnd = False
@@ -469,7 +501,7 @@ class Game():
                     loop = False
             # Player 2 Outcome
             if player2.health == 0:
-                txt = Global.font.render('Player 1 Wins!', True, Fetch('playerColor', None, None, player2, player1))
+                txt = Global.font.render('Player 1 Wins!', True, Fetch('text', 'playerColor', None, player2, player1))
                 textlocal = (155, 530)
                 time = False
                 onEnd = False
@@ -497,8 +529,8 @@ class Game():
             all_sprites.update()
             screen.fill(Global.black)
             screen.blit(Media.wall,(0, 0))
-            screen.blit(Fetch('hp', 'player1', None, player1, player2), (20, 530))
-            screen.blit(Fetch('hp', 'player2', None, player1, player2), (380, 530))
+            screen.blit(Fetch('player', 'player1', 'hp', player1, player2), (20, 530))
+            screen.blit(Fetch('player', 'player2', 'hp', player1, player2), (380, 530))
             screen.blit(txt, (textlocal))
             screen.blit(textstatic1, (19, 515))
             screen.blit(textstatic2, (429, 515))
