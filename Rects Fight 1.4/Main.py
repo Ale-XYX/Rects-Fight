@@ -13,6 +13,7 @@ class Global():
     orange = (247, 157, 66)
     green = (0, 159, 18)
     red = (196, 0, 0)
+    yellow = (255, 238, 0)
     purple = (205, 43, 255)
     P1Char = 1
     P2Char = 2
@@ -39,6 +40,9 @@ class Media():
     # Grey Medialist
     grey = pygame.image.load(os.path.join('media', 'grey.png')).convert_alpha()
     bulletgrey = pygame.image.load(os.path.join('media', 'bulletgrey.png')).convert_alpha()
+    # Yellow Medialist
+    yellow = pygame.image.load(os.path.join('media', 'yellow.png')).convert_alpha()
+    bulletyellow = pygame.image.load(os.path.join('media', 'bulletyellow.png')).convert_alpha()
     # HP Medialist
     hp1 = pygame.image.load(os.path.join('media', 'hp1.png')).convert_alpha()
     hp2 = pygame.image.load(os.path.join('media', 'hp2.png')).convert_alpha()
@@ -74,10 +78,12 @@ def Fetch(type1, type2, type3, insert1, insert2):
                 elif Global.P1Char == 3:
                     return Media.green
                 elif Global.P1Char == 4:
-                    return Media.purple
+                    return Media.yellow
                 elif Global.P1Char == 5:
-                    return Media.red
+                    return Media.purple
                 elif Global.P1Char == 6:
+                    return Media.red
+                elif Global.P1Char == 7:
                     return Media.grey
                 else:
                     return Media.error
@@ -89,10 +95,12 @@ def Fetch(type1, type2, type3, insert1, insert2):
                 elif Global.P1Char == 3:
                     return Media.bulletgreen
                 elif Global.P1Char == 4:
-                    return Media.bulletpurple
+                    return Media.bulletyellow
                 elif Global.P1Char == 5:
-                    return Media.bulletred
+                    return Media.bulletpurple
                 elif Global.P1Char == 6:
+                    return Media.bulletred
+                elif Global.P1Char == 7:
                     return Media.bulletgrey
                 else:
                     return Media.error
@@ -118,10 +126,12 @@ def Fetch(type1, type2, type3, insert1, insert2):
                 elif Global.P2Char == 3:
                     return Media.green
                 elif Global.P2Char == 4:
-                    return Media.purple
+                    return Media.yellow
                 elif Global.P2Char == 5:
-                    return Media.red
+                    return Media.purple
                 elif Global.P2Char == 6:
+                    return Media.red
+                elif Global.P2Char == 7:
                     return Media.grey
                 else:
                     return Media.error
@@ -133,10 +143,12 @@ def Fetch(type1, type2, type3, insert1, insert2):
                 elif Global.P2Char == 3:
                     return Media.bulletgreen
                 elif Global.P2Char == 4:
-                    return Media.bulletpurple
+                    return Media.bulletyellow
                 elif Global.P2Char == 5:
-                    return Media.bulletred
+                    return Media.bulletpurple
                 elif Global.P2Char == 6:
+                    return Media.bulletred
+                elif Globa.P2char == 7:
                     return Media.bulletgrey
                 else:
                     return Media.error
@@ -163,10 +175,12 @@ def Fetch(type1, type2, type3, insert1, insert2):
                 elif Global.P1Char == 3:
                     return Global.font.render('Green', True, Global.green)
                 elif Global.P1Char == 4:
-                    return Global.font.render('Purple', True, Global.purple)
+                    return Global.font.render('Yellow', True, Global.yellow)
                 elif Global.P1Char == 5:
-                    return Global.font.render('Red', True, Global.red)
+                    return Global.font.render('Purple', True, Global.purple)
                 elif Global.P1Char == 6:
+                    return Global.font.render('Red', True, Global.red)
+                elif Global.P1Char == 7:
                     return Global.font.render('Grey', True, Global.grey)
                 else:
                     return Global.font.render('NotFound', True, Global.white)
@@ -178,10 +192,12 @@ def Fetch(type1, type2, type3, insert1, insert2):
                 elif Global.P2Char == 3:
                     return Global.font.render('Green', True, Global.green)
                 elif Global.P2Char == 4:
-                    return Global.font.render('Purple', True, Global.purple)
+                    return Global.font.render('Yellow', True, Global.yellow)
                 elif Global.P2Char == 5:
-                    return Global.font.render('Red', True, Global.red)
+                    return Global.font.render('Purple', True, Global.purple)
                 elif Global.P2Char == 6:
+                    return Global.font.render('Red', True, Global.red)
+                elif Global.P2Char == 7:
                     return Global.font.render('Grey', True, Global.grey)
                 else:
                     return Global.font.render('NotFound', True, Global.white)
@@ -196,10 +212,12 @@ def Fetch(type1, type2, type3, insert1, insert2):
                 elif Global.P1Char == 3:
                     return Global.green
                 elif Global.P1Char == 4:
-                    return Global.purple
+                    return Global.yellow
                 elif Global.P1Char == 5:
-                    return Global.red
+                    return Global.purple
                 elif Global.P1Char == 6:
+                    return Global.red
+                elif Global.P1Char == 7:
                     return Global.grey
                 else:
                     return Global.white
@@ -211,10 +229,12 @@ def Fetch(type1, type2, type3, insert1, insert2):
                 elif Global.P2Char == 3:
                     return Global.green
                 elif Global.P2Char == 4:
-                    return Global.purple
+                    return Global.yellow
                 elif Global.P2Char == 5:
-                    return Global.red
+                    return Global.purple
                 elif Global.P2Char == 6:
+                    return Global.red
+                elif Global.P2Char == 7:
                     return Global.grey
                 else:
                     return Global.white
@@ -309,7 +329,7 @@ class Game():
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_w:
                         Global.P1Char += 1
-                        if not Global.P1Char == 7:
+                        if not Global.P1Char == 8:
                             Media.select.play()
                     elif event.key == pygame.K_s:
                         Global.P1Char -= 1
@@ -317,7 +337,7 @@ class Game():
                             Media.select.play()
                     if event.key == pygame.K_UP:
                         Global.P2Char += 1
-                        if not Global.P2Char == 7:
+                        if not Global.P2Char == 8:
                             Media.select.play()
                     elif event.key == pygame.K_DOWN:
                         Global.P2Char -= 1
@@ -325,11 +345,11 @@ class Game():
                             Media.select.play()
                     if event.key == pygame.K_SPACE:
                         loop = False
-            if Global.P1Char == 7:
+            if Global.P1Char == 8:
                 Global.P1Char -= 1
             elif Global.P1Char == 0:
                 Global.P1Char += 1
-            if Global.P2Char == 7:
+            if Global.P2Char == 8:
                 Global.P2Char -= 1
             elif Global.P2Char == 0:
                 Global.P2Char += 1
