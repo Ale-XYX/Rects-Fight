@@ -6,17 +6,23 @@ Version 1.5: SnivyDroid
 
 # CONTROLS:
 W/S To Select Player 1 Character
+
 UP/DOWN To Select Player 2 Character
 
 WASD to move Player 1
+
 Arrow keys to move Player 2
 
 E to shoot from Player 1
+
 SPACE to shoot from Player 2
 
 TAB to pause
+
 LSHIFT to Unpause
+
 ESC to leave
+
 ENTER to restart game [Paused, At end, etc.]
 
 Game Ends when one player dies [After taking three hits]
