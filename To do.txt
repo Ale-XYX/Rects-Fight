@@ -1,0 +1,12 @@
+To do 1.5:
+Change Media into glob-dict structure [glob loads media into dictionary]
+Kill off fetch()
+Rewrite
+To do 1.6:
+Recreate start screen
+Redesign Character Select with sprites
+
+Ideas:
+Different bullet patterns for each character?
+Alternate abilities for each player instead of alternate bullet patterns?
+You can suggest more features/report bugs in issues.
