@@ -42,9 +42,10 @@ Game Ends when one player dies [After taking three hits]
 
 # Changelog 1.4:
 Changelog 1.4:
-- New Characters: Green, Purple, And Red!
+- New Characters: Green, Purple, Red, Yellow, and Grey  
 - Images now show in character select screen
 - New Sound Effects
 - HP Bars!
 - Plenty Of Random Fixes
 - Egg 20s
+- Unified Fetch()
