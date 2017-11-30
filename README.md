@@ -1,6 +1,6 @@
 # Rects-Fight   
 
-Version 1.4 : SnivyDroid
+Version 1.5: SnivyDroid
 
 ***REQUIRES PYTHON/PYGAME LIBRARY***
 
@@ -40,8 +40,7 @@ Game Ends when one player dies [After taking three hits]
 
 ![Yellow](https://i.imgur.com/rXCyQo1.png "Yellow")
 
-# Changelog 1.4:
-Changelog 1.5:
+# Changelog 1.5
 - New Characters, Yellow and Grey
 - Plenty of behind the scenes things
 - Fixes
