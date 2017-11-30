@@ -82,7 +82,7 @@ def Fetch(type1, type2, type3, insert1, insert2):
                     return Media.bulletpurple
                 elif Global.P2Char == 6:
                     return Media.bulletred
-                elif Globa.P2char == 7:
+                elif Global.P2char == 7:
                     return Media.bulletgrey
                 else:
                     return Media.error
