@@ -1,53 +1,13 @@
 import pygame
 import sys
-sys.path.insert(0, 'items/media.py')
-sys.path.insert(0, 'items/gamewide.py')
-sys.path.insert(0, 'items/fetch.py')
+sys.path.insert(0, './lib')
 from fetch import *
-import gamewide as gamewide
-import media as media
+import media
+import gamewide
+import sprites
 
 pygame.init()
 
-class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, enemy_bullets, image, direction, *groups):
-        super().__init__(*groups)
-        self.image = image
-        self.rect = self.image.get_rect(center = pos)
-        self.vel = pygame.math.Vector2(0, 0)
-        self.pos = pygame.math.Vector2(pos)
-        self.fire_direction = pygame.math.Vector2(direction)
-        self.health = 3
-        self.enemy_bullets = enemy_bullets
-        self.toggle = False
-    def update(self):
-        self.pos += self.vel
-        self.rect.center = self.pos
-        self.rect.clamp_ip(gamewide.playarea)
-        collided = pygame.sprite.spritecollide(self, self.enemy_bullets, True)
-        for bullet in collided:
-            self.health -= 1
-            media.hit.play()
-            if self.health <= 0:
-                self.kill()
-                self.toggle = True
-                media.die.play()
-                
-class Bullet(pygame.sprite.Sprite):
-    def __init__(self, pos, vel, image):
-        super().__init__()
-        self.image = image
-        self.rect = self.image.get_rect(center = pos)
-        self.vel = pygame.math.Vector2(vel)
-        self.pos = pygame.math.Vector2(pos)
-        self.toggle = False
-    def update(self):
-        if self.toggle == False:
-            self.pos += self.vel
-            self.rect.center = self.pos
-            if not gamewide.playarea.contains(self):
-                self.kill()
-                
 def title():
     loop = True
     time = True
@@ -72,9 +32,10 @@ def title():
         media.screen.fill(gamewide.black)
         media.screen.blit(media.title, (0, 0))
         if not time:
-            screen.blit(media.etge, (200, 100))
+            media.screen.blit(media.etge, (200, 100))
         pygame.display.flip()
         clock.tick(60)
+        
 def charselect():
     loop = True
     clock = pygame.time.Clock()
@@ -90,7 +51,7 @@ def charselect():
                         media.select.play()
                 elif event.key == pygame.K_s:
                     gamewide.P1Char -= 1
-                    if not gamewide.P2Char == 8:
+                    if not gamewide.P2Char == 0:
                         media.select.play()
                 if event.key == pygame.K_UP:
                     gamewide.P2Char += 1
@@ -133,8 +94,8 @@ def main():
     all_sprites = pygame.sprite.Group()
     bullets1 = pygame.sprite.Group()
     bullets2 = pygame.sprite.Group()
-    player1 = Player((35, 35), bullets2, Fetch('player', 'player1', 'image', None, None), (8, 0), all_sprites)
-    player2 = Player((465, 465), bullets1, Fetch('player', 'player2', 'image', None, None), (-8, 0), all_sprites)
+    player1 = sprites.Player((35, 35), bullets2, Fetch('player', 'player1', 'image', None, None), (8, 0), all_sprites)
+    player2 = sprites.Player((465, 465), bullets1, Fetch('player', 'player2', 'image', None, None), (-8, 0), all_sprites)
     clock = pygame.time.Clock()
     textstatic1 = gamewide.font2.render('Player 1', True, gamewide.white)
     textstatic2 = gamewide.font2.render('Player 2', True, gamewide.white)
@@ -159,12 +120,12 @@ def main():
                 loop = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_e and player1.toggle == False:
-                    bullet = Bullet(player1.rect.center, pygame.math.Vector2(player1.fire_direction), Fetch('player', 'player1', 'bullet', None, None))
+                    bullet = sprites.Bullet(player1.rect.center, pygame.math.Vector2(player1.fire_direction), Fetch('player', 'player1', 'bullet', None, None))
                     media.shoot.play()
                     bullets1.add(bullet)
                     all_sprites.add(bullet)
                 if event.key == pygame.K_SPACE and player2.toggle == False:
-                    bullet = Bullet(player2.rect.center, pygame.math.Vector2(player2.fire_direction), Fetch('player', 'player2', 'bullet', None, None))
+                    bullet = sprites.Bullet(player2.rect.center, pygame.math.Vector2(player2.fire_direction), Fetch('player', 'player2', 'bullet', None, None))
                     media.shoot.play()
                     bullets2.add(bullet)
                     all_sprites.add(bullet)
@@ -319,6 +280,7 @@ def main():
             media.screen.blit(media.paused, (154, 165))
         pygame.display.flip()
         clock.tick(60)
+        
 if __name__ == '__main__':
     title()
     charselect()
