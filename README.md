@@ -41,11 +41,7 @@ Game Ends when one player dies [After taking three hits]
 ![Yellow](https://i.imgur.com/rXCyQo1.png "Yellow")
 
 # Changelog 1.4:
-Changelog 1.4:
-- New Characters: Green, Purple, Red, Yellow, and Grey  
-- Images now show in character select screen
-- New Sound Effects
-- HP Bars!
-- Plenty Of Random Fixes
-- Egg 20s
-- Unified Fetch()
+Changelog 1.5:
+- New Characters, Yellow and Grey
+- Plenty of behind the scenes things
+- Fixes
