@@ -1,6 +1,6 @@
 import pygame
 import datetime
-logat = str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'APP: '
+logat = str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'VAR: '
 
 pygame.init()
 
@@ -27,4 +27,4 @@ P2Char = None
 font = pygame.font.Font(None, 40)
 font2 = pygame.font.Font(None, 20)
 playarea = pygame.Rect(5, 5, 490, 490)
-print(logat + 'Loaded Font')
+print(logat + 'Loaded Game Items')
