@@ -1,5 +1,5 @@
 import pygame
-from media import *
+import media32 as m32
 import gamewide as Global
 
 def Fetch(type1, type2, type3, insert1, insert2):
@@ -7,47 +7,47 @@ def Fetch(type1, type2, type3, insert1, insert2):
         if type2 == 'player1':
             if type3 == 'image':
                 if Global.P1Char == 1:
-                    return MEDIA[1]
+                    return m32.MEDIA[1]
                 elif Global.P1Char == 2:
-                    return MEDIA[18]
+                    return m32.MEDIA[18]
                 elif Global.P1Char == 3:
-                    return MEDIA[12]
+                    return m32.MEDIA[12]
                 elif Global.P1Char == 4:
-                    return MEDIA[24]
+                    return m32.MEDIA[24]
                 elif Global.P1Char == 5:
-                    return MEDIA[20]
+                    return m32.MEDIA[20]
                 elif Global.P1Char == 6:
-                    return MEDIA[21]
+                    return m32.MEDIA[21]
                 elif Global.P1Char == 7:
-                    return MEDIA[13]
+                    return m32.MEDIA[13]
                 else:
                     return MEDIA[11]
             elif type3 == 'bullet':
                 if Global.P1Char == 1:
-                    return MEDIA[2]
+                    return m32.MEDIA[2]
                 elif Global.P1Char == 2:
-                    return MEDIA[5]
+                    return m32.MEDIA[5]
                 elif Global.P1Char == 3:
-                    return MEDIA[3]
+                    return m32.MEDIA[3]
                 elif Global.P1Char == 4:
-                    return MEDIA[8]
+                    return m32.MEDIA[8]
                 elif Global.P1Char == 5:
-                    return MEDIA[6]
+                    return m32.MEDIA[6]
                 elif Global.P1Char == 6:
-                    return MEDIA[7]
+                    return m32.MEDIA[7]
                 elif Global.P1Char == 7:
-                    return MEDIA[4]
+                    return m32.MEDIA[4]
                 else:
-                    return MEDIA[11]
+                    return m32.MEDIA[11]
             elif type3 == 'hp':
                 if insert1.health == 3:
-                    return pygame.transform.flip(MEDIA[14], True, False)
+                    return pygame.transform.flip(m32.MEDIA[14], True, False)
                 elif insert1.health == 2:
-                    return pygame.transform.flip(MEDIA[15], True, False)
+                    return pygame.transform.flip(m32.MEDIA[15], True, False)
                 elif insert1.health == 1:
-                    return pygame.transform.flip(MEDIA[16], True, False)
+                    return pygame.transform.flip(m32.MEDIA[16], True, False)
                 elif insert1.health <= 0:
-                    return pygame.transform.flip(MEDIA[9], True, False)
+                    return pygame.transform.flip(m32.MEDIA[9], True, False)
                 else:
                     return Media.error
             else:
@@ -55,51 +55,51 @@ def Fetch(type1, type2, type3, insert1, insert2):
         elif type2 == 'player2':
             if type3 == 'image':
                 if Global.P2Char == 1:
-                    return MEDIA[1]
+                    return m32.MEDIA[1]
                 elif Global.P2Char == 2:
-                    return MEDIA[18]
+                    return m32.MEDIA[18]
                 elif Global.P2Char == 3:
-                    return MEDIA[12]
+                    return m32.MEDIA[12]
                 elif Global.P2Char == 4:
-                    return MEDIA[24]
+                    return m32.MEDIA[24]
                 elif Global.P2Char == 5:
-                    return MEDIA[20]
+                    return m32.MEDIA[20]
                 elif Global.P2Char == 6:
-                    return MEDIA[21]
+                    return m32.MEDIA[21]
                 elif Global.P2Char == 7:
-                    return MEDIA[13]
+                    return m32.MEDIA[13]
                 else:
                     return MEDIA[11]
             elif type3 == 'bullet':
                 if Global.P2Char == 1:
-                    return MEDIA[2]
+                    return m32.MEDIA[2]
                 elif Global.P2Char == 2:
-                    return MEDIA[5]
+                    return m32.MEDIA[5]
                 elif Global.P2Char == 3:
-                    return MEDIA[3]
+                    return m32.MEDIA[3]
                 elif Global.P2Char == 4:
-                    return MEDIA[8]
+                    return m32.MEDIA[8]
                 elif Global.P2Char == 5:
-                    return MEDIA[6]
+                    return m32.MEDIA[6]
                 elif Global.P2Char == 6:
-                    return MEDIA[7]
+                    return m32.MEDIA[7]
                 elif Global.P2Char == 7:
-                    return MEDIA[4]
+                    return m32.MEDIA[4]
                 else:
                     return MEDIA[11]
             elif type3 == 'hp':
                 if insert2.health == 3:
-                    return MEDIA[14]
+                    return m32.MEDIA[14]
                 if insert2.health == 2:
-                    return MEDIA[15]
+                    return m32.MEDIA[15]
                 if insert2.health == 1:
-                    return MEDIA[16]
+                    return m32.MEDIA[16]
                 if insert2.health <= 0:
-                    return MEDIA[9]
+                    return m32.MEDIA[9]
                 else:
-                    return MEDIA[11]
+                    return m32.MEDIA[11]
             else:
-                return MEDIA[11]
+                return m32.MEDIA[11]
     elif type1 == 'text':
         if type2 == 'player':
             if type3 == 'player1':

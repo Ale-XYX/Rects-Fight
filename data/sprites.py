@@ -1,6 +1,6 @@
 import pygame
 import gamewide
-from media import *
+import media32 as m32
 
 pygame.init()
 
@@ -22,9 +22,9 @@ class Player(pygame.sprite.Sprite):
         collided = pygame.sprite.spritecollide(self, self.enemy_bullets, True)
         for bullet in collided:
             self.health -= 1
-            MEDIA[27].play()
+            m32.MEDIA[27].play()
             if self.health <= 0:
-                MEDIA[25].play()
+                m32.MEDIA[25].play()
                 self.kill()
                 self.toggle = True
                 
