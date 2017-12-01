@@ -1,5 +1,5 @@
 import pygame
-import gamewide
+import var as v
 import media32 as m32
 
 pygame.init()
@@ -18,7 +18,7 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         self.pos += self.vel
         self.rect.center = self.pos
-        self.rect.clamp_ip(gamewide.playarea)
+        self.rect.clamp_ip(v.playarea)
         collided = pygame.sprite.spritecollide(self, self.enemy_bullets, True)
         for bullet in collided:
             self.health -= 1
@@ -41,6 +41,6 @@ class Bullet(pygame.sprite.Sprite):
         if self.toggle == False:
             self.pos += self.vel
             self.rect.center = self.pos
-            if not gamewide.playarea.contains(self):
+            if not v.playarea.contains(self):
                 self.kill()
                 
