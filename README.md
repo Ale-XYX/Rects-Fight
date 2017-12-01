@@ -26,11 +26,11 @@ ESC to leave
 ENTER to restart game [Paused, At end, etc.]
 
 Game Ends when one player dies [After taking three hits]
-![Title](https://i.imgur.com/GpAOhpL.png "Title Screen")
+![Title](https://i.imgur.com/4NMROK3.png "Title Screen")
 
 ![Character Select](https://i.imgur.com/bOiU3hj.png "Character Select")
 
-![Game](https://i.imgur.com/gzPQYPm.png "Game in Action")
+![Game](https://i.imgur.com/wL76rxt.png "Game in Action")
 
 ![Blue](https://i.imgur.com/pD5AZqO.png "Blue")
 
