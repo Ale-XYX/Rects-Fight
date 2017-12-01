@@ -5,7 +5,7 @@ import sys
 # Import data
 sys.path.insert(0, './data')
 from fetch import *
-import media
+from media import *
 import gamewide
 import sprites
 
@@ -26,17 +26,17 @@ def title():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     loop = False
-                    media.start.play()
+                    MEDIA[32].play()
                 elif event.key == pygame.K_ESCAPE:
                     pygame.quit()
         if time:
             timer -= dt
         if timer <= 0:
             time = False
-        media.screen.fill(gamewide.black)
-        media.screen.blit(media.title, (0, 0))
+        screen.fill(gamewide.black)
+        screen.blit(MEDIA[22], (0, 0))
         if not time:
-            media.screen.blit(media.etge, (200, 100))
+            screen.blit(MEDIA[10], (200, 100))
         pygame.display.flip()
         clock.tick(60)
 
@@ -53,19 +53,19 @@ def charselect():
                 if event.key == pygame.K_w:
                     gamewide.P1Char += 1
                     if not gamewide.P1Char == 8:
-                        media.select.play()
+                        MEDIA[30].play()
                 elif event.key == pygame.K_s:
                     gamewide.P1Char -= 1
                     if not gamewide.P2Char == 0:
-                        media.select.play()
+                        MEDIA[30].play()
                 if event.key == pygame.K_UP:
                     gamewide.P2Char += 1
                     if not gamewide.P2Char == 8:
-                        media.select.play()
+                        MEDIA[30].play()
                 elif event.key == pygame.K_DOWN:
                     gamewide.P2Char -= 1
                     if not gamewide.P2Char == 0:
-                        media.select.play()
+                        MEDIA[30].play()
                 if event.key == pygame.K_SPACE:
                     loop = False
         if gamewide.P1Char == 8:
@@ -82,15 +82,15 @@ def charselect():
         textS2 = gamewide.font.render('Space To Continue', True, gamewide.white)
         textS3 = gamewide.font.render('Player 1: ', True, gamewide.white)
         textS4 = gamewide.font.render('Player 2: ', True, gamewide.white)
-        media.screen.fill(gamewide.black)
-        media.screen.blit(textS1, (100, 50))
-        media.screen.blit(textS2, (125, 500))
-        media.screen.blit(textS3, (115, 225))
-        media.screen.blit(textS4, (115, 325))
-        media.screen.blit(text1, (240, 225))
-        media.screen.blit(text2, (240, 325))
-        media.screen.blit(Fetch('player', 'player1', 'image', None, None), (355, 210))
-        media.screen.blit(Fetch('player', 'player2', 'image', None, None), (355, 310))
+        screen.fill(gamewide.black)
+        screen.blit(textS1, (100, 50))
+        screen.blit(textS2, (125, 500))
+        screen.blit(textS3, (115, 225))
+        screen.blit(textS4, (115, 325))
+        screen.blit(text1, (240, 225))
+        screen.blit(text2, (240, 325))
+        screen.blit(Fetch('player', 'player1', 'image', None, None), (355, 210))
+        screen.blit(Fetch('player', 'player2', 'image', None, None), (355, 310))
         pygame.display.flip()
         clock.tick(60)
 
@@ -127,12 +127,12 @@ def main():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_e and player1.toggle == False:
                     bullet = sprites.Bullet(player1.rect.center, pygame.math.Vector2(player1.fire_direction), Fetch('player', 'player1', 'bullet', None, None))
-                    media.shoot.play()
+                    MEDIA[31].play()
                     bullets1.add(bullet)
                     all_sprites.add(bullet)
                 if event.key == pygame.K_SPACE and player2.toggle == False:
                     bullet = sprites.Bullet(player2.rect.center, pygame.math.Vector2(player2.fire_direction), Fetch('player', 'player2', 'bullet', None, None))
-                    media.shoot.play()
+                    MEDIA[31].play()
                     bullets2.add(bullet)
                     all_sprites.add(bullet)
                 if event.key == pygame.K_d and player1.toggle == False:
@@ -178,8 +178,8 @@ def main():
                     player2.vel.y = vel_reset
         keys = pygame.key.get_pressed()
         if onStart:
-            media.fight.play()
-            media.music.play()
+            MEDIA[26].play()
+            MEDIA[28].play()
             onStart = False
         if keys[pygame.K_TAB] and not confirm and onEnd:
             player1.toggle = True
@@ -191,7 +191,7 @@ def main():
             for bullet in bullets2:
                 bullet.toggle = True
             pygame.mixer.pause()
-            media.pause.play()
+            MEDIA[29].play()
         elif keys[pygame.K_LSHIFT] and confirm:
             player1.toggle = False
             player2.toggle = False
@@ -202,12 +202,12 @@ def main():
             for bullet in bullets2:
                 bullet.toggle = False
             pygame.mixer.unpause()
-            media.pause.play()
+            MEDIA[29].play()
         elif keys[pygame.K_ESCAPE] and confirm:
             gamewide.superloop = False
             loop = False
         elif keys[pygame.K_RETURN] and confirm:
-            media.music.stop()
+            MEDIA[28].stop()
             loop = False
         if time:
             timer -= dt
@@ -219,8 +219,8 @@ def main():
                     bullet.toggle = True
                 for bullet in bullets2:
                     bullet.toggle = True
-                media.die.play()
-                media.music.stop()
+                MEDIA[25].play()
+                MEDIA[28].stop()
                 time = False
                 onEnd = False
                 textlocal = (190, 530)
@@ -229,19 +229,18 @@ def main():
             gamewide.superloop = False
             loop = False
         elif not time and keys[pygame.K_RETURN] and not confirm:
-            media.music.stop()
+            MEDIA[28].stop()
             loop = False
         if player1.health == 0:
             txt = gamewide.font.render('Player 2 Wins!', True, Fetch('text', 'playerColor', None, player2, player1))
             textlocal = (155, 530)
             time = False
             onEnd = False
-            media.music.stop()
+            MEDIA[28].stop()
             if keys[pygame.K_ESCAPE] and not confirm:
                 gamewide.superloop = False
                 loop = False
             elif keys[pygame.K_RETURN] and not confirm:
-                media.music.stop()
                 loop = False
             # Player 2 Outcome
         if player2.health == 0:
@@ -249,12 +248,11 @@ def main():
             textlocal = (155, 530)
             time = False
             onEnd = False
-            media.music.stop()
+            MEDIA[28].stop()
             if keys[pygame.K_ESCAPE] and not confirm:
                 gamewide.superloop = False
                 loop = False
             if keys[pygame.K_RETURN] and not confirm:
-                media.music.stop()
                 loop = False
         # Draw Outcome
         if player1.health == 0 and player2.health == 0:
@@ -267,23 +265,22 @@ def main():
                 gamewide.superloop = False
                 loop = False
             elif keys[pygame.K_RETURN] and not confirm:
-                media.music.stop()
                 loop = False
         # Drawing
         all_sprites.update()
-        media.screen.fill(gamewide.black)
-        media.screen.blit(media.wall, (0, 0))
-        media.screen.blit(Fetch('player', 'player1', 'hp', player1, player2), (20, 530))
-        media.screen.blit(Fetch('player', 'player2', 'hp', player1, player2), (380, 530))
-        media.screen.blit(txt, textlocal)
-        media.screen.blit(textstatic1, (19, 515))
-        media.screen.blit(textstatic2, (429, 515))
-        all_sprites.draw(media.screen)
+        screen.fill(gamewide.black)
+        screen.blit(MEDIA[23], (0, 0))
+        screen.blit(Fetch('player', 'player1', 'hp', player1, player2), (20, 530))
+        screen.blit(Fetch('player', 'player2', 'hp', player1, player2), (380, 530))
+        screen.blit(txt, textlocal)
+        screen.blit(textstatic1, (19, 515))
+        screen.blit(textstatic2, (429, 515))
+        all_sprites.draw(screen)
         if not onEnd:
-            media.screen.blit(textstatic3, (395, 10))
-            media.screen.blit(textstatic4, (10, 10))
+            screen.blit(textstatic3, (395, 10))
+            screen.blit(textstatic4, (10, 10))
         if confirm:
-            media.screen.blit(media.paused, (154, 165))
+            screen.blit(MEDIA[19], (154, 165))
         pygame.display.flip()
         clock.tick(60)
 

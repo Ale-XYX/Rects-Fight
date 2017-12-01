@@ -1,6 +1,6 @@
 import pygame
 import gamewide
-import media
+from media import *
 
 pygame.init()
 
@@ -22,11 +22,12 @@ class Player(pygame.sprite.Sprite):
         collided = pygame.sprite.spritecollide(self, self.enemy_bullets, True)
         for bullet in collided:
             self.health -= 1
-            media.hit.play()
+            MEDIA[27].play()
             if self.health <= 0:
+                MEDIA[25].play()
                 self.kill()
                 self.toggle = True
-                media.die.play()
+                
                 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, pos, vel, image):

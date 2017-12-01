@@ -1,52 +1,53 @@
 import pygame
-import media as Media
+from media import *
 import gamewide as Global
+
 def Fetch(type1, type2, type3, insert1, insert2):
     if type1 == 'player':
         if type2 == 'player1':
             if type3 == 'image':
                 if Global.P1Char == 1:
-                    return Media.blue
+                    return MEDIA[1]
                 elif Global.P1Char == 2:
-                    return Media.orange
+                    return MEDIA[18]
                 elif Global.P1Char == 3:
-                    return Media.green
+                    return MEDIA[12]
                 elif Global.P1Char == 4:
-                    return Media.yellow
+                    return MEDIA[24]
                 elif Global.P1Char == 5:
-                    return Media.purple
+                    return MEDIA[20]
                 elif Global.P1Char == 6:
-                    return Media.red
+                    return MEDIA[21]
                 elif Global.P1Char == 7:
-                    return Media.grey
+                    return MEDIA[13]
                 else:
-                    return Media.error
+                    return MEDIA[11]
             elif type3 == 'bullet':
                 if Global.P1Char == 1:
-                    return Media.bulletblue
+                    return MEDIA[2]
                 elif Global.P1Char == 2:
-                    return Media.bulletorange
+                    return MEDIA[5]
                 elif Global.P1Char == 3:
-                    return Media.bulletgreen
+                    return MEDIA[3]
                 elif Global.P1Char == 4:
-                    return Media.bulletyellow
+                    return MEDIA[8]
                 elif Global.P1Char == 5:
-                    return Media.bulletpurple
+                    return MEDIA[6]
                 elif Global.P1Char == 6:
-                    return Media.bulletred
+                    return MEDIA[7]
                 elif Global.P1Char == 7:
-                    return Media.bulletgrey
+                    return MEDIA[4]
                 else:
-                    return Media.error
+                    return MEDIA[11]
             elif type3 == 'hp':
                 if insert1.health == 3:
-                    return pygame.transform.flip(Media.hp1, True, False)
+                    return pygame.transform.flip(MEDIA[14], True, False)
                 elif insert1.health == 2:
-                    return pygame.transform.flip(Media.hp2, True, False)
+                    return pygame.transform.flip(MEDIA[15], True, False)
                 elif insert1.health == 1:
-                    return pygame.transform.flip(Media.hp3, True, False)
+                    return pygame.transform.flip(MEDIA[16], True, False)
                 elif insert1.health <= 0:
-                    return pygame.transform.flip(Media.dead, True, False)
+                    return pygame.transform.flip(MEDIA[9], True, False)
                 else:
                     return Media.error
             else:
@@ -54,51 +55,51 @@ def Fetch(type1, type2, type3, insert1, insert2):
         elif type2 == 'player2':
             if type3 == 'image':
                 if Global.P2Char == 1:
-                    return Media.blue
+                    return MEDIA[1]
                 elif Global.P2Char == 2:
-                    return Media.orange
+                    return MEDIA[18]
                 elif Global.P2Char == 3:
-                    return Media.green
+                    return MEDIA[12]
                 elif Global.P2Char == 4:
-                    return Media.yellow
+                    return MEDIA[24]
                 elif Global.P2Char == 5:
-                    return Media.purple
+                    return MEDIA[20]
                 elif Global.P2Char == 6:
-                    return Media.red
+                    return MEDIA[21]
                 elif Global.P2Char == 7:
-                    return Media.grey
+                    return MEDIA[13]
                 else:
-                    return Media.error
+                    return MEDIA[11]
             elif type3 == 'bullet':
                 if Global.P2Char == 1:
-                    return Media.bulletblue
+                    return MEDIA[2]
                 elif Global.P2Char == 2:
-                    return Media.bulletorange
+                    return MEDIA[5]
                 elif Global.P2Char == 3:
-                    return Media.bulletgreen
+                    return MEDIA[3]
                 elif Global.P2Char == 4:
-                    return Media.bulletyellow
+                    return MEDIA[8]
                 elif Global.P2Char == 5:
-                    return Media.bulletpurple
+                    return MEDIA[6]
                 elif Global.P2Char == 6:
-                    return Media.bulletred
-                elif Global.P2char == 7:
-                    return Media.bulletgrey
+                    return MEDIA[7]
+                elif Global.P2Char == 7:
+                    return MEDIA[4]
                 else:
-                    return Media.error
+                    return MEDIA[11]
             elif type3 == 'hp':
                 if insert2.health == 3:
-                    return Media.hp1
+                    return MEDIA[14]
                 if insert2.health == 2:
-                    return Media.hp2
+                    return MEDIA[15]
                 if insert2.health == 1:
-                    return Media.hp3
+                    return MEDIA[16]
                 if insert2.health <= 0:
-                    return Media.dead
+                    return MEDIA[9]
                 else:
-                    return Media.error
+                    return MEDIA[11]
             else:
-                return Media.error
+                return MEDIA[11]
     elif type1 == 'text':
         if type2 == 'player':
             if type3 == 'player1':
