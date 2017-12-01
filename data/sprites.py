@@ -1,13 +1,15 @@
 import pygame
+import datetime
 import var as v
-import media32 as m32
+import media as m
+logat = str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'SPRITES: '
 
 pygame.init()
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, enemy_bullets, image, direction, *groups):
+    def __init__(self, pos, enemy_bullets, direction, color, *groups):
         super().__init__(*groups)
-        self.image = image
+        self.image = m.PLAYER_MEDIA[color]['player_image']
         self.rect = self.image.get_rect(center = pos)
         self.vel = pygame.math.Vector2(0, 0)
         self.pos = pygame.math.Vector2(pos)
@@ -15,6 +17,8 @@ class Player(pygame.sprite.Sprite):
         self.health = 3
         self.enemy_bullets = enemy_bullets
         self.toggle = False
+        self.color = m.PLAYER_MEDIA[color]['color']
+        self.bullet_image = m.PLAYER_MEDIA[color]['bullet_image']
     def update(self):
         self.pos += self.vel
         self.rect.center = self.pos
@@ -22,13 +26,14 @@ class Player(pygame.sprite.Sprite):
         collided = pygame.sprite.spritecollide(self, self.enemy_bullets, True)
         for bullet in collided:
             self.health -= 1
-            m32.MEDIA[27].play()
+            m.MEDIA['hit'].play()
             if self.health <= 0:
-                m32.MEDIA[25].play()
+                m.MEDIA['die'].play()
                 self.kill()
                 self.toggle = True
                 
-                
+print(logat + 'Loaded Player Sprite')
+
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, pos, vel, image):
         super().__init__()
@@ -43,4 +48,6 @@ class Bullet(pygame.sprite.Sprite):
             self.rect.center = self.pos
             if not v.playarea.contains(self):
                 self.kill()
+                
+print(logat + 'Loaded Bullet Sprite')
                 
