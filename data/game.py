@@ -46,7 +46,7 @@ def title():
         pygame.display.flip()
         clock.tick(60)
         
-print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'GAME: ' + 'Loaded Title Select')
+print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'GAME: ' + 'Loaded Title')
 
 # Character Select [Credit to skrx]
 def char_select():
