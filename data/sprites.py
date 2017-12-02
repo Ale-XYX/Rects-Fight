@@ -2,7 +2,6 @@ import pygame
 import datetime
 import var as v
 import media as m
-logat = str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'SPRITES: '
 
 pygame.init()
 
@@ -32,7 +31,7 @@ class Player(pygame.sprite.Sprite):
                 self.kill()
                 self.toggle = True
                 
-print(logat + 'Loaded Player Sprite')
+print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'SPRITES: ' + 'Loaded Player Sprite')
 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, pos, vel, image):
@@ -49,7 +48,7 @@ class Bullet(pygame.sprite.Sprite):
             if not v.playarea.contains(self):
                 self.kill()
                 
-print(logat + 'Loaded Bullet Sprite')
+print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'SPRITES: ' + 'Loaded Bullet Sprite')
 
 class Selector(pygame.sprite.Sprite):
     def __init__(self, pos):
@@ -64,5 +63,5 @@ class Selector(pygame.sprite.Sprite):
         if self.pos[0] == 30:
             self.pos[0] = 415
 
-print(logat + 'Loaded Selector Sprite')
+print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'SPRITES: ' + 'Loaded Selector Sprite')
                 

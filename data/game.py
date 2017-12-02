@@ -3,18 +3,17 @@
 import pygame
 import sys
 import datetime
-logat = str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'GAME: '
+print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'GAME: ' + 'Loaded Modules')
 
-print(logat + 'Loaded Modules')
 # Import data
 import media as m
-print(logat + 'Loaded Media')
+print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'GAME: ' + 'Loaded Media')
 import var as v
-print(logat + 'Loaded Variables')
+print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'GAME: ' + 'Loaded Variables')
 import sprites as s
-print(logat + 'Loaded Sprites')
+print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'GAME: ' + 'Loaded Sprites')
 import func as f
-print(logat + 'Loaded Functions')
+print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'GAME: ' + 'Loaded Functions')
 
 pygame.init()
 
@@ -47,7 +46,7 @@ def title():
         pygame.display.flip()
         clock.tick(60)
         
-print(logat + 'Loaded Title Select')
+print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'GAME: ' + 'Loaded Title Select')
 
 # Character Select [Credit to skrx]
 def char_select():
@@ -100,8 +99,8 @@ def char_select():
         m.screen.blit(textS1, (90, 50))
         m.screen.blit(textS2, (120, 500))
         m.screen.blit(textS3, (230, 275))
-        m.screen.blit(text1, (220, 218))
-        m.screen.blit(text2, (220, 330))
+        m.screen.blit(text1, (f.get('local', player1), 218))
+        m.screen.blit(text2, (f.get('local', player2), 330))
         
         m.screen.blit(m.MEDIA['blue'], (60, 163))
         m.screen.blit(m.MEDIA['orange'], (115, 163))
@@ -124,7 +123,7 @@ def char_select():
         pygame.display.flip()
         clock.tick(60)
         
-print(logat + 'Loaded Character Select')
+print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'GAME: ' + 'Loaded Character Select')
 
 # Game
 def main():
@@ -135,8 +134,8 @@ def main():
     player1 = s.Player((35, 35), bullets2, (8, 0), v.P1Char, all_sprites)
     player2 = s.Player((465, 465), bullets1, (-8, 0), v.P2Char, all_sprites)
     clock = pygame.time.Clock()
-    textstatic1 = v.font2.render('Player 1', True, v.white)
-    textstatic2 = v.font2.render('Player 2', True, v.white)
+    textstatic1 = v.font5.render('Player 1', True, v.white)
+    textstatic2 = v.font5.render('Player 2', True, v.white)
     textstatic3 = v.font2.render('Escape to leave', True, v.white)
     textstatic4 = v.font2.render('Enter to restart', True, v.white)
     # Conditionals
@@ -243,10 +242,7 @@ def main():
             loop = False
         if time:
             timer -= dt
-            if timer <= 10:
-                txt = v.font4.render(str(round(timer, 1)), True, f.get('time', timer))
-            else:
-                txt = v.font.render(str(round(timer, 1)), True, f.get('time', timer))
+            txt = f.get('time', timer)
             if timer <= 0:
                 player1.toggle = True
                 player2.toggle = True
@@ -319,4 +315,4 @@ def main():
         pygame.display.flip()
         clock.tick(60)
         
-print(logat + 'Loaded Main')
+print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'GAME: ' + 'Loaded Main')

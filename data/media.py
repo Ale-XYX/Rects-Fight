@@ -3,7 +3,6 @@ import os
 import glob
 import datetime
 import var as v
-logat = str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'MEDIA: '
 
 pygame.init()
 
@@ -17,14 +16,14 @@ for file_name in files:
     obj = pygame.image.load(file_name).convert_alpha()
     MEDIA[os.path.split(file_name)[-1][:-4]] = obj
     
-print(logat + 'Loaded Images')
+print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'MEDIA: ' + 'Loaded Images')
 
 for file_name in files2:
     obj = pygame.mixer.Sound(file_name)
     namer += 1
     MEDIA[os.path.split(file_name)[-1][:-4]] = obj
     
-print(logat + 'Loaded Audio')
+print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'MEDIA: ' + 'Loaded Audio')
 
 pygame.display.set_caption('Rects Fight!')
 pygame.display.set_icon(MEDIA['icon'])
@@ -67,5 +66,5 @@ PLAYER_MEDIA = {
         'local': 330}
     }
 
-print(logat + 'Loaded Player Media Dictionary')
+print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'MEDIA: ' + 'Loaded Player Media Dictionary')
 

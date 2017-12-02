@@ -2,7 +2,6 @@ import pygame
 import datetime
 import media as m
 import var as v
-logat = str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'FUNC: '
 
 pygame.init()
 
@@ -32,9 +31,24 @@ def get(type1, insert):
             return m.MEDIA['dead']
     elif type1 == 'time':
         if insert <= 10:
-            return v.red
+            return v.font4.render(str(round(insert, 1)), True, v.red)
         else:
-            return v.white
-        
-print(logat + 'Loaded Get()')
+            return v.font.render(str(round(insert, 1)), True, v.white)
+    elif type1 == 'local':
+        if insert == 0:
+            return 220
+        elif insert == 1:
+            return 200
+        elif insert == 2:
+            return 210
+        elif insert == 3:
+            return 210
+        elif insert == 4:
+            return 224
+        elif insert == 5:
+            return 209
+        elif insert == 6:
+            return 220
+    
+print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'FUNC: ' + 'Loaded Get()')
         
