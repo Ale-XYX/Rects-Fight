@@ -48,3 +48,5 @@ Game Ends when one player dies [After taking three hits]
 
 # Changelog 1.6
 - New Title Screen
+- Game files now in /data/, client opens
+- File status things
