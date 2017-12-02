@@ -1,6 +1,6 @@
 # Rects-Fight   
 
-Version 1.5: SnivyDroid
+Version 1.6: SnivyDroid
 
 ***REQUIRES PYTHON/PYGAME LIBRARY***
 
@@ -26,7 +26,7 @@ ESC to leave
 ENTER to restart game [Paused, At end, etc.]
 
 Game Ends when one player dies [After taking three hits]
-![Title](https://i.imgur.com/4NMROK3.png "Title Screen")
+![Title](https://i.imgur.com/0LnmDUS.png "Title Screen")
 
 ![Character Select](https://i.imgur.com/bOiU3hj.png "Character Select")
 
@@ -46,7 +46,5 @@ Game Ends when one player dies [After taking three hits]
 
 ![Yellow](https://i.imgur.com/rXCyQo1.png "Yellow")
 
-# Changelog 1.5
-- New Characters, Yellow and Grey
-- Filesystem Changes
-- Fixes
+# Changelog 1.6
+- New Title Screen

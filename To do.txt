@@ -1,8 +1,6 @@
-To do 1.5:
-Rewrite, fix names and unify get_img and get_others
 To do 1.6:
-Recreate start screen
 Redesign Character Select with sprites
+Rewrite some areas
 
 Ideas:
 Different bullet patterns for each character?
