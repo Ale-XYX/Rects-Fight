@@ -26,5 +26,7 @@ P2Char = None
 # Fonts/Rects
 font = pygame.font.Font(None, 40)
 font2 = pygame.font.Font(None, 20)
+font3 = pygame.font.SysFont(None, 40, True, True)
+font4 = pygame.font.SysFont(None, 40, True, False)
 playarea = pygame.Rect(5, 5, 490, 490)
 print(logat + 'Loaded Game Items')

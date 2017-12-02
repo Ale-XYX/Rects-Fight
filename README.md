@@ -1,13 +1,13 @@
-# Rects-Fight   
+![Title](https://i.imgur.com/pvWhary.png) 
 
 Version 1.6: SnivyDroid
 
 ***REQUIRES PYTHON/PYGAME LIBRARY***
 
 # CONTROLS:
-W/S To Select Player 1 Character
+A/D To Select Player 1 Character
 
-UP/DOWN To Select Player 2 Character
+LEFT/RIGHT To Select Player 2 Character
 
 WASD to move Player 1
 
@@ -26,9 +26,8 @@ ESC to leave
 ENTER to restart game [Paused, At end, etc.]
 
 Game Ends when one player dies [After taking three hits]
-![Title](https://i.imgur.com/0LnmDUS.png "Title Screen")
 
-![Character Select](https://i.imgur.com/bOiU3hj.png "Character Select")
+![Character Select](https://i.imgur.com/fo8ZRiq.png "Character Select")
 
 ![Game](https://i.imgur.com/wL76rxt.png "Game in Action")
 
@@ -48,5 +47,6 @@ Game Ends when one player dies [After taking three hits]
 
 # Changelog 1.6
 - New Title Screen
-- Game files now in /data/, client opens
+- Game files now in /data/, client opens files
+- New Character Select
 - File status things

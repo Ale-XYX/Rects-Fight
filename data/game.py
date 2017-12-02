@@ -56,11 +56,12 @@ def char_select():
     player2 = 1
     textS1 = v.font.render('Choose Your Character', True, v.white)
     textS2 = v.font.render('Space To Continue', True, v.white)
+    textS3 = v.font3.render('VS.', True, v.white)
     all_sprites = pygame.sprite.Group()
     player1_image, text1 = f.get('char', color_choices[player1])
     player2_image, text2 = f.get('char', color_choices[player2])
-    selectorA = s.Selector((85, 200))
-    selectorB = s.Selector((140, 300))
+    selectorA = s.Selector((85, 188))
+    selectorB = s.Selector((140, 388))
     all_sprites.add(selectorA, selectorB)
     clock = pygame.time.Clock()
     loop = True
@@ -98,24 +99,27 @@ def char_select():
         m.screen.fill(v.black)
         m.screen.blit(textS1, (90, 50))
         m.screen.blit(textS2, (120, 500))
-        m.screen.blit(text1, (200, 230))
-        m.screen.blit(text2, (200, 330))
-        m.screen.blit(m.MEDIA['blue'], (60, 175))
-        m.screen.blit(m.MEDIA['orange'], (115, 175))
-        m.screen.blit(m.MEDIA['green'], (170, 175))
-        m.screen.blit(m.MEDIA['purple'], (225, 175))
-        m.screen.blit(m.MEDIA['red'], (280, 175))
-        m.screen.blit(m.MEDIA['yellow'], (335, 175))
-        m.screen.blit(m.MEDIA['grey'], (390, 175))
+        m.screen.blit(textS3, (230, 275))
+        m.screen.blit(text1, (220, 218))
+        m.screen.blit(text2, (220, 330))
         
-        m.screen.blit(m.MEDIA['blue'], (60, 275))
-        m.screen.blit(m.MEDIA['orange'], (115, 275))
-        m.screen.blit(m.MEDIA['green'], (170, 275))
-        m.screen.blit(m.MEDIA['purple'], (225, 275))
-        m.screen.blit(m.MEDIA['red'], (280, 275))
-        m.screen.blit(m.MEDIA['yellow'], (335, 275))
-        m.screen.blit(m.MEDIA['grey'], (390, 275))
+        m.screen.blit(m.MEDIA['blue'], (60, 163))
+        m.screen.blit(m.MEDIA['orange'], (115, 163))
+        m.screen.blit(m.MEDIA['green'], (170, 163))
+        m.screen.blit(m.MEDIA['purple'], (225, 163))
+        m.screen.blit(m.MEDIA['red'], (280, 163))
+        m.screen.blit(m.MEDIA['yellow'], (335, 163))
+        m.screen.blit(m.MEDIA['grey'], (390, 163))
+        
+        m.screen.blit(m.MEDIA['blue'], (60, 363))
+        m.screen.blit(m.MEDIA['orange'], (115, 363))
+        m.screen.blit(m.MEDIA['green'], (170, 363))
+        m.screen.blit(m.MEDIA['purple'], (225, 363))
+        m.screen.blit(m.MEDIA['red'], (280, 363))
+        m.screen.blit(m.MEDIA['yellow'], (335, 363))
+        m.screen.blit(m.MEDIA['grey'], (390, 363))
         all_sprites.draw(m.screen)
+        m.screen.blit(m.MEDIA['charselborder'], (0, 0))
         
         pygame.display.flip()
         clock.tick(60)
@@ -239,7 +243,10 @@ def main():
             loop = False
         if time:
             timer -= dt
-            txt = v.font.render(str(round(timer, 1)), True, f.get('time', timer))
+            if timer <= 10:
+                txt = v.font4.render(str(round(timer, 1)), True, f.get('time', timer))
+            else:
+                txt = v.font.render(str(round(timer, 1)), True, f.get('time', timer))
             if timer <= 0:
                 player1.toggle = True
                 player2.toggle = True
