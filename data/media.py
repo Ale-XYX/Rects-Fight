@@ -33,31 +33,38 @@ PLAYER_MEDIA = {
     'Blue': {
         'color': v.blue,
         'player_image': MEDIA['blue'],
-        'bullet_image': MEDIA['bulletblue']},
+        'bullet_image': MEDIA['bulletblue'],
+        'local': 0},
     'Orange': {
         'color': v.orange,
         'player_image': MEDIA['orange'],
-        'bullet_image': MEDIA['bulletorange']},
+        'bullet_image': MEDIA['bulletorange'],
+        'local': 55},
     'Green': {
         'color': v.green,
         'player_image': MEDIA['green'],
-        'bullet_image': MEDIA['bulletgreen']},
+        'bullet_image': MEDIA['bulletgreen'],
+        'local': 110},
     'Purple': {
         'color': v.purple,
         'player_image': MEDIA['purple'],
-        'bullet_image': MEDIA['bulletpurple']},
+        'bullet_image': MEDIA['bulletpurple'],
+        'local': 165},
     'Red': {
         'color': v.red,
         'player_image': MEDIA['red'],
-        'bullet_image': MEDIA['bulletred']},
+        'bullet_image': MEDIA['bulletred'],
+        'local': 220},
     'Yellow': {
         'color': v.yellow,
         'player_image': MEDIA['yellow'],
-        'bullet_image': MEDIA['bulletyellow']},
+        'bullet_image': MEDIA['bulletyellow'],
+        'local': 275},
     'Grey': {
         'color': v.grey,
         'player_image': MEDIA['grey'],
-        'bullet_image': MEDIA['bulletgrey']}
+        'bullet_image': MEDIA['bulletgrey'],
+        'local': 330}
     }
 
 print(logat + 'Loaded Player Media Dictionary')

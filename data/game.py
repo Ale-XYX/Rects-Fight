@@ -56,10 +56,12 @@ def char_select():
     player2 = 1
     textS1 = v.font.render('Choose Your Character', True, v.white)
     textS2 = v.font.render('Space To Continue', True, v.white)
-    textS3 = v.font.render('Player 1: ', True, v.white)
-    textS4 = v.font.render('Player 2: ', True, v.white)
+    all_sprites = pygame.sprite.Group()
     player1_image, text1 = f.get('char', color_choices[player1])
     player2_image, text2 = f.get('char', color_choices[player2])
+    selectorA = s.Selector((85, 200))
+    selectorB = s.Selector((140, 300))
+    all_sprites.add(selectorA, selectorB)
     clock = pygame.time.Clock()
     loop = True
 
@@ -69,15 +71,19 @@ def char_select():
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_w:
+                if event.key == pygame.K_d:
                     player1 += 1
-                elif event.key == pygame.K_s:
+                    selectorA.pos[0] += 55
+                elif event.key == pygame.K_a:
                     player1 -= 1
-                if event.key == pygame.K_UP:
+                    selectorA.pos[0] -= 55
+                if event.key == pygame.K_RIGHT:
                     player2 += 1
-                elif event.key == pygame.K_DOWN:
+                    selectorB.pos[0] += 55
+                elif event.key == pygame.K_LEFT:
                     player2 -= 1
-                if event.key in (pygame.K_w, pygame.K_s, pygame.K_UP, pygame.K_DOWN):
+                    selectorB.pos[0] -= 55
+                if event.key in (pygame.K_d, pygame.K_a, pygame.K_RIGHT, pygame.K_LEFT):
                     player1 %= len(color_choices)
                     player2 %= len(color_choices)
                     player1_image, text1 = f.get('char', color_choices[player1])
@@ -86,16 +92,31 @@ def char_select():
                 if event.key == pygame.K_SPACE:
                     v.P1Char = color_choices[player1]
                     v.P2Char = color_choices[player2]
-                    loop = False             
+                    loop = False
+        all_sprites.update()
+        
         m.screen.fill(v.black)
-        m.screen.blit(textS1, (100, 50))
-        m.screen.blit(textS2, (125, 500))
-        m.screen.blit(textS3, (115, 225))
-        m.screen.blit(textS4, (115, 325))
-        m.screen.blit(text1, (240, 225))
-        m.screen.blit(text2, (240, 325))
-        m.screen.blit(player1_image, (355, 210))
-        m.screen.blit(player2_image, (355, 310))
+        m.screen.blit(textS1, (90, 50))
+        m.screen.blit(textS2, (120, 500))
+        m.screen.blit(text1, (200, 230))
+        m.screen.blit(text2, (200, 330))
+        m.screen.blit(m.MEDIA['blue'], (60, 175))
+        m.screen.blit(m.MEDIA['orange'], (115, 175))
+        m.screen.blit(m.MEDIA['green'], (170, 175))
+        m.screen.blit(m.MEDIA['purple'], (225, 175))
+        m.screen.blit(m.MEDIA['red'], (280, 175))
+        m.screen.blit(m.MEDIA['yellow'], (335, 175))
+        m.screen.blit(m.MEDIA['grey'], (390, 175))
+        
+        m.screen.blit(m.MEDIA['blue'], (60, 275))
+        m.screen.blit(m.MEDIA['orange'], (115, 275))
+        m.screen.blit(m.MEDIA['green'], (170, 275))
+        m.screen.blit(m.MEDIA['purple'], (225, 275))
+        m.screen.blit(m.MEDIA['red'], (280, 275))
+        m.screen.blit(m.MEDIA['yellow'], (335, 275))
+        m.screen.blit(m.MEDIA['grey'], (390, 275))
+        all_sprites.draw(m.screen)
+        
         pygame.display.flip()
         clock.tick(60)
         

@@ -35,5 +35,6 @@ def get(type1, insert):
             return v.red
         else:
             return v.white
+        
 print(logat + 'Loaded Get()')
         

@@ -50,4 +50,19 @@ class Bullet(pygame.sprite.Sprite):
                 self.kill()
                 
 print(logat + 'Loaded Bullet Sprite')
+
+class Selector(pygame.sprite.Sprite):
+    def __init__(self, pos):
+        super().__init__()
+        self.image = m.MEDIA['selector']
+        self.rect = self.image.get_rect(center = pos)
+        self.pos = pygame.math.Vector2(pos)
+    def update(self):
+        self.rect.center = self.pos
+        if self.pos[0] == 470:
+            self.pos[0] = 85
+        if self.pos[0] == 30:
+            self.pos[0] = 415
+
+print(logat + 'Loaded Selector Sprite')
                 
