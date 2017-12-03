@@ -193,6 +193,9 @@ def main():
     if v.mode == 1:
         player1.health = 1
         player2.health = 1
+        pvel = 8
+    if v.mode == 0:
+        pvel = 5
     # Conditionals
     loop = True
     time = True
@@ -220,28 +223,28 @@ def main():
                     bullets2.add(bullet)
                     all_sprites.add(bullet)
                 if event.key == pygame.K_d and player1.toggle == False:
-                    player1.vel.x = 5
+                    player1.vel.x = pvel
                     player1.fire_direction = pygame.math.Vector2(vel, 0)
                 if event.key == pygame.K_a and player1.toggle == False:
-                    player1.vel.x = -5
+                    player1.vel.x = -pvel
                     player1.fire_direction = pygame.math.Vector2(-vel, 0)
                 if event.key == pygame.K_s and player1.toggle == False:
-                    player1.vel.y = 5
+                    player1.vel.y = pvel
                     player1.fire_direction = pygame.math.Vector2(0, vel)
                 if event.key == pygame.K_w and player1.toggle == False:
-                    player1.vel.y = -5
+                    player1.vel.y = -pvel
                     player1.fire_direction = pygame.math.Vector2(0, -vel)
                 if event.key == pygame.K_RIGHT and player2.toggle == False:
-                    player2.vel.x = 5
+                    player2.vel.x = pvel
                     player2.fire_direction = pygame.math.Vector2(vel, 0)
                 if event.key == pygame.K_LEFT and player2.toggle == False:
-                    player2.vel.x = -5
+                    player2.vel.x = -pvel
                     player2.fire_direction = pygame.math.Vector2(-vel, 0)
                 if event.key == pygame.K_DOWN and player2.toggle == False:
-                    player2.vel.y = 5
+                    player2.vel.y = pvel
                     player2.fire_direction = pygame.math.Vector2(0, vel)
                 if event.key == pygame.K_UP and player2.toggle == False:
-                    player2.vel.y = -5
+                    player2.vel.y = -pvel
                     player2.fire_direction = pygame.math.Vector2(0, -vel)
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_d:
