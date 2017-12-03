@@ -5,9 +5,9 @@ import datetime
 import var as v
 
 pygame.init()
+pygame.mixer.init()
 
 screen = pygame.display.set_mode((500, 600))
-namer = 0
 MEDIA = {}
 files = glob.glob(os.path.join(os.path.dirname(__file__), 'media', 'image', '*.png'))
 files2 = glob.glob(os.path.join(os.path.dirname(__file__), 'media', 'audio', '*.wav'))
@@ -20,7 +20,6 @@ print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'MEDIA: ' + 'Loa
 
 for file_name in files2:
     obj = pygame.mixer.Sound(file_name)
-    namer += 1
     MEDIA[os.path.split(file_name)[-1][:-4]] = obj
     
 print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'MEDIA: ' + 'Loaded Audio')

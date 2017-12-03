@@ -18,9 +18,10 @@ print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'VAR: ' + 'Loade
 # Restart function
 superloop = True
 
-# Player Char
+# Determinating things
 P1Char = None
 P2Char = None
+mode = 0
 
 # Fonts/Rects
 font = pygame.font.Font(None, 40)

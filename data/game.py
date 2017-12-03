@@ -48,6 +48,48 @@ def title():
         
 print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'GAME: ' + 'Loaded Title')
 
+def mode_select():
+    loop = True
+    clock = pygame.time.Clock()
+    all_sprites = pygame.sprite.Group()
+    selectorbig = s.SelectorBig((250, 250))
+    mode_choices = ['classic', 'aon']
+    all_sprites.add(selectorbig)
+    textS1 = v.font.render('Choose Mode', True, v.white)
+    while loop:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    v.mode += 1
+                    selectorbig.pos[1] -= 100
+                if event.key == pygame.K_DOWN:
+                    v.mode -= 1
+                    selectorbig.pos[1] += 100
+                if event.key == pygame.K_SPACE:
+                    loop = False
+                    if v.mode == 0:
+                        m.MEDIA['classicaudio'].play()
+                    elif v.mode == 1:
+                        m.MEDIA['aonaudio'].play()
+                if event.key in (pygame.K_UP, pygame.K_DOWN):                
+                    v.mode %= len(mode_choices)
+                    if selectorbig.pos[1] == 450:
+                        selectorbig.pos[1] = 250
+                    elif selectorbig.pos[1] == 150:
+                        selectorbig.pos[1] = 350
+                    m.MEDIA['select'].play()     
+        all_sprites.update()
+        m.screen.fill(v.black)
+        m.screen.blit(m.MEDIA['classic'], (150, 200))
+        m.screen.blit(m.MEDIA['aon'], (150, 300))
+        m.screen.blit(textS1, (155, 100))
+        all_sprites.draw(m.screen)
+        pygame.display.flip()
+        clock.tick(60)
+
 # Character Select [Credit to skrx]
 def char_select():
     color_choices = ['Blue', 'Orange', 'Green', 'Purple', 'Red', 'Yellow', 'Grey']
@@ -147,7 +189,12 @@ def main():
     # Integers
     vel = 8
     vel_reset = 0
-    timer = 30
+    if v.mode == 0:
+        timer = 30
+    elif v.mode == 1:
+        timer = 10
+        player1.health = 1
+        player2.health = 1
     dt = clock.tick(60) / 1000
     textlocal = (222, 520)
     while loop:
@@ -210,7 +257,10 @@ def main():
         keys = pygame.key.get_pressed()
         if onStart:
             m.MEDIA['fight'].play()
-            m.MEDIA['music'].play()
+            if v.mode == 0:
+                m.MEDIA['music'].play()
+            elif v.mode == 1:
+                m.MEDIA['panic'].play()
             onStart = False
         if keys[pygame.K_TAB] and not confirm and onEnd:
             player1.toggle = True
@@ -238,7 +288,10 @@ def main():
             v.superloop = False
             loop = False
         elif keys[pygame.K_RETURN] and confirm:
-            m.MEDIA['music'].stop()
+            if v.mode == 0:
+                m.MEDIA['music'].stop()
+            elif v.mode == 1:
+                m.MEDIA['panic'].stop()
             loop = False
         if time:
             timer -= dt
@@ -251,7 +304,10 @@ def main():
                 for bullet in bullets2:
                     bullet.toggle = True
                 m.MEDIA['die'].play()
-                m.MEDIA['music'].stop()
+                if v.mode == 0:
+                    m.MEDIA['music'].stop()
+                elif v.mode == 1:
+                    m.MEDIA['panic'].stop()
                 time = False
                 onEnd = False
                 textlocal = (190, 530)
@@ -260,14 +316,17 @@ def main():
             v.superloop = False
             loop = False
         elif not time and keys[pygame.K_RETURN] and not confirm:
-            m.MEDIA['music'].stop()
+            pygame.mixer.pause()
             loop = False
         if player1.health == 0:
             txt = v.font.render('Player 2 Wins!', True, player2.color)
             textlocal = (155, 530)
             time = False
             onEnd = False
-            m.MEDIA['music'].stop()
+            if v.mode == 0:
+                m.MEDIA['music'].stop()
+            elif v.mode == 1:
+                m.MEDIA['panic'].stop()
             if keys[pygame.K_ESCAPE] and not confirm:
                 v.superloop = False
                 loop = False
@@ -279,7 +338,10 @@ def main():
             textlocal = (155, 530)
             time = False
             onEnd = False
-            m.MEDIA['music'].stop()
+            if v.mode == 0:
+                m.MEDIA['music'].stop()
+            elif v.mode == 1:
+                m.MEDIA['panic'].stop()
             if keys[pygame.K_ESCAPE] and not confirm:
                 v.superloop = False
                 loop = False
@@ -291,7 +353,10 @@ def main():
             textlocal = (210, 530)
             time = False
             onEnd = False
-            m.MEDIA['music'].stop()
+            if v.mode == 0:
+                m.MEDIA['music'].stop()
+            elif v.mode == 1:
+                m.MEDIA['panic'].stop()
             if keys[pygame.K_ESCAPE] and not confirm:
                 v.superloop = False
                 loop = False

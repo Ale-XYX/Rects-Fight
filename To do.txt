@@ -1,7 +1,6 @@
 To do 1.6:
-Rewrite some areas
+Abilities
+No Abilities Mode
 
 Ideas:
-Different bullet patterns for each character?
-Alternate abilities for each player instead of alternate bullet patterns?
 You can suggest more features/report bugs in issues.

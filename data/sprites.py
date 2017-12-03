@@ -64,4 +64,17 @@ class Selector(pygame.sprite.Sprite):
             self.pos[0] = 415
 
 print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'SPRITES: ' + 'Loaded Selector Sprite')
+
+class SelectorBig(pygame.sprite.Sprite):
+    def __init__(self, pos):
+        super().__init__()
+        self.image = m.MEDIA['selectorbig']
+        self.rect = self.image.get_rect(center = pos)
+        self.pos = pygame.math.Vector2(pos)
+    def update(self):
+        self.rect.center = self.pos
+
+print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'SPRITES: ' + 'Loaded Selectorbig Sprite')
+
+        
                 
