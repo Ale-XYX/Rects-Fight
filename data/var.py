@@ -14,7 +14,6 @@ red = (196, 0, 0)
 yellow = (255, 238, 0)
 purple = (205, 43, 255)
 print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'VAR: ' + 'Loaded Colors')
-
 # Restart function
 superloop = True
 
@@ -22,6 +21,7 @@ superloop = True
 P1Char = None
 P2Char = None
 mode = 0
+egg = False
 
 # Fonts/Rects
 font = pygame.font.Font(None, 40)

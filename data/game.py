@@ -23,7 +23,7 @@ def title():
     time = True
     clock = pygame.time.Clock()
     dt = clock.tick(60) / 1000
-    timer = 20
+    timer = 5
     while loop:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -35,10 +35,14 @@ def title():
                     m.MEDIA['start'].play()
                 elif event.key == pygame.K_ESCAPE:
                     pygame.quit()
+        keys = pygame.key.get_pressed()
         if time:
             timer -= dt
         if timer <= 0:
             time = False
+        if keys[pygame.K_RSHIFT] and not time:
+                v.egg = True
+                loop = False
         m.screen.fill(v.black)
         m.screen.blit(m.MEDIA['title'], (0, 0))
         if not time:
@@ -173,13 +177,22 @@ def main():
     all_sprites = pygame.sprite.Group()
     bullets1 = pygame.sprite.Group()
     bullets2 = pygame.sprite.Group()
-    player1 = s.Player((35, 35), bullets2, (8, 0), v.P1Char, all_sprites)
-    player2 = s.Player((465, 465), bullets1, (-8, 0), v.P2Char, all_sprites)
+    if v.mode == 0:
+        timer = 30
+        vel = 8
+    elif v.mode == 1:
+        timer = 10
+        vel = 15
+    player1 = s.Player((35, 35), bullets2, (vel, 0), v.P1Char, all_sprites)
+    player2 = s.Player((465, 465), bullets1, (-vel, 0), v.P2Char, all_sprites)
     clock = pygame.time.Clock()
     textstatic1 = v.font5.render('Player 1', True, v.white)
     textstatic2 = v.font5.render('Player 2', True, v.white)
     textstatic3 = v.font2.render('Escape to leave', True, v.white)
     textstatic4 = v.font2.render('Enter to restart', True, v.white)
+    if v.mode == 1:
+        player1.health = 1
+        player2.health = 1
     # Conditionals
     loop = True
     time = True
@@ -187,14 +200,7 @@ def main():
     onEnd = True
     confirm = False
     # Integers
-    vel = 8
     vel_reset = 0
-    if v.mode == 0:
-        timer = 30
-    elif v.mode == 1:
-        timer = 10
-        player1.health = 1
-        player2.health = 1
     dt = clock.tick(60) / 1000
     textlocal = (222, 520)
     while loop:
@@ -377,6 +383,21 @@ def main():
             m.screen.blit(textstatic4, (10, 10))
         if confirm:
             m.screen.blit(m.MEDIA['paused'], (154, 165))
+        pygame.display.flip()
+        clock.tick(60)
+def egg():
+    loop = True
+    clock = pygame.time.Clock()
+    fontS1 = v.font.render('All Sounds from freesound.org', True, v.white)
+    while loop:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+        m.screen.fill(v.black)
+        m.screen.blit(m.MEDIA['egg'], (0, 100))
+        m.screen.blit(fontS1, (40, 10))
+        
         pygame.display.flip()
         clock.tick(60)
         

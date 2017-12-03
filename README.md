@@ -49,6 +49,6 @@ Game Ends when one player dies [After taking three hits]
 - New Title Screen
 - New Character Select
 - Mode Select!
-- New Mode -- CHAOS
+- New Mode -- CHAOS. Faster bullets, lower time, and one-hit death.
 - Game files now in /data/, client opens files
 - File status things

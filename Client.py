@@ -11,6 +11,8 @@ if __name__ == '__main__':
     pygame.init()
     print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'CLIENT: ' + 'Game Init')
     g.title()
+    if v.egg == True:
+        g.egg()
     g.mode_select()
     g.char_select()
     print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'CLIENT: ' + 'Main init')
