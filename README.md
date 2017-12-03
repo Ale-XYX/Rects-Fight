@@ -47,6 +47,8 @@ Game Ends when one player dies [After taking three hits]
 
 # Changelog 1.6
 - New Title Screen
-- Game files now in /data/, client opens files
 - New Character Select
+- Mode Select!
+- New Mode -- CHAOS
+- Game files now in /data/, client opens files
 - File status things
