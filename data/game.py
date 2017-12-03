@@ -69,12 +69,10 @@ def mode_select():
                 if event.key == pygame.K_UP:
                     v.mode += 1
                     v.mode %= 3
-                    print(v.mode)
                     selectorbig.pos[1] -= 100
                 if event.key == pygame.K_DOWN:
                     v.mode -= 1
                     v.mode %= 3
-                    print(v.mode)
                     selectorbig.pos[1] += 100
                 if event.key == pygame.K_SPACE:
                     loop = False
@@ -194,6 +192,7 @@ def main():
     elif v.mode == 2:
         timer = 10
         bvel = 15
+        pvel = 8
     player1 = s.Player((35, 35), bullets2, (bvel, 0), v.P1Char, all_sprites)
     player2 = s.Player((465, 465), bullets1, (-bvel, 0), v.P2Char, all_sprites)
     clock = pygame.time.Clock()
