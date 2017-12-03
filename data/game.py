@@ -57,7 +57,7 @@ def mode_select():
     clock = pygame.time.Clock()
     all_sprites = pygame.sprite.Group()
     selectorbig = s.SelectorBig((250, 250))
-    mode_choices = ['classic', 'aon']
+    mode_choices = ['classic', 'aon', 'inverted']
     all_sprites.add(selectorbig)
     textS1 = v.font.render('Choose Mode', True, v.white)
     while loop:
@@ -68,27 +68,33 @@ def mode_select():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
                     v.mode += 1
+                    v.mode %= 3
+                    print(v.mode)
                     selectorbig.pos[1] -= 100
                 if event.key == pygame.K_DOWN:
                     v.mode -= 1
+                    v.mode %= 3
+                    print(v.mode)
                     selectorbig.pos[1] += 100
                 if event.key == pygame.K_SPACE:
                     loop = False
                     if v.mode == 0:
                         m.MEDIA['classicaudio'].play()
                     elif v.mode == 1:
+                        m.MEDIA['invertedaudio'].play()
+                    elif v.mode == 2:
                         m.MEDIA['aonaudio'].play()
-                if event.key in (pygame.K_UP, pygame.K_DOWN):                
-                    v.mode %= len(mode_choices)
-                    if selectorbig.pos[1] == 450:
+                if event.key in (pygame.K_UP, pygame.K_DOWN):
+                    if selectorbig.pos[1] == 550:
                         selectorbig.pos[1] = 250
                     elif selectorbig.pos[1] == 150:
-                        selectorbig.pos[1] = 350
+                        selectorbig.pos[1] = 450
                     m.MEDIA['select'].play()     
         all_sprites.update()
         m.screen.fill(v.black)
         m.screen.blit(m.MEDIA['classic'], (150, 200))
         m.screen.blit(m.MEDIA['aon'], (150, 300))
+        m.screen.blit(m.MEDIA['invertedpic'], (150, 400))
         m.screen.blit(textS1, (155, 100))
         all_sprites.draw(m.screen)
         pygame.display.flip()
@@ -179,23 +185,25 @@ def main():
     bullets2 = pygame.sprite.Group()
     if v.mode == 0:
         timer = 30
-        vel = 8
+        bvel = 8
+        pvel = 5
     elif v.mode == 1:
+        timer = 30
+        pvel = -5
+        bvel = -8
+    elif v.mode == 2:
         timer = 10
-        vel = 15
-    player1 = s.Player((35, 35), bullets2, (vel, 0), v.P1Char, all_sprites)
-    player2 = s.Player((465, 465), bullets1, (-vel, 0), v.P2Char, all_sprites)
+        bvel = 15
+    player1 = s.Player((35, 35), bullets2, (bvel, 0), v.P1Char, all_sprites)
+    player2 = s.Player((465, 465), bullets1, (-bvel, 0), v.P2Char, all_sprites)
     clock = pygame.time.Clock()
     textstatic1 = v.font5.render('Player 1', True, v.white)
     textstatic2 = v.font5.render('Player 2', True, v.white)
     textstatic3 = v.font2.render('Escape to leave', True, v.white)
     textstatic4 = v.font2.render('Enter to restart', True, v.white)
-    if v.mode == 1:
+    if v.mode == 2:
         player1.health = 1
-        player2.health = 1
-        pvel = 8
-    if v.mode == 0:
-        pvel = 5
+        player2.health = 1    
     # Conditionals
     loop = True
     time = True
@@ -224,28 +232,28 @@ def main():
                     all_sprites.add(bullet)
                 if event.key == pygame.K_d and player1.toggle == False:
                     player1.vel.x = pvel
-                    player1.fire_direction = pygame.math.Vector2(vel, 0)
+                    player1.fire_direction = pygame.math.Vector2(bvel, 0)
                 if event.key == pygame.K_a and player1.toggle == False:
                     player1.vel.x = -pvel
-                    player1.fire_direction = pygame.math.Vector2(-vel, 0)
+                    player1.fire_direction = pygame.math.Vector2(-bvel, 0)
                 if event.key == pygame.K_s and player1.toggle == False:
                     player1.vel.y = pvel
-                    player1.fire_direction = pygame.math.Vector2(0, vel)
+                    player1.fire_direction = pygame.math.Vector2(0, bvel)
                 if event.key == pygame.K_w and player1.toggle == False:
                     player1.vel.y = -pvel
-                    player1.fire_direction = pygame.math.Vector2(0, -vel)
+                    player1.fire_direction = pygame.math.Vector2(0, -bvel)
                 if event.key == pygame.K_RIGHT and player2.toggle == False:
                     player2.vel.x = pvel
-                    player2.fire_direction = pygame.math.Vector2(vel, 0)
+                    player2.fire_direction = pygame.math.Vector2(bvel, 0)
                 if event.key == pygame.K_LEFT and player2.toggle == False:
                     player2.vel.x = -pvel
-                    player2.fire_direction = pygame.math.Vector2(-vel, 0)
+                    player2.fire_direction = pygame.math.Vector2(-bvel, 0)
                 if event.key == pygame.K_DOWN and player2.toggle == False:
                     player2.vel.y = pvel
-                    player2.fire_direction = pygame.math.Vector2(0, vel)
+                    player2.fire_direction = pygame.math.Vector2(0, bvel)
                 if event.key == pygame.K_UP and player2.toggle == False:
                     player2.vel.y = -pvel
-                    player2.fire_direction = pygame.math.Vector2(0, -vel)
+                    player2.fire_direction = pygame.math.Vector2(0, -bvel)
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_d:
                     player1.vel.x = vel_reset
@@ -269,7 +277,11 @@ def main():
             if v.mode == 0:
                 m.MEDIA['music'].play()
             elif v.mode == 1:
+                m.MEDIA['inverted'].play()
+            elif v.mode == 2:
                 m.MEDIA['panic'].play()
+            else:
+                m.MEDIA['music'].play()
             onStart = False
         if keys[pygame.K_TAB] and not confirm and onEnd:
             player1.toggle = True
@@ -300,7 +312,11 @@ def main():
             if v.mode == 0:
                 m.MEDIA['music'].stop()
             elif v.mode == 1:
+                m.MEDIA['inverted'].stop()
+            elif v.mode == 2:
                 m.MEDIA['panic'].stop()
+            else:
+                m.MEDIA['music'].stop()
             loop = False
         if time:
             timer -= dt
@@ -316,7 +332,11 @@ def main():
                 if v.mode == 0:
                     m.MEDIA['music'].stop()
                 elif v.mode == 1:
+                    m.MEDIA['inverted'].stop()
+                elif v.mode == 2:
                     m.MEDIA['panic'].stop()
+                else:
+                    m.MEDIA['music'].stop()
                 time = False
                 onEnd = False
                 textlocal = (190, 530)
@@ -335,7 +355,11 @@ def main():
             if v.mode == 0:
                 m.MEDIA['music'].stop()
             elif v.mode == 1:
+                m.MEDIA['inverted'].stop()
+            elif v.mode == 2:
                 m.MEDIA['panic'].stop()
+            else:
+                m.MEDIA['music'].stop()
             if keys[pygame.K_ESCAPE] and not confirm:
                 v.superloop = False
                 loop = False
@@ -350,7 +374,11 @@ def main():
             if v.mode == 0:
                 m.MEDIA['music'].stop()
             elif v.mode == 1:
+                m.MEDIA['inverted'].stop()
+            elif v.mode == 2:
                 m.MEDIA['panic'].stop()
+            else:
+                m.MEDIA['music'].stop()
             if keys[pygame.K_ESCAPE] and not confirm:
                 v.superloop = False
                 loop = False
@@ -365,7 +393,11 @@ def main():
             if v.mode == 0:
                 m.MEDIA['music'].stop()
             elif v.mode == 1:
+                m.MEDIA['inverted'].play()
+            elif v.mode == 2:
                 m.MEDIA['panic'].stop()
+            else:
+                m.MEDIA['music'].stop()
             if keys[pygame.K_ESCAPE] and not confirm:
                 v.superloop = False
                 loop = False

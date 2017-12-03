@@ -50,5 +50,6 @@ Game Ends when one player dies [After taking three hits]
 - New Character Select
 - Mode Select!
 - New Mode -- CHAOS. Faster bullets, lower time, and one-hit death.
+- New Mode -- Inverted. All controls inverted.
 - Game files now in /data/, client opens files
 - File status things
