@@ -27,6 +27,8 @@ ENTER to restart game [Paused, At end, etc.]
 
 Game Ends when one player dies [After taking three hits]
 
+![Mode Select](https://i.imgur.com/MyDVS7t.png "Mode Select")
+
 ![Character Select](https://i.imgur.com/fo8ZRiq.png "Character Select")
 
 ![Game](https://i.imgur.com/wL76rxt.png "Game in Action")
