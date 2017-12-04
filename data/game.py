@@ -60,6 +60,7 @@ def mode_select():
     mode_choices = ['classic', 'aon', 'inverted']
     all_sprites.add(selectorbig)
     textS1 = v.font.render('Choose Mode', True, v.white)
+    
     while loop:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -68,19 +69,17 @@ def mode_select():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
                     v.mode += 1
-                    v.mode %= 3
+                    v.mode %= 2
                     selectorbig.pos[1] -= 100
                 if event.key == pygame.K_DOWN:
                     v.mode -= 1
-                    v.mode %= 3
+                    v.mode %= 2
                     selectorbig.pos[1] += 100
                 if event.key == pygame.K_SPACE:
                     loop = False
                     if v.mode == 0:
                         m.MEDIA['classicaudio'].play()
                     elif v.mode == 1:
-                        m.MEDIA['invertedaudio'].play()
-                    elif v.mode == 2:
                         m.MEDIA['aonaudio'].play()
                 if event.key in (pygame.K_UP, pygame.K_DOWN):
                     if selectorbig.pos[1] == 550:
@@ -89,12 +88,13 @@ def mode_select():
                         selectorbig.pos[1] = 450
                     m.MEDIA['select'].play()     
         all_sprites.update()
+        
         m.screen.fill(v.black)
         m.screen.blit(m.MEDIA['classic'], (150, 200))
         m.screen.blit(m.MEDIA['aon'], (150, 300))
-        m.screen.blit(m.MEDIA['invertedpic'], (150, 400))
         m.screen.blit(textS1, (155, 100))
         all_sprites.draw(m.screen)
+        
         pygame.display.flip()
         clock.tick(60)
 
@@ -186,10 +186,6 @@ def main():
         bvel = 8
         pvel = 5
     elif v.mode == 1:
-        timer = 30
-        pvel = -5
-        bvel = 8
-    elif v.mode == 2:
         timer = 10
         bvel = 15
         pvel = 8
@@ -200,7 +196,7 @@ def main():
     textstatic2 = v.font5.render('Player 2', True, v.white)
     textstatic3 = v.font2.render('Escape to leave', True, v.white)
     textstatic4 = v.font2.render('Enter to restart', True, v.white)
-    if v.mode == 2:
+    if v.mode == 1:
         player1.health = 1
         player2.health = 1    
     # Conditionals
@@ -276,8 +272,6 @@ def main():
             if v.mode == 0:
                 m.MEDIA['music'].play()
             elif v.mode == 1:
-                m.MEDIA['inverted'].play()
-            elif v.mode == 2:
                 m.MEDIA['panic'].play()
             else:
                 m.MEDIA['music'].play()
@@ -311,8 +305,6 @@ def main():
             if v.mode == 0:
                 m.MEDIA['music'].stop()
             elif v.mode == 1:
-                m.MEDIA['inverted'].stop()
-            elif v.mode == 2:
                 m.MEDIA['panic'].stop()
             else:
                 m.MEDIA['music'].stop()
@@ -331,8 +323,6 @@ def main():
                 if v.mode == 0:
                     m.MEDIA['music'].stop()
                 elif v.mode == 1:
-                    m.MEDIA['inverted'].stop()
-                elif v.mode == 2:
                     m.MEDIA['panic'].stop()
                 else:
                     m.MEDIA['music'].stop()
@@ -354,8 +344,6 @@ def main():
             if v.mode == 0:
                 m.MEDIA['music'].stop()
             elif v.mode == 1:
-                m.MEDIA['inverted'].stop()
-            elif v.mode == 2:
                 m.MEDIA['panic'].stop()
             else:
                 m.MEDIA['music'].stop()
@@ -373,8 +361,6 @@ def main():
             if v.mode == 0:
                 m.MEDIA['music'].stop()
             elif v.mode == 1:
-                m.MEDIA['inverted'].stop()
-            elif v.mode == 2:
                 m.MEDIA['panic'].stop()
             else:
                 m.MEDIA['music'].stop()
@@ -392,8 +378,6 @@ def main():
             if v.mode == 0:
                 m.MEDIA['music'].stop()
             elif v.mode == 1:
-                m.MEDIA['inverted'].play()
-            elif v.mode == 2:
                 m.MEDIA['panic'].stop()
             else:
                 m.MEDIA['music'].stop()
