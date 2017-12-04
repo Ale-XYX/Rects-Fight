@@ -188,7 +188,7 @@ def main():
     elif v.mode == 1:
         timer = 30
         pvel = -5
-        bvel = -8
+        bvel = 8
     elif v.mode == 2:
         timer = 10
         bvel = 15
