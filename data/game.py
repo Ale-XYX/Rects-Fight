@@ -82,10 +82,10 @@ def mode_select():
                     elif v.mode == 1:
                         m.MEDIA['aonaudio'].play()
                 if event.key in (pygame.K_UP, pygame.K_DOWN):
-                    if selectorbig.pos[1] == 550:
+                    if selectorbig.pos[1] == 450:
                         selectorbig.pos[1] = 250
                     elif selectorbig.pos[1] == 150:
-                        selectorbig.pos[1] = 450
+                        selectorbig.pos[1] = 350
                     m.MEDIA['select'].play()     
         all_sprites.update()
         
