@@ -1,6 +1,6 @@
 ![Title](https://i.imgur.com/pvWhary.png) 
 
-Version 1.6: SnivyDroid
+Version 1.7: SnivyDroid
 
 ***REQUIRES PYTHON/PYGAME LIBRARY***
 
@@ -47,10 +47,5 @@ Game Ends when one player dies [After taking three hits]
 
 ![Yellow](https://i.imgur.com/rXCyQo1.png "Yellow")
 
-# Changelog 1.6
-- New Title Screen
-- New Character Select
-- Mode Select!
-- New Mode -- CHAOS. Faster bullets, lower time, and one-hit death.
-- Game files now in /data/, client opens files
-- File status things
+# Changelog 1.7
+- New Characters, White and rainbow!
