@@ -1,7 +1,3 @@
-To do 1.6:
-Add white
-
-
 To Do 1.7:
 Add Abilities:
 Blue and orange: Slow but large bullet
