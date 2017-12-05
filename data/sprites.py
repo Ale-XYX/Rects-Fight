@@ -59,10 +59,10 @@ class Selector(pygame.sprite.Sprite):
         self.pos = pygame.math.Vector2(pos)
     def update(self):
         self.rect.center = self.pos
-        if self.pos[0] == 470:
+        '''if self.pos[0] == 470:
             self.pos[0] = 85
         if self.pos[0] == 30:
-            self.pos[0] = 415
+            self.pos[0] = 415'''
 
 print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'SPRITES: ' + 'Loaded Selector Sprite')
 

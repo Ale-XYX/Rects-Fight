@@ -1,7 +1,24 @@
 import media as m
 import var as v
 import datetime
+import random
 
+def get_rainbow_random():
+    i = random.randrange(0, 6)
+    if i == 0:
+        return v.blue
+    if i == 1:
+        return v.orange
+    if i == 2:
+        return v.green
+    if i == 3:
+        return v.purple
+    if i == 4:
+        return v.red
+    if i == 5:
+        return v.yellow
+    if i == 6:
+        return v.white
 GAME_MEDIA = {
     'Blue': {
         'color': v.blue,
@@ -38,11 +55,22 @@ GAME_MEDIA = {
         'player_image': m.MEDIA['grey'],
         'bullet_image': m.MEDIA['bulletgrey'],
         'local': 220},
+    'White': {
+        'color': v.white,
+        'player_image': m.MEDIA['white'],
+        'bullet_image': m.MEDIA['bulletgrey'],
+        'local': 200},
+    'Rainbow': {
+        'color': get_rainbow_random(),
+        'player_image': m.MEDIA['rainbow'],
+        'bullet_image': m.MEDIA['bulletrainbow'],
+        'local': 200},
     'HP': {
         0: m.MEDIA['dead'],
         1: m.MEDIA['hp3'],
         2: m.MEDIA['hp2'],
         3: m.MEDIA['hp1']},
 }
+
 
 print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'DICT: ' + 'Loaded Game Media Dictionary')
