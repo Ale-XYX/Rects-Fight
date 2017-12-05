@@ -98,6 +98,7 @@ def mode_select():
         pygame.display.flip()
         clock.tick(60)
 
+        
 # Character Select [Credit to skrx]
 def char_select():
     def get(insert):
