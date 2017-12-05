@@ -3,6 +3,7 @@ import var as v
 import datetime
 import random
 
+# Rainbow has random colors
 def get_rainbow_random():
     i = random.randrange(0, 6)
     if i == 0:
