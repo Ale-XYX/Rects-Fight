@@ -12,6 +12,9 @@ import var as v
 print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'GAME: ' + 'Loaded Variables')
 import sprites as s
 print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'GAME: ' + 'Loaded Sprites')
+import dictionary as d
+print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'GAME: ' + 'Loaded Dictionary')
+
 pygame.init()
 
 # Title Screen
@@ -98,8 +101,8 @@ def mode_select():
 # Character Select [Credit to skrx]
 def char_select():
     def get(insert):
-        image = m.GAME_MEDIA[insert]['player_image']
-        color = m.GAME_MEDIA[insert]['color']
+        image = d.GAME_MEDIA[insert]['player_image']
+        color = d.GAME_MEDIA[insert]['color']
         text = v.font.render(insert, True, color)
         return image, text
     color_choices = ['Blue', 'Orange', 'Green', 'Purple', 'Red', 'Yellow', 'Grey']
@@ -151,8 +154,8 @@ def char_select():
         m.screen.blit(textS1, (90, 50))
         m.screen.blit(textS2, (120, 500))
         m.screen.blit(textS3, (230, 275))
-        m.screen.blit(text1, (m.GAME_MEDIA[color_choices[player1]]['local'], 218))
-        m.screen.blit(text2, (m.GAME_MEDIA[color_choices[player2]]['local'], 330))
+        m.screen.blit(text1, (d.GAME_MEDIA[color_choices[player1]]['local'], 218))
+        m.screen.blit(text2, (d.GAME_MEDIA[color_choices[player2]]['local'], 330))
         
         m.screen.blit(m.MEDIA['blue'], (60, 163))
         m.screen.blit(m.MEDIA['orange'], (115, 163))
@@ -395,8 +398,8 @@ def main():
         all_sprites.update()
         m.screen.fill(v.black)
         m.screen.blit(m.MEDIA['wall'], (0, 0))
-        m.screen.blit(pygame.transform.flip(m.GAME_MEDIA['HP'][player1.health], True, False), (20, 530))
-        m.screen.blit(m.GAME_MEDIA['HP'][player2.health], (380, 530))
+        m.screen.blit(pygame.transform.flip(d.GAME_MEDIA['HP'][player1.health], True, False), (20, 530))
+        m.screen.blit(d.GAME_MEDIA['HP'][player2.health], (380, 530))
         m.screen.blit(txt, textlocal)
         m.screen.blit(textstatic1, (19, 515))
         m.screen.blit(textstatic2, (429, 515))

@@ -2,13 +2,14 @@ import pygame
 import datetime
 import var as v
 import media as m
+import dictionary as d
 
 pygame.init()
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, enemy_bullets, direction, color, *groups):
         super().__init__(*groups)
-        self.image = m.GAME_MEDIA[color]['player_image']
+        self.image = d.GAME_MEDIA[color]['player_image']
         self.rect = self.image.get_rect(center = pos)
         self.vel = pygame.math.Vector2(0, 0)
         self.pos = pygame.math.Vector2(pos)
@@ -16,8 +17,8 @@ class Player(pygame.sprite.Sprite):
         self.health = 3
         self.enemy_bullets = enemy_bullets
         self.toggle = False
-        self.color = m.GAME_MEDIA[color]['color']
-        self.bullet_image = m.GAME_MEDIA[color]['bullet_image']
+        self.color = d.GAME_MEDIA[color]['color']
+        self.bullet_image = d.GAME_MEDIA[color]['bullet_image']
     def update(self):
         self.pos += self.vel
         self.rect.center = self.pos
