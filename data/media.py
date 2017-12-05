@@ -27,43 +27,49 @@ print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'MEDIA: ' + 'Loa
 pygame.display.set_caption('Rects Fight!')
 pygame.display.set_icon(MEDIA['icon'])
 
-PLAYER_MEDIA = {
+GAME_MEDIA = {
     'Blue': {
         'color': v.blue,
         'player_image': MEDIA['blue'],
         'bullet_image': MEDIA['bulletblue'],
-        'local': 0},
+        'local': 220},
     'Orange': {
         'color': v.orange,
         'player_image': MEDIA['orange'],
         'bullet_image': MEDIA['bulletorange'],
-        'local': 55},
+        'local': 200},
     'Green': {
         'color': v.green,
         'player_image': MEDIA['green'],
         'bullet_image': MEDIA['bulletgreen'],
-        'local': 110},
+        'local': 210},
     'Purple': {
         'color': v.purple,
         'player_image': MEDIA['purple'],
         'bullet_image': MEDIA['bulletpurple'],
-        'local': 165},
+        'local': 210},
     'Red': {
         'color': v.red,
         'player_image': MEDIA['red'],
         'bullet_image': MEDIA['bulletred'],
-        'local': 220},
+        'local': 224},
     'Yellow': {
         'color': v.yellow,
         'player_image': MEDIA['yellow'],
         'bullet_image': MEDIA['bulletyellow'],
-        'local': 275},
+        'local': 209},
     'Grey': {
         'color': v.grey,
         'player_image': MEDIA['grey'],
         'bullet_image': MEDIA['bulletgrey'],
-        'local': 330}
-    }
+        'local': 220},
+    'HP': {
+        0: MEDIA['dead'],
+        1: MEDIA['hp3'],
+        2: MEDIA['hp2'],
+        3: MEDIA['hp1']
+        },
+}
 
-print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'MEDIA: ' + 'Loaded Player Media Dictionary')
+print(str(datetime.datetime.now().strftime("%H:%M:%S")) + '@' + 'MEDIA: ' + 'Loaded Game Media Dictionary')
 

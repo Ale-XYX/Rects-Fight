@@ -1,6 +1,28 @@
 To do 1.6:
-Abilities
-No Abilities Mode
+Add locals to GAME_MEDIA dict
+Add white
 
-Ideas:
-You can suggest more features/report bugs in issues.
+
+To Do 1.7:
+Add Abilities:
+Blue and orange: Slow but large bullet
+[Blue: Same, Orange: Same]
+
+Green and yellow: Timebombs that explode into tiny bullets
+[Green: -|-, Yellow: -|- but rotated]
+Time until explode: 3S
+
+Red and purple: Lasers [Or long rectangles] 
+[Red: Long and slow ; Purple: Short and fast]
+
+Grey and white: Bullet that is slower but on keypress it turns 90 degrees [Only once]
+[Grey: Right, White: Left]
+ALL CD 3S
+
+Add "Best Of Three" Mode
+
+
+To Do 2.0:
+Rewrite of ALL code.
+Rework mode select
+By then the FCC would have repealed net neutrality so probaly no more :(
