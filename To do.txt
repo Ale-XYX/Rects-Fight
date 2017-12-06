@@ -1,0 +1,22 @@
+To Do 1.8:
+Add Abilities:
+Blue and orange: Slow but large bullet
+[Blue: Same, Orange: Same]
+
+Green and yellow: Timebombs that explode into tiny bullets
+[Green: -|-, Yellow: -|- but rotated]
+Time until explode: 3S
+
+Red and purple: Lasers [Or long rectangles] 
+[Red: Long and slow ; Purple: Short and fast]
+
+Grey and white: Bullet that is slower but on keypress it turns 90 degrees [Only once]
+[Grey: Right, White: Left]
+ALL CD 3S
+
+Rainbow: Multi-shot of normal bullets, random colors
+
+Add "Best Of Three" Mode
+
+To Do 2.0:
+By then the FCC would have repealed net neutrality so probaly no more :(
