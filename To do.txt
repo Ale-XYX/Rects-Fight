@@ -1,4 +1,6 @@
 To Do 1.8:
+Redesign Bullet Sprites [Sorta-done]
+
 Add Abilities:
 Blue and orange: Slow but large bullet
 [Blue: Same, Orange: Same]

@@ -3,7 +3,7 @@ import pygame
 
 pygame.init()
 
-# COLORS
+# Colors
 BLACK = (0, 0, 0)
 GREY = (192, 192, 192)
 WHITE = (255, 255, 255)
@@ -14,7 +14,7 @@ RED = (196, 0, 0)
 YELLOW = (255, 238, 0)
 PURPLE = (205, 43, 255)
 
-# GAME
+# Game
 SUPERLOOP = True
 P1CHAR = None
 P2CHAR = None
@@ -22,6 +22,7 @@ MODE = None
 EGG = False
 TIMER = 30
 
+# Fonts and other game items
 FONTNORMAL = pygame.font.Font(None, 40)
 FONTSMALL = pygame.font.SysFont(None, 20, False, True)
 FONTB = pygame.font.SysFont(None, 40, True, False)

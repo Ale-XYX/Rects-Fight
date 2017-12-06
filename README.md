@@ -49,4 +49,5 @@ Game Ends when one player dies [After taking three hits]
 
 # Changelog 1.8
 - Full Rewrite
+- Bullet Image Redesign
 - Player colors now show on names next to hp bars

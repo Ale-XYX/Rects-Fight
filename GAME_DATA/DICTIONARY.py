@@ -1,7 +1,9 @@
+# DICTIONARY
 import MEDIA as m
 import GLOBAL as g
 import random
 
+# Sets up colors in a dictonary and returns a random color [For rainbow character]
 def GET_RANDOM():
     i = random.randrange(0, 6)
     DICT = {
@@ -16,6 +18,7 @@ def GET_RANDOM():
     return DICT[i]      
         
 GAME_DICT = {
+    # Player Media, Colors, And Locations
     'BLUE': {
         'COLOR': g.BLUE,
         'PLAYER_IMAGE': m.MEDIA['blue_face'],
@@ -61,11 +64,13 @@ GAME_DICT = {
         'PLAYER_IMAGE': m.MEDIA['rainbow_face'],
         'BULLET_IMAGE': m.MEDIA['rainbow_bullet'],
         'LOCAL': 190},
+    # HP Bars
     'HP': {
         0: m.MEDIA['hp_dead'],
         1: m.MEDIA['hp_low'],
         2: m.MEDIA['hp_decayed'],
         3: m.MEDIA['hp_full']},
+    # Mode Values [Loaded In main game depending on g.MODE]
     'MODE': {
         'CLASSIC': {
             'TIMER': 30,
@@ -82,6 +87,7 @@ GAME_DICT = {
             'SOUND': m.MEDIA['chaos_sound'], 
             'MUSIC': m.MEDIA['chaos_music']}
         },
+    # Timer Values
     'TIMER': {
         True: [g.RED, g.FONTB],
         False: [g.WHITE, g.FONTNORMAL]},

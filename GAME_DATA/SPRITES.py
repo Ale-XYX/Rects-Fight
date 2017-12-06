@@ -1,4 +1,4 @@
-# Sprites
+# SPRITES
 import pygame
 import GLOBAL as g
 import MEDIA as m
@@ -6,6 +6,7 @@ import DICTIONARY as d
 
 pygame.init()
 
+# Player Sprite
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, enemy_bullets, direction, color, *groups):
         super().__init__(*groups)
@@ -32,6 +33,7 @@ class Player(pygame.sprite.Sprite):
                 self.kill()
                 self.toggle = True
 
+# Bullet
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, pos, vel, image):
         super().__init__()
@@ -46,7 +48,8 @@ class Bullet(pygame.sprite.Sprite):
             self.rect.center = self.pos
             if not g.PLAY_AREA.contains(self):
                 self.kill()
-
+                
+# Selector
 class Selector(pygame.sprite.Sprite):
     def __init__(self, pos):
         super().__init__()
@@ -60,6 +63,7 @@ class Selector(pygame.sprite.Sprite):
         elif self.pos[0] < 0:
             self.pos[0] = 470
 
+# Larger Selector
 class SelectorBig(pygame.sprite.Sprite):
     def __init__(self, pos):
         super().__init__()
