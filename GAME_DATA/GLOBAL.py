@@ -21,7 +21,6 @@ P2CHAR = None
 MODE = None
 EGG = False
 TIMER = 30
-CONFIRM = False
 
 FONTNORMAL = pygame.font.Font(None, 40)
 FONTSMALL = pygame.font.SysFont(None, 20, False, True)
