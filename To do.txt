@@ -1,9 +1,6 @@
 To Do 1.8:
-Redesign Bullet Sprites [Sorta-done]
-
-Add Abilities:
-Blue and orange: Slow but large bullet
-[Blue: Same, Orange: Same]
+Fix Bugs:
+No die sound plays when timer = 0
 
 Green and yellow: Timebombs that explode into tiny bullets
 [Green: -|-, Yellow: -|- but rotated]
