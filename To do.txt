@@ -13,7 +13,6 @@ Grey and white: Bullet that is slower but on keypress it turns 90 degrees [Only 
 [Grey: Right, White: Left]
 ALL CD 3S
 
-Rainbow: Multi-shot of normal bullets, random colors
 
 Add "Best Of Three" Mode
 

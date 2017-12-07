@@ -4,6 +4,15 @@ Version 1.8: SnivyDroid
 
 ***REQUIRES PYTHON/PYGAME LIBRARY***
 
+*Play normal build if you want normal experience*
+*Abilities build in-beta*
+
+*Status*
+- Blue/Orange working [Known Bugs: Error when health goes below 0]
+- Grey/White broken [Known bugs: Unable to register different keypresses [Breaking]]
+- Rainbow working [no bugs]
+- Chaos mode needs tinkering
+
 # CONTROLS:
 A/D To Select Player 1 Character
 

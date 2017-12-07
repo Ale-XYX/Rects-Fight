@@ -333,6 +333,7 @@ def GAME():
                 ON_END = False
                 TEXT_LOCAL = (190, 530)
                 TXT = g.FONTNORMAL.render('Times Up!', True, g.GREY)
+                m.MEDIA['die_sound'].play()
             if not TIME and keys[pygame.K_ESCAPE]:
                 pygame.quit()
                 sys.exit()
@@ -356,7 +357,7 @@ def GAME():
         # Outcome if Player 1 Wins
         if PLAYER2.health == 0:
             TXT = g.FONTNORMAL.render('Player 1 Wins!', True, PLAYER1.color)
-            TEXT_LOCAL = (210, 530)
+            TEXT_LOCAL = (155, 530)
             TIME = False
             ON_END = False
             GAME_MUSIC.stop()

@@ -18,6 +18,7 @@ def GET_RANDOM():
     }
     return DICT[i]
 
+# Blue/Orange Big bullet
 def BIG_BULLET(groupa, groupb, pos, vel, img):
     if not vel[0] == 0:
         if not vel[0] == -8:
@@ -33,6 +34,8 @@ def BIG_BULLET(groupa, groupb, pos, vel, img):
     groupa.add(BIGBULLET)
     groupb.add(BIGBULLET)
     m.MEDIA['big_shoot_sound'].play()
+
+# Grey/White Turn Bullet [Currently Broken]
 def TURN_BULLET(groupa, groupb, pos, vel, img, color, dictionary):
     if not vel[0] == 0:
         if not vel[0] == -8:
@@ -75,8 +78,20 @@ def TURN_BULLET(groupa, groupb, pos, vel, img, color, dictionary):
                 vel = (vel[0] + 6, vel[1] + 6)
             TURN_BULLET.vel = vel
             print(vel)
-            
-            
+# Rainbow Multi-bullet
+def MULTI_BULLET(groupa, groupb, pos):
+    BULLET1 = s.Bullet(pos, (6, 0), m.MEDIA['blue_bullet'])
+    BULLET2 = s.Bullet(pos, (-6, 0), m.MEDIA['orange_bullet'])
+    BULLET3 = s.Bullet(pos, (0, 6), m.MEDIA['green_bullet'])
+    BULLET4 = s.Bullet(pos, (0, -6), m.MEDIA['purple_bullet'])
+    BULLET5 = s.Bullet(pos, (6, 6), m.MEDIA['red_bullet'])
+    BULLET6 = s.Bullet(pos, (-6, -6), m.MEDIA['grey_bullet'])
+    BULLET7 = s.Bullet(pos, (6, -6), m.MEDIA['yellow_bullet'])
+    BULLET8 = s.Bullet(pos, (-6, 6), m.MEDIA['white_bullet'])
+    groupa.add(BULLET1, BULLET2, BULLET3, BULLET4, BULLET5, BULLET6, BULLET7, BULLET8)
+    groupb.add(BULLET1, BULLET2, BULLET3, BULLET4, BULLET5, BULLET6, BULLET7, BULLET8)
+    m.MEDIA['multi_shoot_sound'].play()
+    
 def TEMP_DEFAULT(groupa, groupb, pos, velocity, img):
     BULLET = s.Bullet(pos, velocity, img)
     groupa.add(BULLET)
@@ -140,7 +155,7 @@ GAME_DICT = {
         'PLAYER_IMAGE': m.MEDIA['rainbow_face'],
         'BULLET_IMAGE': m.MEDIA['rainbow_bullet'],
         'LOCAL': 190,
-        'ABILITY': TEMP_DEFAULT},
+        'ABILITY': MULTI_BULLET},
     # HP Bars
     'HP': {
         0: m.MEDIA['hp_dead'],

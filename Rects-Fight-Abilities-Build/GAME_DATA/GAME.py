@@ -242,8 +242,8 @@ def GAME():
                 'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), PLAYER1.bullet_image, 'GREY', d.GAME_DICT],
                 'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), PLAYER2.bullet_image, 'GREY', d.GAME_DICT]},
             'RAINBOW': {
-                'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), PLAYER1.bullet_image],
-                'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), PLAYER2.bullet_image]},
+                'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center],
+                'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center]},
             'WHITE': {
                 'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), PLAYER1.bullet_image, 'WHITE', d.GAME_DICT],
                 'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), PLAYER2.bullet_image, 'WHITE', d.GAME_DICT]},
@@ -369,6 +369,7 @@ def GAME():
                 ON_END = False
                 TEXT_LOCAL = (190, 530)
                 TXT = g.FONTNORMAL.render('Times Up!', True, g.GREY)
+                m.MEDIA['die_sound'].play()
             if not TIME and keys[pygame.K_ESCAPE]:
                 pygame.quit()
                 sys.exit()
