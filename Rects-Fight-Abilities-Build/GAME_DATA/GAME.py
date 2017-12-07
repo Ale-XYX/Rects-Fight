@@ -103,7 +103,7 @@ def CHARACTER_SELECT():
         COLOR = d.GAME_DICT[INSERT.upper()]['COLOR']
         TEXT = g.FONTNORMAL.render(INSERT, True, COLOR)
         return IMAGE, TEXT
-    COLOR_CHOICES = ['Blue', 'Orange', 'Green', 'Purple', 'Red', 'Yellow', 'Grey', 'White', 'Rainbow']
+    COLOR_CHOICES = ['Blue', 'Orange', 'Green', 'Yellow', 'Red', 'Purple', 'Grey', 'White', 'Rainbow']
     PLAYER1 = 0
     PLAYER2 = 1
     TEXTS1 = g.FONTNORMAL.render('Choose Your Character', True, g.WHITE)
@@ -161,9 +161,9 @@ def CHARACTER_SELECT():
         m.SCREEN.blit(m.MEDIA['blue_face'], (5, 163))
         m.SCREEN.blit(m.MEDIA['orange_face'], (60, 163))
         m.SCREEN.blit(m.MEDIA['green_face'], (115, 163))
-        m.SCREEN.blit(m.MEDIA['purple_face'], (170, 163))
+        m.SCREEN.blit(m.MEDIA['yellow_face'], (170, 163))
         m.SCREEN.blit(m.MEDIA['red_face'], (225, 163))
-        m.SCREEN.blit(m.MEDIA['yellow_face'], (280, 163))
+        m.SCREEN.blit(m.MEDIA['purple_face'], (280, 163))
         m.SCREEN.blit(m.MEDIA['grey_face'], (335, 163))
         m.SCREEN.blit(m.MEDIA['white_face'], (390, 163))
         m.SCREEN.blit(m.MEDIA['rainbow_face'], (445, 163))
@@ -171,9 +171,9 @@ def CHARACTER_SELECT():
         m.SCREEN.blit(m.MEDIA['blue_face'], (60 - 55, 363))
         m.SCREEN.blit(m.MEDIA['orange_face'], (115 - 55, 363))
         m.SCREEN.blit(m.MEDIA['green_face'], (170 - 55, 363))
-        m.SCREEN.blit(m.MEDIA['purple_face'], (225 - 55, 363))
+        m.SCREEN.blit(m.MEDIA['yellow_face'], (225 - 55, 363))
         m.SCREEN.blit(m.MEDIA['red_face'], (280 - 55, 363))
-        m.SCREEN.blit(m.MEDIA['yellow_face'], (335 - 55, 363))
+        m.SCREEN.blit(m.MEDIA['purple_face'], (335 - 55, 363))
         m.SCREEN.blit(m.MEDIA['grey_face'], (390 - 55, 363))
         m.SCREEN.blit(m.MEDIA['white_face'], (390, 363))
         m.SCREEN.blit(m.MEDIA['rainbow_face'], (445, 363))
@@ -227,26 +227,26 @@ def GAME():
                 'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), m.MEDIA['orange_big_bullet']],
                 'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), m.MEDIA['orange_big_bullet']]},
             'GREEN': {
-                'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), PLAYER1.bullet_image],
-                'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), PLAYER2.bullet_image]},
+                'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), m.MEDIA['green_split_bullet'], 'GREEN'],
+                'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), m.MEDIA['green_split_bullet'], 'GREEN']},
             'PURPLE': {
-                'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), PLAYER1.bullet_image],
-                'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), PLAYER2.bullet_image]},
+                'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction)],
+                'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction)]},
             'RED': {
-                'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), PLAYER1.bullet_image],
-                'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), PLAYER2.bullet_image]},
+                'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction)],
+                'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction)]},
             'YELLOW': {
+                'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), m.MEDIA['yellow_split_bullet'], 'YELLOW'],
+                'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), m.MEDIA['yellow_split_bullet'], 'YELLOW']},
+            'GREY': {
                 'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), PLAYER1.bullet_image],
                 'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), PLAYER2.bullet_image]},
-            'GREY': {
-                'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), PLAYER1.bullet_image, 'GREY', d.GAME_DICT],
-                'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), PLAYER2.bullet_image, 'GREY', d.GAME_DICT]},
             'RAINBOW': {
                 'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center],
                 'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center]},
             'WHITE': {
-                'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), PLAYER1.bullet_image, 'WHITE', d.GAME_DICT],
-                'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), PLAYER2.bullet_image, 'WHITE', d.GAME_DICT]},
+                'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), PLAYER1.bullet_image],
+                'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), PLAYER2.bullet_image]},
         }
         P1PARAMS = ARGS_DICT[g.P1CHAR.upper()]['PLAYER1']
         P2PARAMS = ARGS_DICT[g.P2CHAR.upper()]['PLAYER2']
@@ -269,7 +269,7 @@ def GAME():
                 if event.key == pygame.K_RCTRL and not PLAYER2.toggle:
                     d.GAME_DICT[g.P2CHAR.upper()]['ABILITY'](*P2PARAMS)
                 if event.key == pygame.K_g and not PLAYER1.toggle:
-                    d.GAME_DICT[g.P1CHAR.upper()]['ABILITY'](*P1PARAMS)
+                    d.GAME_DICT[g.P1CHAR.upper()]['ABILITY'](*P1PARAMS)                      
                 if event.key == pygame.K_d and PLAYER1.toggle == False:
                     PLAYER1.vel.x = PLAYER_VELOCITY
                     PLAYER1.fire_direction = pygame.math.Vector2(BULLET_VELOCITY, 0)
@@ -378,7 +378,7 @@ def GAME():
                 LOOP = False
                 
         # Outcome is Player 2 Wins
-        if PLAYER1.health == 0:
+        if PLAYER1.health <= 0:
             TXT = g.FONTNORMAL.render('Player 2 Wins!', True, PLAYER2.color)
             TEXT_LOCAL = (155, 530)
             TIME = False
@@ -391,7 +391,7 @@ def GAME():
                 LOOP = False
                 
         # Outcome if Player 1 Wins
-        if PLAYER2.health == 0:
+        if PLAYER2.health <= 0:
             TXT = g.FONTNORMAL.render('Player 1 Wins!', True, PLAYER1.color)
             TEXT_LOCAL = (155, 530)
             TIME = False
@@ -404,7 +404,7 @@ def GAME():
                 LOOP = False
 
         # Outcome of draw
-        if PLAYER1.health == 0 and PLAYER2.health == 0:
+        if PLAYER1.health <= 0 and PLAYER2.health <= 0:
             TXT = g.FONTNORMAL.render('Draw!', True, v.GREY)
             TEXT_LOCAL = (210, 530)
             TIME = False

@@ -1,20 +1,13 @@
 To Do 1.8:
-Fix Bugs:
-No die sound plays when timer = 0
 
-Green and yellow: Timebombs that explode into tiny bullets
-[Green: -|-, Yellow: -|- but rotated]
-Time until explode: 3S
-
-Red and purple: Lasers [Or long rectangles] 
-[Red: Long and slow ; Purple: Short and fast]
-
-Grey and white: Bullet that is slower but on keypress it turns 90 degrees [Only once]
-[Grey: Right, White: Left]
-ALL CD 3S
-
-
-Add "Best Of Three" Mode
+add sounds/improve images on lazer ability
+add sounds/improve images on split-bullet abiltiy 
+add grey/white ability
+improve images/add sounds to grey/white abiltiy
+add cooldowns for abilities
+Full/Semi Rewrite to clean code
+Fixes
 
 To Do 2.0:
+Add "Best Of Three" Mode [Best of three rounds, rounds get progressively harder]
 By then the FCC would have repealed net neutrality so probaly no more :(

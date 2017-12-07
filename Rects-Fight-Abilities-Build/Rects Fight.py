@@ -1,6 +1,6 @@
 # CLIENT
 if __name__ == '__main__':
-    print('Loading Rects Fight V1.7')
+    print('Loading Rects Fight V1.8')
     # Import Modules
     import pygame
     import sys

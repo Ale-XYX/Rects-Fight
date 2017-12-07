@@ -3,6 +3,7 @@ import MEDIA as m
 import GLOBAL as g
 import SPRITES as s
 import random
+import pygame
 
 # Sets up colors in a dictonary and returns a random color [For rainbow character]
 def GET_RANDOM():
@@ -34,66 +35,54 @@ def BIG_BULLET(groupa, groupb, pos, vel, img):
     groupa.add(BIGBULLET)
     groupb.add(BIGBULLET)
     m.MEDIA['big_shoot_sound'].play()
-
-# Grey/White Turn Bullet [Currently Broken]
-def TURN_BULLET(groupa, groupb, pos, vel, img, color, dictionary):
-    if not vel[0] == 0:
-        if not vel[0] == -8:
-            vel = (vel[0] - 2, 0)
-        else:
-            vel = (vel[0] + 2, 0)
-    if not vel[1] == 0 and vel[0] == 0:
-        if not vel[1] == -8:
-            vel = (0, vel[1] - 2)
-        else:
-            vel = (0, vel[1] + 2)
-    if not dictionary[color]['TURN_TOGGLE']:
-        TURN_BULLET = s.TurnBullet(pos, vel, img, color)
-        groupa.add(TURN_BULLET)
-        groupb.add(TURN_BULLET)
-        m.MEDIA['shoot_sound'].play()
-        dictionary[color]['TURN_TOGGLE'] = True
-    if dictionary[color]['TURN_TOGGLE']:
-        if color == 'WHITE':
-            print(vel)
-            if vel[0] == 6 and vel[1] == 0:
-                vel = (vel[0] - 6, vel[1] + 6)
-            elif vel[0] == -6 and vel[1] == 0:
-                vel = (vel[0] + 6, vel[1] - 6)
-            elif vel[0] == 0 and vel[1] == 6:
-                vel = (vel[0] + 6, vel[1] - 6)
-            elif vel[0] == 0 and vel[1] == -6:
-                vel = (vel[0] - 6, vel[1] + 6)
-            TURN_BULLET.vel = vel
-            print(vel)
-        if color == 'GREY':
-            print(vel)
-            if vel[0] == 6 and vel[1] == 0:
-                vel = (vel[0] - 6, vel[1] - 6)
-            elif vel[0] == -6 and vel[1] == 0:
-                vel = (vel[0] + 6, vel[1] + 6)
-            elif vel[0] == 0 and vel[1] == 6:
-                vel = (vel[0] - 6, vel[1] - 6)
-            elif vel[0] == 0 and vel[1] == -6:
-                vel = (vel[0] + 6, vel[1] + 6)
-            TURN_BULLET.vel = vel
-            print(vel)
+    
 # Rainbow Multi-bullet
 def MULTI_BULLET(groupa, groupb, pos):
-    BULLET1 = s.Bullet(pos, (6, 0), m.MEDIA['blue_bullet'])
-    BULLET2 = s.Bullet(pos, (-6, 0), m.MEDIA['orange_bullet'])
-    BULLET3 = s.Bullet(pos, (0, 6), m.MEDIA['green_bullet'])
-    BULLET4 = s.Bullet(pos, (0, -6), m.MEDIA['purple_bullet'])
-    BULLET5 = s.Bullet(pos, (6, 6), m.MEDIA['red_bullet'])
-    BULLET6 = s.Bullet(pos, (-6, -6), m.MEDIA['grey_bullet'])
-    BULLET7 = s.Bullet(pos, (6, -6), m.MEDIA['yellow_bullet'])
-    BULLET8 = s.Bullet(pos, (-6, 6), m.MEDIA['white_bullet'])
+    BULLET1 = s.Bullet(pos, (6, 0), m.MEDIA['red_bullet'])
+    BULLET2 = s.Bullet(pos, (6, -6), m.MEDIA['orange_bullet'])
+    BULLET3 = s.Bullet(pos, (0, -6), m.MEDIA['yellow_bullet'])
+    BULLET4 = s.Bullet(pos, (-6, -6), m.MEDIA['green_bullet'])
+    BULLET5 = s.Bullet(pos, (-6, 0), m.MEDIA['blue_bullet'])
+    BULLET6 = s.Bullet(pos, (-6, 6), m.MEDIA['purple_bullet'])
+    BULLET7 = s.Bullet(pos, (0, 6), m.MEDIA['white_bullet'])
+    BULLET8 = s.Bullet(pos, (6, 6), m.MEDIA['grey_bullet'])
     groupa.add(BULLET1, BULLET2, BULLET3, BULLET4, BULLET5, BULLET6, BULLET7, BULLET8)
     groupb.add(BULLET1, BULLET2, BULLET3, BULLET4, BULLET5, BULLET6, BULLET7, BULLET8)
     m.MEDIA['multi_shoot_sound'].play()
+
+def PURPLE_LASER_BEAM(groupa, groupb, pos, vel):
+    if vel[0] == 8 and vel[1] == 0:
+        vel = (vel[0] - 3, vel[1])
+    elif vel[0] == -8 and vel[1] == 0:
+        vel = (vel[0] + 3, vel[1])
+    elif vel[0] == 0 and vel[1] == 8:
+        vel = (vel[0], vel[1] - 3)
+    elif vel[0] == 0 and vel[1] == -8:
+        vel = (vel[0], vel[1] + 3)
+    BEAM = s.PurpleBeam(pos, vel)
+    groupa.add(BEAM)
+    groupb.add(BEAM)
+
+def RED_LASER_BEAM(groupa, groupb, pos, vel):
+    if vel[0] == 8 and vel[1] == 0:
+        vel = (vel[0] - 3, vel[1])
+    elif vel[0] == -8 and vel[1] == 0:
+        vel = (vel[0] + 3, vel[1])
+    elif vel[0] == 0 and vel[1] == 8:
+        vel = (vel[0], vel[1] - 3)
+    elif vel[0] == 0 and vel[1] == -8:
+        vel = (vel[0], vel[1] + 3)
+    BEAM = s.RedBeam(pos, vel)
+    groupa.add(BEAM)
+    groupb.add(BEAM)
     
-def TEMP_DEFAULT(groupa, groupb, pos, velocity, img):
-    BULLET = s.Bullet(pos, velocity, img)
+def SPLIT_BULLET(groupa, groupb, pos, vel, img, color):
+    SPLIT_BULLET = s.SplitBullet(pos, vel, img, groupa, groupb, color)
+    groupa.add(SPLIT_BULLET)
+    groupb.add(SPLIT_BULLET)
+    
+def TEMP_DEFAULT(groupa, groupb, pos, vel, img):
+    BULLET = s.Bullet(pos, vel, img)
     groupa.add(BULLET)
     groupb.add(BULLET)
     m.MEDIA['shoot_sound'].play()
@@ -117,39 +106,39 @@ GAME_DICT = {
         'PLAYER_IMAGE': m.MEDIA['green_face'],
         'BULLET_IMAGE': m.MEDIA['green_bullet'],
         'LOCAL': 210,
-        'ABILITY': TEMP_DEFAULT},
+        'ABILITY': SPLIT_BULLET,
+        'SPLIT_BULLET_IMAGE': m.MEDIA['green_split_bullet']},
     'PURPLE': {
         'COLOR': g.PURPLE,
         'PLAYER_IMAGE': m.MEDIA['purple_face'],
         'BULLET_IMAGE': m.MEDIA['purple_bullet'],
         'LOCAL': 210,
-        'ABILITY': TEMP_DEFAULT},
+        'ABILITY': PURPLE_LASER_BEAM},
     'RED': {
         'COLOR': g.RED,
         'PLAYER_IMAGE': m.MEDIA['red_face'],
         'BULLET_IMAGE': m.MEDIA['red_bullet'],
         'LOCAL': 224,
-        'ABILITY': TEMP_DEFAULT},
+        'ABILITY': RED_LASER_BEAM},
     'YELLOW': {
         'COLOR': g.YELLOW,
         'PLAYER_IMAGE': m.MEDIA['yellow_face'],
         'BULLET_IMAGE': m.MEDIA['yellow_bullet'],
         'LOCAL': 209,
-        'ABILITY': TEMP_DEFAULT},
+        'ABILITY': SPLIT_BULLET,
+        'SPLIT_BULLET_IMAGE': m.MEDIA['yellow_split_bullet']},
     'GREY': {
         'COLOR': g.GREY,
         'PLAYER_IMAGE': m.MEDIA['grey_face'],
         'BULLET_IMAGE': m.MEDIA['grey_bullet'],
         'LOCAL': 220,
-        'ABILITY': TURN_BULLET,
-        'TURN_TOGGLE': False},
+        'ABILITY': TEMP_DEFAULT},
     'WHITE': {
         'COLOR': g.WHITE,
         'PLAYER_IMAGE': m.MEDIA['white_face'],
         'BULLET_IMAGE': m.MEDIA['white_bullet'],
         'LOCAL': 210,
-        'ABILITY': TURN_BULLET,
-        'TURN_TOGGLE': False},
+        'ABILITY': TEMP_DEFAULT},
     'RAINBOW': {
         'COLOR': GET_RANDOM(),
         'PLAYER_IMAGE': m.MEDIA['rainbow_face'],
@@ -161,7 +150,8 @@ GAME_DICT = {
         0: m.MEDIA['hp_dead'],
         1: m.MEDIA['hp_low'],
         2: m.MEDIA['hp_decayed'],
-        3: m.MEDIA['hp_full']},
+        3: m.MEDIA['hp_full'],
+        -1: m.MEDIA['hp_dead']},
     # Mode Values [Loaded In main game depending on g.MODE]
     'MODE': {
         'CLASSIC': {
