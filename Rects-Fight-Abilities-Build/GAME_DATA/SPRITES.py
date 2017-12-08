@@ -161,6 +161,7 @@ class SplitBullet(pygame.sprite.Sprite):
                     bullet3 = Bullet(self.rect.center, (-8, 5), self.alt_image)
                     self.groupa.add(bullet1, bullet2, bullet3)
                     self.groupb.add(bullet1, bullet2, bullet3)
+                    m.MEDIA['bullet_split_sound'].play()
                     self.kill()
                 if self.vel[0] == -8 and self.vel[1] == 0:
                     bullet1 = Bullet(self.rect.center, (8, 0), self.alt_image)
@@ -168,6 +169,7 @@ class SplitBullet(pygame.sprite.Sprite):
                     bullet3 = Bullet(self.rect.center, (8, 5), self.alt_image)
                     self.groupa.add(bullet1, bullet2, bullet3)
                     self.groupb.add(bullet1, bullet2, bullet3)
+                    m.MEDIA['bullet_split_sound'].play()
                     self.kill()                    
                 if self.vel[0] == 0 and self.vel[1] == 8:
                     bullet1 = Bullet(self.rect.center, (0, -8), self.alt_image)
@@ -175,6 +177,7 @@ class SplitBullet(pygame.sprite.Sprite):
                     bullet3 = Bullet(self.rect.center, (-5, -8), self.alt_image)
                     self.groupa.add(bullet1, bullet2, bullet3)
                     self.groupb.add(bullet1, bullet2, bullet3)
+                    m.MEDIA['bullet_split_sound'].play()
                     self.kill()
                 if self.vel[0] == 0 and self.vel[1] == -8:
                     bullet1 = Bullet(self.rect.center, (0, 8), self.alt_image)
@@ -182,8 +185,41 @@ class SplitBullet(pygame.sprite.Sprite):
                     bullet3 = Bullet(self.rect.center, (-5, 8), self.alt_image)
                     self.groupa.add(bullet1, bullet2, bullet3)
                     self.groupb.add(bullet1, bullet2, bullet3)
+                    m.MEDIA['bullet_split_sound'].play()
                     self.kill()
-                    
+
+class BoomerangBullet(pygame.sprite.Sprite):
+    def __init__(self, pos, vel, image):
+        super().__init__()
+        self.image = image
+        self.rect = self.image.get_rect(center = pos)
+        self.vel = pygame.math.Vector2(vel)
+        self.pos = pygame.math.Vector2(pos)
+        self.toggle = False
+        self.type = 'BULLET'
+        if self.vel[0] == 8 and self.vel[1] == 0:
+            self.direction = 'RIGHT'
+        elif self.vel[0] == -8 and self.vel[1] == 0:
+            self.direction = 'LEFT'
+        elif self.vel[0] == 0 and self.vel[1] == 8:
+            self.direction = 'DOWN'
+        elif self.vel[0] == 0 and self.vel[1] == -8:
+            self.direction = 'UP'
+    def update(self):
+        if self.toggle == False:
+            if self.direction == 'RIGHT':
+                self.vel = (self.vel[0] - 0.2, self.vel[1])
+            elif self.direction == 'LEFT':
+                self.vel = (self.vel[0] + 0.2, self.vel[1])
+            elif self.direction == 'DOWN':
+                self.vel = (self.vel[0], self.vel[1] - 0.2)
+            elif self.direction == 'UP':
+                self.vel = (self.vel[0], self.vel[1] + 0.2)
+            self.pos += self.vel
+            self.rect.center = self.pos
+            if not g.PLAY_AREA.contains(self):
+                self.kill()
+    
 # Selector
 class Selector(pygame.sprite.Sprite):
     def __init__(self, pos):

@@ -202,10 +202,15 @@ def GAME():
     PLAYER1 = s.Player((35, 35), BULLETS2, (BULLET_VELOCITY, 0), g.P1CHAR, ALL_SPRITES)
     PLAYER2 = s.Player((465, 465), BULLETS1, (-BULLET_VELOCITY, 0), g.P2CHAR, ALL_SPRITES)
     PLAYER1.health = d.GAME_DICT['MODE'][g.MODE]['HEALTH']
-    PLAYER2.health = d.GAME_DICT['MODE'][g.MODE]['HEALTH'] 
+    PLAYER2.health = d.GAME_DICT['MODE'][g.MODE]['HEALTH']
+    DT_COOLDOWN = d.GAME_DICT['MODE'][g.MODE]['DT']
     # Bools
     LOOP = True
     TIME = True
+    ABILITY1 = False
+    ABILITY2 = False
+    COOLDOWN1 = 3
+    COOLDOWN2 = 3
     TIME1 = True
     TIME2 = True
     ON_START = True
@@ -239,14 +244,14 @@ def GAME():
                 'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), m.MEDIA['yellow_split_bullet'], 'YELLOW'],
                 'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), m.MEDIA['yellow_split_bullet'], 'YELLOW']},
             'GREY': {
-                'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), PLAYER1.bullet_image],
-                'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), PLAYER2.bullet_image]},
+                'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), m.MEDIA['grey_boomerang_bullet']],
+                'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), m.MEDIA['grey_boomerang_bullet']]},
             'RAINBOW': {
                 'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center],
                 'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center]},
             'WHITE': {
-                'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), PLAYER1.bullet_image],
-                'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), PLAYER2.bullet_image]},
+                'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), m.MEDIA['white_boomerang_bullet']],
+                'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), m.MEDIA['white_boomerang_bullet']]},
         }
         P1PARAMS = ARGS_DICT[g.P1CHAR.upper()]['PLAYER1']
         P2PARAMS = ARGS_DICT[g.P2CHAR.upper()]['PLAYER2']
@@ -266,10 +271,16 @@ def GAME():
                     BULLETS2.add(BULLET)
                     ALL_SPRITES.add(BULLET)
                     m.MEDIA['shoot_sound'].play()
-                if event.key == pygame.K_RCTRL and not PLAYER2.toggle:
+                if event.key == pygame.K_RCTRL and not PLAYER2.toggle and ABILITY2:
                     d.GAME_DICT[g.P2CHAR.upper()]['ABILITY'](*P2PARAMS)
-                if event.key == pygame.K_g and not PLAYER1.toggle:
-                    d.GAME_DICT[g.P1CHAR.upper()]['ABILITY'](*P1PARAMS)                      
+                    COOLDOWN2 = 3
+                    TIME2 = True
+                    ABILITY2 = False
+                if event.key == pygame.K_g and not PLAYER1.toggle and ABILITY1:
+                    d.GAME_DICT[g.P1CHAR.upper()]['ABILITY'](*P1PARAMS)
+                    COOLDOWN1 = 3
+                    TIME1 = True
+                    ABILITY1 = False
                 if event.key == pygame.K_d and PLAYER1.toggle == False:
                     PLAYER1.vel.x = PLAYER_VELOCITY
                     PLAYER1.fire_direction = pygame.math.Vector2(BULLET_VELOCITY, 0)
@@ -376,12 +387,26 @@ def GAME():
             elif not TIME and keys[pygame.K_RETURN] and not CONFIRM:
                 pygame.mixer.pause()
                 LOOP = False
+        # Subtracts cooldown/detects when cooldown is 0       
+        if TIME1:
+            COOLDOWN1 -= DT_COOLDOWN
+            if COOLDOWN1 <= 0:
+                TIME1 = False
+                ABILITY1 = True
                 
+        if TIME2:
+            COOLDOWN2 -= DT_COOLDOWN
+            if COOLDOWN2 <= 0:
+                TIME2 = False
+                ABILITY2 = True
+        
         # Outcome is Player 2 Wins
         if PLAYER1.health <= 0:
             TXT = g.FONTNORMAL.render('Player 2 Wins!', True, PLAYER2.color)
             TEXT_LOCAL = (155, 530)
             TIME = False
+            TIME1 = False
+            TIME2 = False
             ON_END = False
             GAME_MUSIC.stop()
             if keys[pygame.K_ESCAPE] and not CONFIRM:
@@ -395,6 +420,8 @@ def GAME():
             TXT = g.FONTNORMAL.render('Player 1 Wins!', True, PLAYER1.color)
             TEXT_LOCAL = (155, 530)
             TIME = False
+            TIME1 = False
+            TIME2 = False
             ON_END = False
             GAME_MUSIC.stop()
             if keys[pygame.K_ESCAPE] and not CONFIRM:
@@ -408,6 +435,8 @@ def GAME():
             TXT = g.FONTNORMAL.render('Draw!', True, v.GREY)
             TEXT_LOCAL = (210, 530)
             TIME = False
+            TIME1 = False
+            TIME2 = False
             ON_END = False
             GAME_MUSIC.stop()
             if keys[pygame.K_ESCAPE] and not CONFIRM:
@@ -425,6 +454,23 @@ def GAME():
         m.SCREEN.blit(TXT, TEXT_LOCAL)
         m.SCREEN.blit(TEXTS1, (19, 515))
         m.SCREEN.blit(TEXTS2, (429, 515))
+        if COOLDOWN1 <= 3 and COOLDOWN1 >= 2:
+            m.SCREEN.blit(m.MEDIA['cooldown3'], (100, 515))
+        elif COOLDOWN1 <= 2 and COOLDOWN1 >= 1:
+            m.SCREEN.blit(m.MEDIA['cooldown2'], (100, 515))
+        elif COOLDOWN1 <= 1 and COOLDOWN1 >= 0:
+            m.SCREEN.blit(m.MEDIA['cooldown1'], (100, 515))
+        elif COOLDOWN1 <= 0:
+            m.SCREEN.blit(m.MEDIA['cooldown0'], (100, 515))
+            
+        if COOLDOWN2 <= 3 and COOLDOWN2 >= 2:
+            m.SCREEN.blit(m.MEDIA['cooldown3'], (380, 515))
+        elif COOLDOWN2 <= 2 and COOLDOWN2 >= 1:
+            m.SCREEN.blit(m.MEDIA['cooldown2'], (380, 515))
+        elif COOLDOWN2 <= 1 and COOLDOWN2 >= 0:
+            m.SCREEN.blit(m.MEDIA['cooldown1'], (380, 515))
+        elif COOLDOWN2 <= 0:
+            m.SCREEN.blit(m.MEDIA['cooldown0'], (380, 515))
         ALL_SPRITES.draw(m.SCREEN)
         if not ON_END:
             m.SCREEN.blit(TEXTS3, (395, 10))

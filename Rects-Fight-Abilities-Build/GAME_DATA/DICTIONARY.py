@@ -5,6 +5,7 @@ import SPRITES as s
 import random
 import pygame
 
+CLOCK = pygame.time.Clock()
 # Sets up colors in a dictonary and returns a random color [For rainbow character]
 def GET_RANDOM():
     i = random.randrange(0, 6)
@@ -62,6 +63,7 @@ def PURPLE_LASER_BEAM(groupa, groupb, pos, vel):
     BEAM = s.PurpleBeam(pos, vel)
     groupa.add(BEAM)
     groupb.add(BEAM)
+    m.MEDIA['laser_shoot_sound'].play()
 
 def RED_LASER_BEAM(groupa, groupb, pos, vel):
     if vel[0] == 8 and vel[1] == 0:
@@ -75,11 +77,19 @@ def RED_LASER_BEAM(groupa, groupb, pos, vel):
     BEAM = s.RedBeam(pos, vel)
     groupa.add(BEAM)
     groupb.add(BEAM)
+    m.MEDIA['laser_shoot_sound'].play()
     
 def SPLIT_BULLET(groupa, groupb, pos, vel, img, color):
     SPLIT_BULLET = s.SplitBullet(pos, vel, img, groupa, groupb, color)
     groupa.add(SPLIT_BULLET)
     groupb.add(SPLIT_BULLET)
+    m.MEDIA['split_shoot_sound'].play()
+
+def BOOMERANG_BULLET(groupa, groupb, pos, vel, img):
+    BOOM_BULLET = s.BoomerangBullet(pos, vel, img)
+    groupa.add(BOOM_BULLET)
+    groupb.add(BOOM_BULLET)
+    m.MEDIA['shoot_sound'].play()
     
 def TEMP_DEFAULT(groupa, groupb, pos, vel, img):
     BULLET = s.Bullet(pos, vel, img)
@@ -132,13 +142,13 @@ GAME_DICT = {
         'PLAYER_IMAGE': m.MEDIA['grey_face'],
         'BULLET_IMAGE': m.MEDIA['grey_bullet'],
         'LOCAL': 220,
-        'ABILITY': TEMP_DEFAULT},
+        'ABILITY': BOOMERANG_BULLET},
     'WHITE': {
         'COLOR': g.WHITE,
         'PLAYER_IMAGE': m.MEDIA['white_face'],
         'BULLET_IMAGE': m.MEDIA['white_bullet'],
         'LOCAL': 210,
-        'ABILITY': TEMP_DEFAULT},
+        'ABILITY': BOOMERANG_BULLET},
     'RAINBOW': {
         'COLOR': GET_RANDOM(),
         'PLAYER_IMAGE': m.MEDIA['rainbow_face'],
@@ -160,14 +170,16 @@ GAME_DICT = {
             'BULLET_VELOCITY': 8,
             'HEALTH': 3,
             'SOUND': m.MEDIA['classic_sound'],
-            'MUSIC': m.MEDIA['classic_music']},
+            'MUSIC': m.MEDIA['classic_music'],
+            'DT': CLOCK.tick(60) / 1000},
         'CHAOS': {
             'TIMER': 10,
             'PLAYER_VELOCITY': 8,
             'BULLET_VELOCITY': 15,
             'HEALTH': 1,
             'SOUND': m.MEDIA['chaos_sound'], 
-            'MUSIC': m.MEDIA['chaos_music']}
+            'MUSIC': m.MEDIA['chaos_music'],
+            'DT': CLOCK.tick(60) / 100}
         },
     # Timer Values
     'TIMER': {

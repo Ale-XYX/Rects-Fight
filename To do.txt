@@ -1,10 +1,4 @@
 To Do 1.8:
-
-add sounds/improve images on lazer ability
-add sounds/improve images on split-bullet abiltiy 
-add grey/white ability
-improve images/add sounds to grey/white abiltiy
-add cooldowns for abilities
 Full/Semi Rewrite to clean code
 Fixes
 
