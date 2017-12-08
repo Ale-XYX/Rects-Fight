@@ -2,7 +2,7 @@
 import pygame
 import GLOBAL as g
 import MEDIA as m
-import DICTIONARY as d
+import DICT as d
 
 pygame.init()
 
@@ -208,13 +208,13 @@ class BoomerangBullet(pygame.sprite.Sprite):
     def update(self):
         if self.toggle == False:
             if self.direction == 'RIGHT':
-                self.vel = (self.vel[0] - 0.2, self.vel[1])
+                self.vel = (self.vel[0] - 0.2, self.vel[1] - 0.02)
             elif self.direction == 'LEFT':
-                self.vel = (self.vel[0] + 0.2, self.vel[1])
+                self.vel = (self.vel[0] + 0.2, self.vel[1] + 0.02)
             elif self.direction == 'DOWN':
-                self.vel = (self.vel[0], self.vel[1] - 0.2)
+                self.vel = (self.vel[0] - 0.02, self.vel[1] - 0.2)
             elif self.direction == 'UP':
-                self.vel = (self.vel[0], self.vel[1] + 0.2)
+                self.vel = (self.vel[0] - 0.02, self.vel[1] + 0.2)
             self.pos += self.vel
             self.rect.center = self.pos
             if not g.PLAY_AREA.contains(self):

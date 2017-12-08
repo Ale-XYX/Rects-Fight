@@ -21,20 +21,18 @@ def GET_RANDOM():
     return DICT[i]
 
 # Blue/Orange Big bullet
-def BIG_BULLET(groupa, groupb, pos, vel, img):
-    if not vel[0] == 0:
-        if not vel[0] == -8:
-            vel = (vel[0] - 4, 0)
-        else:
-            vel = (vel[0] + 4, 0)
-    if not vel[1] == 0 and vel[0] == 0:
-        if not vel[1] == -8:
-            vel = (0, vel[1] - 4)
-        else:
-            vel = (0, vel[1] + 4)
-    BIGBULLET = s.BigBullet(pos, vel, img)
-    groupa.add(BIGBULLET)
-    groupb.add(BIGBULLET)
+def BIG_BULLET(GROUP_A, GROUP_B, POS, VEL, IMG):
+    if VEL[0] == 8 and VEL[1] == 0:
+        VEL = (VEL[0] - 4, 0)
+    elif VEL[0] == -8 and VEL[1] == 0:
+        VEL = (VEL[0] + 4, 0)
+    elif VEL[0] == 0 and VEL[1] == 8:
+        VEL = (0, VEL[1] - 4)
+    elif VEL[0] == 0 and VEL[1] == -8:
+        VEL = (0, VEL[1] + 4)
+    BIGBULLET = s.BigBullet(POS, VEL, IMG)
+    GROUP_A.add(BIGBULLET)
+    GROUP_B.add(BIGBULLET)
     m.MEDIA['big_shoot_sound'].play()
     
 # Rainbow Multi-bullet

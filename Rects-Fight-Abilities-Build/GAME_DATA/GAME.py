@@ -5,7 +5,7 @@ import sys
 import GLOBAL as g
 import MEDIA as m
 import SPRITES as s
-import DICTIONARY as d
+import DICT as d
 
 pygame.init()
 
