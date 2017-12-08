@@ -5,8 +5,8 @@ if __name__ == '__main__':
     import pygame
     import sys
 
-    sys.path.insert(0, './GAME_DATA')
     # Import Game Module [Which Loads Sprites, Global, Media, etc.]
+    sys.path.insert(0, './GAME_DATA')
     import GAME as g
 
     pygame.init()

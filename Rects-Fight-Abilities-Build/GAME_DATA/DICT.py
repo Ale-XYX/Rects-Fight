@@ -30,71 +30,46 @@ def BIG_BULLET(GROUP_A, GROUP_B, POS, VEL, IMG):
         VEL = (0, VEL[1] - 4)
     elif VEL[0] == 0 and VEL[1] == -8:
         VEL = (0, VEL[1] + 4)
-    BIGBULLET = s.BigBullet(POS, VEL, IMG)
+    BIGBULLET = s.BIG_BULLET(POS, VEL, IMG)
     GROUP_A.add(BIGBULLET)
     GROUP_B.add(BIGBULLET)
     m.MEDIA['big_shoot_sound'].play()
+
+# Green/Yellow Split Bullet    
+def SPLIT_BULLET(GROUP_A, GROUP_B, POS, VEL, IMG, COLOR):
+    SPLIT_BULLET = s.SPLIT_BULLET(POS, VEL, IMG, GROUP_A, GROUP_B, COLOR)
+    GROUP_A.add(SPLIT_BULLET)
+    GROUP_B.add(SPLIT_BULLET)
+    m.MEDIA['split_shoot_sound'].play()
+    
+# Red/Purple Laser Beam
+def LASER_BEAM(GROUP_A, GROUP_B, POS, VEL, COLOR):
+    BEAM = s.BEAM(POS, VEL, COLOR)
+    GROUP_A.add(BEAM)
+    GROUP_B.add(BEAM)
+    m.MEDIA['laser_shoot_sound'].play()
+
+# Grey/White reverse bullet        
+def REVERSE_BULLET(GROUP_A, GROUP_B, POS, VEL, IMG):
+    REVERSE_BULLET = s.REVERSE_BULLET(POS, VEL, IMG)
+    GROUP_A.add(REVERSE_BULLET)
+    GROUP_B.add(REVERSE_BULLET)
+    m.MEDIA['reverse_shoot_sound'].play()
     
 # Rainbow Multi-bullet
-def MULTI_BULLET(groupa, groupb, pos):
-    BULLET1 = s.Bullet(pos, (6, 0), m.MEDIA['red_bullet'])
-    BULLET2 = s.Bullet(pos, (6, -6), m.MEDIA['orange_bullet'])
-    BULLET3 = s.Bullet(pos, (0, -6), m.MEDIA['yellow_bullet'])
-    BULLET4 = s.Bullet(pos, (-6, -6), m.MEDIA['green_bullet'])
-    BULLET5 = s.Bullet(pos, (-6, 0), m.MEDIA['blue_bullet'])
-    BULLET6 = s.Bullet(pos, (-6, 6), m.MEDIA['purple_bullet'])
-    BULLET7 = s.Bullet(pos, (0, 6), m.MEDIA['white_bullet'])
-    BULLET8 = s.Bullet(pos, (6, 6), m.MEDIA['grey_bullet'])
-    groupa.add(BULLET1, BULLET2, BULLET3, BULLET4, BULLET5, BULLET6, BULLET7, BULLET8)
-    groupb.add(BULLET1, BULLET2, BULLET3, BULLET4, BULLET5, BULLET6, BULLET7, BULLET8)
-    m.MEDIA['multi_shoot_sound'].play()
+def MULTI_BULLET(GROUP_A, GROUP_B, POS):
+    BULLET_1 = s.BULLET(POS, (6, 0), m.MEDIA['red_bullet'])
+    BULLET_2 = s.BULLET(POS, (6, -6), m.MEDIA['orange_bullet'])
+    BULLET_3 = s.BULLET(POS, (0, -6), m.MEDIA['yellow_bullet'])
+    BULLET_4 = s.BULLET(POS, (-6, -6), m.MEDIA['green_bullet'])
+    BULLET_5 = s.BULLET(POS, (-6, 0), m.MEDIA['blue_bullet'])
+    BULLET_6 = s.BULLET(POS, (-6, 6), m.MEDIA['purple_bullet'])
+    BULLET_7 = s.BULLET(POS, (0, 6), m.MEDIA['white_bullet'])
+    BULLET_8 = s.BULLET(POS, (6, 6), m.MEDIA['grey_bullet'])
+    groupa.add(BULLET_1, BULLET_2, BULLET_3, BULLET_4, BULLET_5, BULLET_6, BULLET_7, BULLET_8)
+    groupb.add(BULLET_1, BULLET_2, BULLET_3, BULLET_4, BULLET_5, BULLET_6, BULLET_7, BULLET_8)
+    m.MEDIA['multi_shoot_sound'].play()      
 
-def PURPLE_LASER_BEAM(groupa, groupb, pos, vel):
-    if vel[0] == 8 and vel[1] == 0:
-        vel = (vel[0] - 3, vel[1])
-    elif vel[0] == -8 and vel[1] == 0:
-        vel = (vel[0] + 3, vel[1])
-    elif vel[0] == 0 and vel[1] == 8:
-        vel = (vel[0], vel[1] - 3)
-    elif vel[0] == 0 and vel[1] == -8:
-        vel = (vel[0], vel[1] + 3)
-    BEAM = s.PurpleBeam(pos, vel)
-    groupa.add(BEAM)
-    groupb.add(BEAM)
-    m.MEDIA['laser_shoot_sound'].play()
-
-def RED_LASER_BEAM(groupa, groupb, pos, vel):
-    if vel[0] == 8 and vel[1] == 0:
-        vel = (vel[0] - 3, vel[1])
-    elif vel[0] == -8 and vel[1] == 0:
-        vel = (vel[0] + 3, vel[1])
-    elif vel[0] == 0 and vel[1] == 8:
-        vel = (vel[0], vel[1] - 3)
-    elif vel[0] == 0 and vel[1] == -8:
-        vel = (vel[0], vel[1] + 3)
-    BEAM = s.RedBeam(pos, vel)
-    groupa.add(BEAM)
-    groupb.add(BEAM)
-    m.MEDIA['laser_shoot_sound'].play()
-    
-def SPLIT_BULLET(groupa, groupb, pos, vel, img, color):
-    SPLIT_BULLET = s.SplitBullet(pos, vel, img, groupa, groupb, color)
-    groupa.add(SPLIT_BULLET)
-    groupb.add(SPLIT_BULLET)
-    m.MEDIA['split_shoot_sound'].play()
-
-def BOOMERANG_BULLET(groupa, groupb, pos, vel, img):
-    BOOM_BULLET = s.BoomerangBullet(pos, vel, img)
-    groupa.add(BOOM_BULLET)
-    groupb.add(BOOM_BULLET)
-    m.MEDIA['shoot_sound'].play()
-    
-def TEMP_DEFAULT(groupa, groupb, pos, vel, img):
-    BULLET = s.Bullet(pos, vel, img)
-    groupa.add(BULLET)
-    groupb.add(BULLET)
-    m.MEDIA['shoot_sound'].play()
-        
 GAME_DICT = {
     # Player Media, Colors, And Locations
     'BLUE': {
@@ -121,13 +96,13 @@ GAME_DICT = {
         'PLAYER_IMAGE': m.MEDIA['purple_face'],
         'BULLET_IMAGE': m.MEDIA['purple_bullet'],
         'LOCAL': 210,
-        'ABILITY': PURPLE_LASER_BEAM},
+        'ABILITY': LASER_BEAM},
     'RED': {
         'COLOR': g.RED,
         'PLAYER_IMAGE': m.MEDIA['red_face'],
         'BULLET_IMAGE': m.MEDIA['red_bullet'],
         'LOCAL': 224,
-        'ABILITY': RED_LASER_BEAM},
+        'ABILITY': LASER_BEAM},
     'YELLOW': {
         'COLOR': g.YELLOW,
         'PLAYER_IMAGE': m.MEDIA['yellow_face'],
@@ -140,13 +115,13 @@ GAME_DICT = {
         'PLAYER_IMAGE': m.MEDIA['grey_face'],
         'BULLET_IMAGE': m.MEDIA['grey_bullet'],
         'LOCAL': 220,
-        'ABILITY': BOOMERANG_BULLET},
+        'ABILITY': REVERSE_BULLET},
     'WHITE': {
         'COLOR': g.WHITE,
         'PLAYER_IMAGE': m.MEDIA['white_face'],
         'BULLET_IMAGE': m.MEDIA['white_bullet'],
         'LOCAL': 210,
-        'ABILITY': BOOMERANG_BULLET},
+        'ABILITY': REVERSE_BULLET},
     'RAINBOW': {
         'COLOR': GET_RANDOM(),
         'PLAYER_IMAGE': m.MEDIA['rainbow_face'],
@@ -164,7 +139,7 @@ GAME_DICT = {
     'MODE': {
         'CLASSIC': {
             'TIMER': 30,
-            'PLAYER_VELOCITY': 5,
+            'PLAYER_VELOCITY': 6,
             'BULLET_VELOCITY': 8,
             'HEALTH': 3,
             'SOUND': m.MEDIA['classic_sound'],

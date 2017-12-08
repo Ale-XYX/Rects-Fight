@@ -54,7 +54,7 @@ def MODE_SELECT():
     CLOCK = pygame.time.Clock()
     LOOP = True
     ALL_SPRITES = pygame.sprite.Group()
-    SELECTOR_BIG = s.SelectorBig((250, 250))
+    SELECTOR_BIG = s.SELECTOR_BIG((250, 250))
     MODE_CHOICES = ['CLASSIC', 'CHAOS']
     ALL_SPRITES.add(SELECTOR_BIG)
     TEXTS1 = g.FONTNORMAL.render('Choose Mode', True, g.WHITE)
@@ -112,8 +112,8 @@ def CHARACTER_SELECT():
     ALL_SPRITES = pygame.sprite.Group()
     PLAYER1_IMAGE, TEXT1 = GET(COLOR_CHOICES[PLAYER1])
     PLAYER2_IMAGE, TEXT2 = GET(COLOR_CHOICES[PLAYER2])
-    SELECTORA = s.Selector((30, 188))
-    SELECTORB = s.Selector((85, 388))
+    SELECTORA = s.SELECTOR((30, 188))
+    SELECTORB = s.SELECTOR((85, 388))
     ALL_SPRITES.add(SELECTORA, SELECTORB)
     CLOCK = pygame.time.Clock()
     LOOP = True
@@ -199,8 +199,8 @@ def GAME():
     g.TIMER = d.GAME_DICT['MODE'][g.MODE]['TIMER']
     PLAYER_VELOCITY = d.GAME_DICT['MODE'][g.MODE]['PLAYER_VELOCITY']
     BULLET_VELOCITY = d.GAME_DICT['MODE'][g.MODE]['BULLET_VELOCITY']
-    PLAYER1 = s.Player((35, 35), BULLETS2, (BULLET_VELOCITY, 0), g.P1CHAR, ALL_SPRITES)
-    PLAYER2 = s.Player((465, 465), BULLETS1, (-BULLET_VELOCITY, 0), g.P2CHAR, ALL_SPRITES)
+    PLAYER1 = s.RECT((35, 35), BULLETS2, (BULLET_VELOCITY, 0), g.P1CHAR, ALL_SPRITES)
+    PLAYER2 = s.RECT((465, 465), BULLETS1, (-BULLET_VELOCITY, 0), g.P2CHAR, ALL_SPRITES)
     PLAYER1.health = d.GAME_DICT['MODE'][g.MODE]['HEALTH']
     PLAYER2.health = d.GAME_DICT['MODE'][g.MODE]['HEALTH']
     DT_COOLDOWN = d.GAME_DICT['MODE'][g.MODE]['DT']
@@ -235,11 +235,11 @@ def GAME():
                 'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), m.MEDIA['green_split_bullet'], 'GREEN'],
                 'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), m.MEDIA['green_split_bullet'], 'GREEN']},
             'PURPLE': {
-                'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction)],
-                'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction)]},
+                'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), 'PURPLE'],
+                'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), 'PURPLE']},
             'RED': {
-                'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction)],
-                'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction)]},
+                'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), 'RED'],
+                'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), 'RED']},
             'YELLOW': {
                 'PLAYER1': [BULLETS1, ALL_SPRITES, PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), m.MEDIA['yellow_split_bullet'], 'YELLOW'],
                 'PLAYER2': [BULLETS2, ALL_SPRITES, PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), m.MEDIA['yellow_split_bullet'], 'YELLOW']},
@@ -262,12 +262,12 @@ def GAME():
             # Keymap
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_f and not PLAYER1.toggle:
-                    BULLET = s.Bullet(PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), PLAYER1.bullet_image)
+                    BULLET = s.BULLET(PLAYER1.rect.center, pygame.math.Vector2(PLAYER1.fire_direction), PLAYER1.bullet_image)
                     BULLETS1.add(BULLET)
                     ALL_SPRITES.add(BULLET)
                     m.MEDIA['shoot_sound'].play()
                 if event.key == pygame.K_SPACE and not PLAYER2.toggle:
-                    BULLET = s.Bullet(PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), PLAYER2.bullet_image)
+                    BULLET = s.BULLET(PLAYER2.rect.center, pygame.math.Vector2(PLAYER2.fire_direction), PLAYER2.bullet_image)
                     BULLETS2.add(BULLET)
                     ALL_SPRITES.add(BULLET)
                     m.MEDIA['shoot_sound'].play()
@@ -387,6 +387,7 @@ def GAME():
             elif not TIME and keys[pygame.K_RETURN] and not CONFIRM:
                 pygame.mixer.pause()
                 LOOP = False
+                
         # Subtracts cooldown/detects when cooldown is 0       
         if TIME1:
             COOLDOWN1 -= DT_COOLDOWN
@@ -454,6 +455,7 @@ def GAME():
         m.SCREEN.blit(TXT, TEXT_LOCAL)
         m.SCREEN.blit(TEXTS1, (19, 515))
         m.SCREEN.blit(TEXTS2, (429, 515))
+        # Cooldown blitting [Probaly Will Optimize with GAME_DICT]
         if COOLDOWN1 <= 3 and COOLDOWN1 >= 2:
             m.SCREEN.blit(m.MEDIA['cooldown3'], (100, 515))
         elif COOLDOWN1 <= 2 and COOLDOWN1 >= 1:

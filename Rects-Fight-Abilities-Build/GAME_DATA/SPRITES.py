@@ -7,7 +7,7 @@ import DICT as d
 pygame.init()
 
 # Player Sprite
-class Player(pygame.sprite.Sprite):
+class RECT(pygame.sprite.Sprite):
     def __init__(self, pos, enemy_bullets, direction, color, *groups):
         super().__init__(*groups)
         self.image = d.GAME_DICT[color.upper()]['PLAYER_IMAGE']
@@ -49,17 +49,17 @@ class Player(pygame.sprite.Sprite):
                     self.kill()
                     self.toggle = True
                 else:
-                    if bullet.vel[0] == 5 and bullet.vel[1] == 0:
+                    if bullet.vel[0] == 8 and bullet.vel[1] == 0:
                         self.pos[0] -= -(bullet.vel[0] + 10)
-                    elif bullet.vel[0] == -5 and bullet.vel[1] == 0:
+                    elif bullet.vel[0] == -8 and bullet.vel[1] == 0:
                         self.pos[0] -= -(bullet.vel[0] - 10)
-                    elif bullet.vel[0] == 0 and bullet.vel[1] == 5:
+                    elif bullet.vel[0] == 0 and bullet.vel[1] == 8:
                         self.pos[1] -= -(bullet.vel[1] + 10)
-                    elif bullet.vel[0] == 0 and bullet.vel[1] == -5:
+                    elif bullet.vel[0] == 0 and bullet.vel[1] == -8:
                         self.pos[1] -= -(bullet.vel[1] - 10)
 
 # Bullet
-class Bullet(pygame.sprite.Sprite):
+class BULLET(pygame.sprite.Sprite):
     def __init__(self, pos, vel, image):
         super().__init__()
         self.image = image
@@ -74,9 +74,9 @@ class Bullet(pygame.sprite.Sprite):
             self.rect.center = self.pos
             if not g.PLAY_AREA.contains(self):
                 self.kill()
+                
 # Big Bullet [Blue/Orange Ability]
-
-class BigBullet(pygame.sprite.Sprite):
+class BIG_BULLET(pygame.sprite.Sprite):
     def __init__(self, pos, vel, image):
         super().__init__()
         self.image = image
@@ -91,40 +91,30 @@ class BigBullet(pygame.sprite.Sprite):
             self.rect.center = self.pos
             if not g.PLAY_AREA.contains(self):
                 self.kill()
-class RedBeam(pygame.sprite.Sprite):
-    def __init__(self, pos, vel):
+
+# Red/Purple Laser Beam
+class BEAM(pygame.sprite.Sprite):
+    def __init__(self, pos, vel, color):
         super().__init__()
-        if vel[0] == 0 and vel[1] == 5:
-            self.image = pygame.transform.rotate(m.MEDIA['red_laser'], -90)
-        elif vel[0] == 0 and vel[1] == -5:
-            self.image = pygame.transform.rotate(m.MEDIA['red_laser'], 90)
-        elif vel[0] == 5 and vel[1] == 0:
-            self.image = m.MEDIA['red_laser']
-        elif vel[0] == -5 and vel[1] == 0:
-            self.image = m.MEDIA['red_laser']
-        self.rect = self.image.get_rect(center = pos)
-        self.vel = pygame.math.Vector2(vel)
-        self.pos = pygame.math.Vector2(pos)
-        self.toggle = False
-        self.type = 'LASER'
-    def update(self):
-        if self.toggle == False:
-            self.pos += self.vel
-            self.rect.center = self.pos
-            if not g.PLAY_AREA.contains(self):
-                self.kill()
-                
-class PurpleBeam(pygame.sprite.Sprite):
-    def __init__(self, pos, vel):
-        super().__init__()
-        if vel[0] == 0 and vel[1] == 5:
-            self.image = pygame.transform.rotate(m.MEDIA['purple_laser'], -90)
-        elif vel[0] == 0 and vel[1] == -5:
-            self.image = pygame.transform.rotate(m.MEDIA['purple_laser'], 90)
-        elif vel[0] == 5 and vel[1] == 0:
-            self.image = pygame.transform.flip(m.MEDIA['purple_laser'], True, False)
-        elif vel[0] == -5 and vel[1] == 0:
-            self.image = m.MEDIA['purple_laser']
+        self.color = color
+        if color == 'RED':
+            if vel[0] == 0 and vel[1] == 8:
+                self.image = pygame.transform.rotate(m.MEDIA['red_laser'], -90)
+            elif vel[0] == 0 and vel[1] == -8:
+                self.image = pygame.transform.rotate(m.MEDIA['red_laser'], 90)
+            elif vel[0] == 8 and vel[1] == 0:
+                self.image = m.MEDIA['red_laser']
+            elif vel[0] == -8 and vel[1] == 0:
+                self.image = m.MEDIA['red_laser']
+        elif color == 'PURPLE':
+            if vel[0] == 0 and vel[1] == 8:
+                self.image = pygame.transform.rotate(m.MEDIA['purple_laser'], -90)
+            elif vel[0] == 0 and vel[1] == -8:
+                self.image = pygame.transform.rotate(m.MEDIA['purple_laser'], 90)
+            elif vel[0] == 8 and vel[1] == 0:
+                self.image = pygame.transform.flip(m.MEDIA['purple_laser'], True, False)
+            elif vel[0] == -8 and vel[1] == 0:
+                self.image = m.MEDIA['purple_laser']
         self.rect = self.image.get_rect(center = pos)
         self.vel = pygame.math.Vector2(vel)
         self.pos = pygame.math.Vector2(pos)
@@ -137,7 +127,8 @@ class PurpleBeam(pygame.sprite.Sprite):
             if not g.PLAY_AREA.contains(self):
                 self.kill()
 
-class SplitBullet(pygame.sprite.Sprite):
+# Green/Yellow Split Bullet
+class SPLIT_BULLET(pygame.sprite.Sprite):
     def __init__(self, pos, vel, image, groupa, groupb, color):
         super().__init__()
         self.color = color
@@ -156,39 +147,40 @@ class SplitBullet(pygame.sprite.Sprite):
             self.rect.center = self.pos
             if not g.PLAY_AREA.contains(self):
                 if self.vel[0] == 8 and self.vel[1] == 0:
-                    bullet1 = Bullet(self.rect.center, (-8, 0), self.alt_image)
-                    bullet2 = Bullet(self.rect.center, (-8, -5), self.alt_image)
-                    bullet3 = Bullet(self.rect.center, (-8, 5), self.alt_image)
-                    self.groupa.add(bullet1, bullet2, bullet3)
-                    self.groupb.add(bullet1, bullet2, bullet3)
+                    BULLET_A = BULLET(self.rect.center, (-8, 0), self.alt_image)
+                    BULLET_B = BULLET(self.rect.center, (-8, -5), self.alt_image)
+                    BULLET_C = BULLET(self.rect.center, (-8, 5), self.alt_image)
+                    self.groupa.add(BULLET_A, BULLET_B, BULLET_C)
+                    self.groupb.add(BULLET_A, BULLET_B, BULLET_C)
                     m.MEDIA['bullet_split_sound'].play()
                     self.kill()
                 if self.vel[0] == -8 and self.vel[1] == 0:
-                    bullet1 = Bullet(self.rect.center, (8, 0), self.alt_image)
-                    bullet2 = Bullet(self.rect.center, (8, -5), self.alt_image)
-                    bullet3 = Bullet(self.rect.center, (8, 5), self.alt_image)
-                    self.groupa.add(bullet1, bullet2, bullet3)
-                    self.groupb.add(bullet1, bullet2, bullet3)
+                    BULLET_A = BULLET(self.rect.center, (8, 0), self.alt_image)
+                    BULLET_B = BULLET(self.rect.center, (8, -5), self.alt_image)
+                    BULLET_C = BULLET(self.rect.center, (8, 5), self.alt_image)
+                    self.groupa.add(BULLET_A, BULLET_B, BULLET_C)
+                    self.groupb.add(BULLET_A, BULLET_B, BULLET_C)
                     m.MEDIA['bullet_split_sound'].play()
                     self.kill()                    
                 if self.vel[0] == 0 and self.vel[1] == 8:
-                    bullet1 = Bullet(self.rect.center, (0, -8), self.alt_image)
-                    bullet2 = Bullet(self.rect.center, (5, -8), self.alt_image)
-                    bullet3 = Bullet(self.rect.center, (-5, -8), self.alt_image)
-                    self.groupa.add(bullet1, bullet2, bullet3)
-                    self.groupb.add(bullet1, bullet2, bullet3)
+                    BULLET_A = BULLET(self.rect.center, (0, -8), self.alt_image)
+                    BULLET_B = BULLET(self.rect.center, (5, -8), self.alt_image)
+                    BULLET_C = BULLET(self.rect.center, (-5, -8), self.alt_image)
+                    self.groupa.add(BULLET_A, BULLET_B, BULLET_C)
+                    self.groupb.add(BULLET_A, BULLET_B, BULLET_C)
                     m.MEDIA['bullet_split_sound'].play()
                     self.kill()
                 if self.vel[0] == 0 and self.vel[1] == -8:
-                    bullet1 = Bullet(self.rect.center, (0, 8), self.alt_image)
-                    bullet2 = Bullet(self.rect.center, (5, 8), self.alt_image)
-                    bullet3 = Bullet(self.rect.center, (-5, 8), self.alt_image)
-                    self.groupa.add(bullet1, bullet2, bullet3)
-                    self.groupb.add(bullet1, bullet2, bullet3)
+                    BULLET_A = BULLET(self.rect.center, (0, 8), self.alt_image)
+                    BULLET_B = BULLET(self.rect.center, (5, 8), self.alt_image)
+                    BULLET_C = BULLET(self.rect.center, (-5, 8), self.alt_image)
+                    self.groupa.add(BULLET_A, BULLET_B, BULLET_C)
+                    self.groupb.add(BULLET_A, BULLET_B, BULLET_C)
                     m.MEDIA['bullet_split_sound'].play()
                     self.kill()
 
-class BoomerangBullet(pygame.sprite.Sprite):
+# Grey/White Reverse Bullet
+class REVERSE_BULLET(pygame.sprite.Sprite):
     def __init__(self, pos, vel, image):
         super().__init__()
         self.image = image
@@ -221,7 +213,7 @@ class BoomerangBullet(pygame.sprite.Sprite):
                 self.kill()
     
 # Selector
-class Selector(pygame.sprite.Sprite):
+class SELECTOR(pygame.sprite.Sprite):
     def __init__(self, pos):
         super().__init__()
         self.image = m.MEDIA['selector']
@@ -235,7 +227,7 @@ class Selector(pygame.sprite.Sprite):
             self.pos[0] = 470
 
 # Larger Selector
-class SelectorBig(pygame.sprite.Sprite):
+class SELECTOR_BIG(pygame.sprite.Sprite):
     def __init__(self, pos):
         super().__init__()
         self.image = m.MEDIA['selectorbig']
