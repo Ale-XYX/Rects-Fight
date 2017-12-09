@@ -13,42 +13,53 @@ Version 2.0: SnivyDroid
 *Install*
 
 First, Get and install python from python.org
+
 ![1](https://i.imgur.com/Dy3sHw3.png)
 
 Second, Go into command prompt and install python and glob
+
 ![2](https://i.imgur.com/8QTTkZ7.png)
 
 ![3](https://i.imgur.com/aG21YOt.png)
 
 Third, Run Rects Fight.py and you are ready
+
 ![4](https://i.imgur.com/Ixv1vJf.png)
 
 *Mechanics*
 
-Title Screen : Space To Continue 
+Title Screen : Space To Continue
+
 ![5](https://i.imgur.com/uk1GMKk.png)
 
 Mode Select [Choose From Normal and CHAOS] : Space To Continue
+
 ![6](https://i.imgur.com/yPTGWau.png)
 
 Character Select [9 Characters with unique abilities!] : A/D to move P1 Slider, LEFT/RIGHT to move P2 Slider
+
 ![7](https://i.imgur.com/2OW69lV.png)
 
 Main Game [WASD/F/G to Move, shoot, and use ability [P1] : ARROWS/SPACE/RCTRL to Move, shoot, and use ability [P2]]
+
 ![8](https://i.imgur.com/8RrBSpV.png)
 
 Press TAB to pause
+
 ![9](https://i.imgur.com/cYFA7mn.png)
 
 Every player has only a small amount of HP, so act fast!
+
 ![10](https://i.imgur.com/nUA0FRd.png)
 
 *Modes*
 
 Classic Mode Has 30 seconds timer, and 3 HP for each player
+
 ![11](https://i.imgur.com/v0KaTQS.png)
 
 Chaos Mode has only 10 seconds and 1 HP each! Its all or nothing!
+
 ![12](https://i.imgur.com/ztXTsc2.png)
 
 *Abilities*
