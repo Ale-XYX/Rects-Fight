@@ -1,64 +1,74 @@
 ![Title](https://i.imgur.com/pvWhary.png) 
 
-Version 1.8: SnivyDroid
+Version 2.0: SnivyDroid
 
 ***REQUIRES PYTHON/PYGAME LIBRARY***
 
-*Play normal build if you want normal experience*
-*Abilities build in-beta*
+# Changelog 2.0
+- Many Optimizations!
+- Abilities Now complete!
+- Redesigned README
+# HOW TO PLAY
 
-*Status*
-- Blue/Orange working [No Bugs]
-- Rainbow working [No Bugs]
-- Green/Yellow working [No Bugs]
-- Red/Purple working [No Bugs]
-- Grey/White not done yet
-- Chaos mode needs [some] tinkering
+*Install*
+First, Get and install python from python.org
+![1](https://i.imgur.com/Dy3sHw3.png)
 
-# CONTROLS:
-A/D To Select Player 1 Character
+Second, Go into command prompt and install python and glob
+![2](https://i.imgur.com/8QTTkZ7.png)
+![3](https://i.imgur.com/aG21YOt.png)
 
-LEFT/RIGHT To Select Player 2 Character
+Third, Run Rects Fight.py and you are ready
+![4](https://i.imgur.com/Ixv1vJf.png)
 
-WASD to move Player 1
+*Mechanics*
 
-Arrow keys to move Player 2
+Title Screen : Space To Continue 
+![5](https://i.imgur.com/uk1GMKk.png)
 
-E to shoot from Player 1
+Mode Select [Choose From Normal and CHAOS] : Space To Continue
+![6](https://i.imgur.com/yPTGWau.png)
 
-SPACE to shoot from Player 2
+Character Select [9 Characters with unique abilities!] : A/D to move P1 Slider, LEFT/RIGHT to move P2 Slider
+![7](https://i.imgur.com/2OW69lV.png)
 
-TAB to pause
+Main Game [WASD/F/G to Move, shoot, and use ability [P1] : ARROWS/SPACE/RCTRL to Move, shoot, and use ability [P2]]
+![8](https://i.imgur.com/8RrBSpV.png)
 
-LSHIFT to Unpause
+Press TAB to pause
+![9](https://i.imgur.com/cYFA7mn.png)
 
-ESC to leave
+Every player has only a small amount of HP, so act fast!
+![10](https://i.imgur.com/nUA0FRd.png)
 
-ENTER to restart game [Paused, At end, etc.]
+*Modes*
 
-Game Ends when one player dies [After taking three hits]
+Classic Mode Has 30 seconds timer, and 3 HP for each player
+![11](https://i.imgur.com/v0KaTQS.png)
 
-![Mode Select](https://i.imgur.com/MyDVS7t.png "Mode Select")
+Chaos Mode has only 10 seconds and 1 HP each! Its all or nothing!
+![12](https://i.imgur.com/ztXTsc2.png)
 
-![Character Select](https://i.imgur.com/fo8ZRiq.png "Character Select")
+*Abilities*
 
-![Game](https://i.imgur.com/wL76rxt.png "Game in Action")
+Blue/Orange shoot a large bullet, slow but does 2 damage.
 
-![Blue](https://i.imgur.com/pD5AZqO.png "Blue")
+![13](https://i.imgur.com/x05BPM4.png)
 
-![Green](https://i.imgur.com/xsTXprV.png "Green")
+Green/Yellow shoot a medium-sized bullet that on contact with the borders, splits into 3 bullets that go back on to the arena
 
-![Orange](https://i.imgur.com/LDyIXrp.png "Orange")
+![14](https://i.imgur.com/ieP1yTr.png)
 
-![Red](https://i.imgur.com/UcZDa4W.png "Red")
+Red/Purple shoot lasers with knockback [UFO not included]
 
-![Purple](https://i.imgur.com/hOSbbuM.png "Purple")
+![15](https://i.imgur.com/iOvKyR2.png)
 
-![Grey](https://i.imgur.com/fFwBq3y.png "Grey")
+Grey/White shoot bullets that curve straight back, like a boomarang
 
-![Yellow](https://i.imgur.com/rXCyQo1.png "Yellow")
+![16](https://i.imgur.com/Y8g7m2z.png)
 
-# Changelog 1.8
-- Full Rewrite
-- Bullet Image Redesign
-- Player colors now show on names next to hp bars
+Rainbow shoots six bullets at once in all directions!
+
+![17](https://i.imgur.com/uQh88W4.png)
+
+*Quick credit to skrx with helping me with alot of issues + huge improvements/ideas*

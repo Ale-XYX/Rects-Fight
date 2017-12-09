@@ -1,7 +1,3 @@
-To Do 1.8:
-Full/Semi Rewrite to clean code
-Fixes
-
 To Do 2.0:
 Add "Best Of Three" Mode [Best of three rounds, rounds get progressively harder]
 By then the FCC would have repealed net neutrality so probaly no more :(
