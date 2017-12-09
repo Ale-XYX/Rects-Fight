@@ -1,6 +1,7 @@
 # GAME
 import pygame
 import sys
+import random
 
 import GLOBAL as G
 import SPRITES as S
@@ -16,8 +17,8 @@ def TITLE_SCREEN():
     CLOCK = pygame.time.Clock()
     LOOP = True
     TIME = True
-    DT = CLOCK.tick(60) / 1000
     TIMER = 10
+    DT = CLOCK.tick(60) / 1000
 
     while LOOP:
         for event in pygame.event.get():

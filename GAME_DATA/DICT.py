@@ -27,17 +27,7 @@ for FILE_NAME in FILES2:
 CLOCK = pygame.time.Clock()
 # Sets up colors in a dictonary and returns a random color [For rainbow character]
 def GET_RANDOM():
-    i = random.randrange(0, 6)
-    DICT = {
-        0: G.BLUE,
-        1: G.ORANGE,
-        2: G.GREEN,
-        3: G.PURPLE,
-        4: G.RED,
-        5: G.YELLOW,
-        6: G.WHITE
-    }
-    return DICT[i]
+    return random.choice((G.BLUE, G.ORANGE, G.GREEN, G.PURPLE, G.RED, G.YELLOW, G.WHITE))
 
 # Blue/Orange Big bullet
 def BIG_BULLET(GROUP_A, GROUP_B, POS, VEL, IMG, TYPE, DICTIONARY):
