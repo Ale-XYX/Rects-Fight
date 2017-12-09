@@ -26,7 +26,7 @@ Third, Run Rects Fight.py and you are ready
 
 ![4](https://i.imgur.com/Ixv1vJf.png)
 
-*Mechanics*
+**Mechanics**
 
 Title Screen : Space To Continue
 
@@ -52,7 +52,7 @@ Every player has only a small amount of HP, so act fast!
 
 ![10](https://i.imgur.com/nUA0FRd.png)
 
-*Modes*
+**Modes**
 
 Classic Mode Has 30 seconds timer, and 3 HP for each player
 
@@ -62,7 +62,7 @@ Chaos Mode has only 10 seconds and 1 HP each! Its all or nothing!
 
 ![12](https://i.imgur.com/ztXTsc2.png)
 
-*Abilities*
+**Abilities**
 
 Blue/Orange shoot a large bullet, slow but does 2 damage.
 
