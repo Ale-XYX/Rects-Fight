@@ -11,11 +11,13 @@ Version 2.0: SnivyDroid
 # HOW TO PLAY
 
 *Install*
+
 First, Get and install python from python.org
 ![1](https://i.imgur.com/Dy3sHw3.png)
 
 Second, Go into command prompt and install python and glob
 ![2](https://i.imgur.com/8QTTkZ7.png)
+
 ![3](https://i.imgur.com/aG21YOt.png)
 
 Third, Run Rects Fight.py and you are ready
