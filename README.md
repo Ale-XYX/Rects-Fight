@@ -8,9 +8,10 @@ Version 2.0: SnivyDroid
 - Many Optimizations!
 - Abilities Now complete!
 - Redesigned README
+
 # HOW TO PLAY
 
-*Install*
+**Install**
 
 First, Get and install python from python.org
 
