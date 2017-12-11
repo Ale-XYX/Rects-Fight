@@ -5,7 +5,7 @@ import random
 
 import GLOBAL as G
 import SPRITES as S
-import DICT as D
+import DICTIONARY as D
 
 pygame.init()
 
@@ -281,28 +281,28 @@ def GAME():
                     TIME_2 = True
                     ABILITY_2 = False
                     COOLDOWN_2 = 3
-                if event.key == pygame.K_d and PLAYER_1.toggle == False and PLAYER_1.vel.x == 0:
+                if event.key == pygame.K_d and not PLAYER_1.toggle and PLAYER_1.vel.x == 0:
                     PLAYER_1.vel.x = PLAYER_VELOCITY
                     PLAYER_1.fire_direction = (BULLET_VELOCITY, 0)
-                if event.key == pygame.K_a and PLAYER_1.toggle == False and PLAYER_1.vel.x == 0:
+                if event.key == pygame.K_a and not PLAYER_1.toggle and PLAYER_1.vel.x == 0:
                     PLAYER_1.vel.x = -PLAYER_VELOCITY
                     PLAYER_1.fire_direction = (-BULLET_VELOCITY, 0)
-                if event.key == pygame.K_s and PLAYER_1.toggle == False and PLAYER_1.vel.y == 0:
+                if event.key == pygame.K_s and not PLAYER_1.toggle and PLAYER_1.vel.y == 0:
                     PLAYER_1.vel.y = PLAYER_VELOCITY
                     PLAYER_1.fire_direction = (0, BULLET_VELOCITY)
-                if event.key == pygame.K_w and PLAYER_1.toggle == False and PLAYER_1.vel.y == 0:
+                if event.key == pygame.K_w and not PLAYER_1.toggle and PLAYER_1.vel.y == 0:
                     PLAYER_1.vel.y = -PLAYER_VELOCITY
                     PLAYER_1.fire_direction = (0, -BULLET_VELOCITY)
-                if event.key == pygame.K_RIGHT and PLAYER_2.toggle == False and PLAYER_2.vel.x == 0:
+                if event.key == pygame.K_RIGHT and not PLAYER_2.toggle and PLAYER_2.vel.x == 0:
                     PLAYER_2.vel.x = PLAYER_VELOCITY
                     PLAYER_2.fire_direction = (BULLET_VELOCITY, 0)
-                if event.key == pygame.K_LEFT and PLAYER_2.toggle == False and PLAYER_2.vel.x == 0:
+                if event.key == pygame.K_LEFT and not PLAYER_2.toggle and PLAYER_2.vel.x == 0:
                     PLAYER_2.vel.x = -PLAYER_VELOCITY
                     PLAYER_2.fire_direction = (-BULLET_VELOCITY, 0)                   
-                if event.key == pygame.K_DOWN and PLAYER_2.toggle == False and PLAYER_2.vel.y == 0:
+                if event.key == pygame.K_DOWN and not PLAYER_2.toggle and PLAYER_2.vel.y == 0:
                     PLAYER_2.vel.y = PLAYER_VELOCITY
                     PLAYER_2.fire_direction = (0, BULLET_VELOCITY)
-                if event.key == pygame.K_UP and PLAYER_2.toggle == False and PLAYER_2.vel.y == 0:
+                if event.key == pygame.K_UP and not PLAYER_2.toggle and PLAYER_2.vel.y == 0:
                     PLAYER_2.vel.y = -PLAYER_VELOCITY
                     PLAYER_2.fire_direction = (0, -BULLET_VELOCITY)
             if event.type == pygame.KEYUP:

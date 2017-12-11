@@ -1,7 +1,7 @@
 # SPRITES
 import pygame
 import GLOBAL as G
-import DICT as D
+import DICTIONARY as D
 
 pygame.init()
 
