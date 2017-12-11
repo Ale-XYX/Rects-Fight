@@ -81,7 +81,7 @@ Grey/White shoot bullets that curve straight back, like a boomarang
 
 ![16](https://i.imgur.com/Y8g7m2z.png)
 
-Rainbow shoots six bullets at once in all directions!
+Rainbow shoots eight bullets at once in all directions!
 
 ![17](https://i.imgur.com/uQh88W4.png)
 
