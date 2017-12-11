@@ -428,7 +428,7 @@ def GAME():
 
         # Outcome of draw
         if PLAYER_1.health <= 0 and PLAYER_2.health <= 0:
-            TXT = G.FONTNORMAL.render('Draw!', True, v.GREY)
+            TXT = G.FONTNORMAL.render('Draw!', True, G.GREY)
             TEXT_LOCAL = (210, 530)
             TIME = False
             TIME_1 = False
