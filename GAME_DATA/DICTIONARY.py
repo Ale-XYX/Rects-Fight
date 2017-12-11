@@ -219,10 +219,10 @@ GAME_DICT = {
                     (0, 12): 'FASTDOWN',
                     (0, -12): 'FASTUP'},
                 'WHITE': {
-                    'RIGHT': lambda self: (self.vel[0] - 0.2, self.vel[1] - 0.1),
-                    'LEFT': lambda self: (self.vel[0] + 0.2, self.vel[1] + 0.1),
-                    'UP': lambda self: (self.vel[0] - 0.1, self.vel[1] + 0.2),
-                    'DOWN': lambda self: (self.vel[0] - 0.1, self.vel[1] - 0.2),
+                    'RIGHT': lambda self: (self.vel[0] - 0.2, self.vel[1] - 0.02),
+                    'LEFT': lambda self: (self.vel[0] + 0.2, self.vel[1] + 0.02),
+                    'UP': lambda self: (self.vel[0] - 0.02, self.vel[1] + 0.2),
+                    'DOWN': lambda self: (self.vel[0] - 0.02, self.vel[1] - 0.2),
                     'FASTRIGHT': lambda self: (self.vel[0] - 0.4, self.vel[1] - 0.1),
                     'FASTLEFT': lambda self: (self.vel[0] + 0.4, self.vel[1] + 0.1),
                     'FASTUP': lambda self: (self.vel[0] - 0.1, self.vel[1] + 0.4),
@@ -232,10 +232,10 @@ GAME_DICT = {
                     'LEFT': lambda self: (self.vel[0] + 0.2, self.vel[1] - 0.02),
                     'UP': lambda self: (self.vel[0] + 0.02, self.vel[1] + 0.2),
                     'DOWN': lambda self:(self.vel[0] + 0.02, self.vel[1] - 0.2),
-                    'FASTRIGHT': lambda self: (self.vel[0] - 0.4, self.vel[1] + 0.02),
-                    'FASTLEFT': lambda self: (self.vel[0] + 0.4, self.vel[1] - 0.02),
-                    'FASTUP': lambda self: (self.vel[0] + 0.02, self.vel[1] + 0.4),
-                    'FASTDOWN': lambda self:(self.vel[0] + 0.02, self.vel[1] - 0.4)}
+                    'FASTRIGHT': lambda self: (self.vel[0] - 0.4, self.vel[1] + 0.1),
+                    'FASTLEFT': lambda self: (self.vel[0] + 0.4, self.vel[1] - 0.1),
+                    'FASTUP': lambda self: (self.vel[0] + 0.1, self.vel[1] + 0.4),
+                    'FASTDOWN': lambda self:(self.vel[0] + 0.1, self.vel[1] - 0.4)}
                 }
             },
         'COMPARE': {
