@@ -9,9 +9,9 @@ pygame.init()
 class RECT(pygame.sprite.Sprite):
     def __init__(self, pos, enemy_bullets, direction, color, *groups):
         super().__init__(*groups)
-        self.image = D.GAME_DICT[color.upper()]['PLAYER_IMAGE']
-        self.color = D.GAME_DICT[color.upper()]['COLOR']
-        self.bullet_image = D.GAME_DICT[color.upper()]['BULLET_IMAGE']
+        self.image = D.PLAYER_DICT[color.upper()]['PLAYER_IMAGE']
+        self.color = D.PLAYER_DICT[color.upper()]['COLOR']
+        self.bullet_image = D.PLAYER_DICT[color.upper()]['BULLET_IMAGE']
         self.rect = self.image.get_rect(center = pos)
         self.vel = pygame.math.Vector2(0, 0)
         self.pos = pygame.math.Vector2(pos)
@@ -49,9 +49,9 @@ class RECT(pygame.sprite.Sprite):
                     self.toggle = True
                 else:
                     if bullet.vel[0] == 8 or -8:
-                        self.pos[0] -= D.GAME_DICT['VEL']['CONVERT']['LASER'][bullet.vel](bullet)
+                        self.pos[0] -= D.VEL_DICT['CONVERT']['LASER'][bullet.vel](bullet)
                     else:
-                        self.pos[1] -= D.GAME_DICT['VEL']['CONVERT']['LASER'][bullet.vel](bullet)                   
+                        self.pos[1] -= D.VEL_DICT['CONVERT']['LASER'][bullet.vel](bullet)                   
 
 # Bullet
 class BULLET(pygame.sprite.Sprite):
@@ -76,7 +76,7 @@ class BEAM(pygame.sprite.Sprite):
         super().__init__()
         self.color = color
         self.vel = (vel)
-        self.image = D.GAME_DICT['VEL']['COMPARE']['LASER_IMAGE'][self.color][self.vel]
+        self.image = D.VEL_DICT['COMPARE']['LASER_IMAGE'][self.color][self.vel]
         self.rect = self.image.get_rect(center = pos)
         self.pos = pygame.math.Vector2(pos)
         self.toggle = False
@@ -101,13 +101,13 @@ class SPLIT_BULLET(pygame.sprite.Sprite):
         self.type = 'BULLET'
         self.groupa = groupa
         self.groupb = groupb
-        self.alt_image = D.GAME_DICT[self.color]['BULLET_IMAGE']
+        self.alt_image = D.PLAYER_DICT[self.color]['BULLET_IMAGE']
     def update(self):
         if self.toggle == False:
             self.pos += self.vel
             self.rect.center = self.pos
             if not G.PLAY_AREA.contains(self):
-                PARAMS = D.GAME_DICT['VEL']['CONVERT']['SPLIT_BULLET'][self.vel]
+                PARAMS = D.VEL_DICT['CONVERT']['SPLIT_BULLET'][self.vel]
                 D.ON_SPLIT(self, D.MEDIA, self.groupa, self.groupb, *PARAMS)
                 self.kill()
 
@@ -122,10 +122,10 @@ class REVERSE_BULLET(pygame.sprite.Sprite):
         self.pos = pygame.math.Vector2(pos)
         self.toggle = False
         self.type = 'BULLET'
-        self.direction = D.GAME_DICT['VEL']['CONVERT']['REVERSE_BULLET']['DIRECTION'][self.vel]
+        self.direction = D.VEL_DICT['CONVERT']['REVERSE_BULLET']['DIRECTION'][self.vel]
     def update(self):
         if self.toggle == False:
-            self.vel = D.GAME_DICT['VEL']['CONVERT']['REVERSE_BULLET'][self.color][self.direction](self)
+            self.vel = D.VEL_DICT['CONVERT']['REVERSE_BULLET'][self.color][self.direction](self)
             self.pos += self.vel
             self.rect.center = self.pos
             self.rect.center = self.pos

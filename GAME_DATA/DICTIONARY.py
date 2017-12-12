@@ -25,13 +25,187 @@ for FILE_NAME in FILES2:
     MEDIA[os.path.split(FILE_NAME)[-1][:-4]] = OBJ
     
 CLOCK = pygame.time.Clock()
-# Sets up colors in a dictonary and returns a random color [For rainbow character]
-def GET_RANDOM():
-    return random.choice((G.BLUE, G.ORANGE, G.GREEN, G.PURPLE, G.RED, G.YELLOW, G.WHITE))
+
+VEL_DICT = {
+    'CONVERT': {
+        'BIG_BULLET': {
+            (8, 0): (4, 0),
+            (-8, 0): (-4, 0),
+            (0, 8): (0, 4),
+            (0, -8): (0, -4),
+            (16, 0): (8, 0),
+            (-16, 0): (-8, 0),
+            (0, 16): (0, 8),
+            (0, -16): (0, -8)},
+        'LASER': {
+            (8, 0): lambda bullet: -(bullet.vel[0] + 10),
+            (-8, 0): lambda bullet: -(bullet.vel[0] - 10),
+            (0, 8): lambda bullet: -(bullet.vel[1] + 10),
+            (0, -8): lambda bullet: -(bullet.vel[1] - 10),
+            (16, 0): lambda bullet: -(bullet.vel[0] + 20),
+            (-16, 0): lambda bullet: -(bullet.vel[0] - 20),
+            (0, 16): lambda bullet: -(bullet.vel[1] + 20),
+            (0, -16): lambda bullet: -(bullet.vel[1] - 20)},
+        'SPLIT_BULLET': {
+            (8, 0): [(-8, 0), (-8, -5), (-8, 5)],
+            (-8, 0): [(8, 0), (8, -5), (8, 5)],
+            (0, 8): [(0, -8), (5, -8), (-5, -8)],
+            (0, -8): [(0, 8), (5, 8), (-5, 8)],
+            (16, 0): [(-16, 10), (-16, -10), (-16, 10)],
+            (-16, 0): [(16, 0), (16, -10), (16, 10)],
+            (0, 16): [(0, -16), (10, -16), (-10, -16)],
+            (0, -16): [(0, 16), (10, 16), (-10, 16)]},
+        'REVERSE_BULLET': {
+            'VEL': {
+                (8, 0): (8, 0),
+                (-8, 0): (-8, 0),
+                (0, 8): (0, 8),
+                (0, -8): (0, -8),
+                (16, 0): (12, 0),
+                (-16, 0): (-12, 0),
+                (0, 16): (0, 12),
+                (0, -16): (0, -12)},
+            'DIRECTION': {
+                (8, 0): 'RIGHT',
+                (-8, 0): 'LEFT',
+                (0, 8): 'DOWN',
+                (0, -8): 'UP',
+                (12, 0): 'FASTRIGHT',
+                (-12, 0): 'FASTLEFT',
+                (0, 12): 'FASTDOWN',
+                (0, -12): 'FASTUP'},
+            'WHITE': {
+                'RIGHT': lambda self: (self.vel[0] - 0.2, self.vel[1] - 0.02),
+                'LEFT': lambda self: (self.vel[0] + 0.2, self.vel[1] + 0.02),
+                'UP': lambda self: (self.vel[0] - 0.02, self.vel[1] + 0.2),
+                'DOWN': lambda self: (self.vel[0] - 0.02, self.vel[1] - 0.2),
+                'FASTRIGHT': lambda self: (self.vel[0] - 0.4, self.vel[1] - 0.1),
+                'FASTLEFT': lambda self: (self.vel[0] + 0.4, self.vel[1] + 0.1),
+                'FASTUP': lambda self: (self.vel[0] - 0.1, self.vel[1] + 0.4),
+                'FASTDOWN': lambda self: (self.vel[0] - 0.1, self.vel[1] - 0.4)},
+            'GREY': {
+                'RIGHT': lambda self: (self.vel[0] - 0.2, self.vel[1] + 0.02),
+                'LEFT': lambda self: (self.vel[0] + 0.2, self.vel[1] - 0.02),
+                'UP': lambda self: (self.vel[0] + 0.02, self.vel[1] + 0.2),
+                'DOWN': lambda self:(self.vel[0] + 0.02, self.vel[1] - 0.2),
+                'FASTRIGHT': lambda self: (self.vel[0] - 0.4, self.vel[1] + 0.1),
+                'FASTLEFT': lambda self: (self.vel[0] + 0.4, self.vel[1] - 0.1),
+                'FASTUP': lambda self: (self.vel[0] + 0.1, self.vel[1] + 0.4),
+                'FASTDOWN': lambda self:(self.vel[0] + 0.1, self.vel[1] - 0.4)}
+            }
+        },
+    'COMPARE': {
+        'LASER_IMAGE': {
+            'PURPLE': {
+                (8, 0): MEDIA['purple_laser'],
+                (-8, 0): MEDIA['purple_laser'],
+                (0, 8): pygame.transform.rotate(MEDIA['purple_laser'], -90),
+                (0, -8): pygame.transform.rotate(MEDIA['purple_laser'], 90),
+                (16, 0): MEDIA['purple_laser'],
+                (-16, 0): MEDIA['purple_laser'],
+                (0, 16): pygame.transform.rotate(MEDIA['purple_laser'], -90),
+                (0, -16): pygame.transform.rotate(MEDIA['purple_laser'], 90)},
+            'RED': {
+                (8, 0): MEDIA['red_laser'],
+                (-8, 0): MEDIA['red_laser'],
+                (0, 8): pygame.transform.rotate(MEDIA['red_laser'], -90),
+                (0, -8): pygame.transform.rotate(MEDIA['red_laser'], 90),
+                (16, 0): MEDIA['red_laser'],
+                (-16, 0): MEDIA['red_laser'],
+                (0, 16): pygame.transform.rotate(MEDIA['red_laser'], -90),
+                (0, -16): pygame.transform.rotate(MEDIA['red_laser'], 90)},                    
+            }
+        }
+    }
+PLAYER_DICT = {
+    # Player Media, Colors, And Locations
+    'BLUE': {
+        'COLOR': G.BLUE,
+        'PLAYER_IMAGE': MEDIA['blue_face'],
+        'BULLET_IMAGE': MEDIA['blue_bullet'],
+        'LOCAL': 220},
+    'ORANGE': {
+        'COLOR': G.ORANGE,
+        'PLAYER_IMAGE': MEDIA['orange_face'],
+        'BULLET_IMAGE': MEDIA['orange_bullet'],
+        'LOCAL': 220},
+    'GREEN': {
+        'COLOR': G.GREEN,
+        'PLAYER_IMAGE': MEDIA['green_face'],
+        'BULLET_IMAGE': MEDIA['green_bullet'],
+        'LOCAL': 210,
+        'SPLIT_BULLET_IMAGE': MEDIA['green_split_bullet']},
+    'PURPLE': {
+        'COLOR': G.PURPLE,
+        'PLAYER_IMAGE': MEDIA['purple_face'],
+        'BULLET_IMAGE': MEDIA['purple_bullet'],
+        'LOCAL': 210},
+    'RED': {
+        'COLOR': G.RED,
+        'PLAYER_IMAGE': MEDIA['red_face'],
+        'BULLET_IMAGE': MEDIA['red_bullet'],
+        'LOCAL': 224},
+    'YELLOW': {
+        'COLOR': G.YELLOW,
+        'PLAYER_IMAGE': MEDIA['yellow_face'],
+        'BULLET_IMAGE': MEDIA['yellow_bullet'],
+        'LOCAL': 209,
+        'SPLIT_BULLET_IMAGE': MEDIA['yellow_split_bullet']},
+    'GREY': {
+        'COLOR': G.GREY,
+        'PLAYER_IMAGE': MEDIA['grey_face'],
+        'BULLET_IMAGE': MEDIA['grey_bullet'],
+        'LOCAL': 220},
+    'WHITE': {
+        'COLOR': G.WHITE,
+        'PLAYER_IMAGE': MEDIA['white_face'],
+        'BULLET_IMAGE': MEDIA['white_bullet'],
+        'LOCAL': 210},
+    'RAINBOW': {
+        'COLOR': random.choice((G.BLUE, G.ORANGE, G.GREEN, G.PURPLE, G.RED, G.YELLOW, G.WHITE)),
+        'PLAYER_IMAGE': MEDIA['rainbow_face'],
+        'BULLET_IMAGE': MEDIA['rainbow_bullet'],
+        'LOCAL': 190},
+    }
+    
+# HP BARS
+HP_DICT = {
+    0: MEDIA['hp_dead'],
+    1: MEDIA['hp_low'],
+    2: MEDIA['hp_decayed'],
+    3: MEDIA['hp_full'],
+    -1: MEDIA['hp_dead']
+    }
+
+# Mode Select [selects on G.MODE]
+MODE_DICT = {
+    'CLASSIC': {
+        'TIMER': 30,
+        'PLAYER_VELOCITY': 6,
+        'BULLET_VELOCITY': 8,
+        'HEALTH': 3,
+        'SOUND': MEDIA['classic_sound'],
+        'MUSIC': MEDIA['classic_music'],
+        'DT': CLOCK.tick(60) / 1000},
+    'CHAOS': {
+        'TIMER': 10,
+        'PLAYER_VELOCITY': 8,
+        'BULLET_VELOCITY': 16,
+        'HEALTH': 1,
+        'SOUND': MEDIA['chaos_sound'], 
+        'MUSIC': MEDIA['chaos_music'],
+        'DT': CLOCK.tick(60) / 100}
+    }
+
+# Timer Values
+TIMER_DICT = {
+    True: [G.RED, G.FONTB],
+    False: [G.WHITE, G.FONTNORMAL]
+}
 
 # Blue/Orange Big bullet
-def BIG_BULLET(GROUP_A, GROUP_B, POS, VEL, IMG, TYPE, DICTIONARY):
-    VEL = DICTIONARY['VEL']['CONVERT']['BIG_BULLET'][VEL]        
+def BIG_BULLET(GROUP_A, GROUP_B, POS, VEL, IMG, TYPE):
+    VEL = VEL_DICT['CONVERT']['BIG_BULLET'][VEL]        
     BIGBULLET = S.BULLET(POS, VEL, IMG, TYPE)
     GROUP_A.add(BIGBULLET)
     GROUP_B.add(BIGBULLET)
@@ -61,8 +235,8 @@ def LASER_BEAM(GROUP_A, GROUP_B, POS, VEL, COLOR):
     MEDIA['laser_shoot_sound'].play()
 
 # Grey/White reverse bullet        
-def REVERSE_BULLET(GROUP_A, GROUP_B, POS, VEL, IMG, COLOR, DICTIONARY):
-    VEL = DICTIONARY['VEL']['CONVERT']['REVERSE_BULLET']['VEL'][VEL]
+def REVERSE_BULLET(GROUP_A, GROUP_B, POS, VEL, IMG, COLOR):
+    VEL = VEL_DICT['CONVERT']['REVERSE_BULLET']['VEL'][VEL]
     REVERSE_BULLET = S.REVERSE_BULLET(POS, VEL, IMG, COLOR)
     GROUP_A.add(REVERSE_BULLET)
     GROUP_B.add(REVERSE_BULLET)
@@ -80,186 +254,19 @@ def MULTI_BULLET(GROUP_A, GROUP_B, POS):
     BULLET_8 = S.BULLET(POS, (6, 6), MEDIA['grey_bullet'], 'BULLET')
     GROUP_A.add(BULLET_1, BULLET_2, BULLET_3, BULLET_4, BULLET_5, BULLET_6, BULLET_7, BULLET_8)
     GROUP_B.add(BULLET_1, BULLET_2, BULLET_3, BULLET_4, BULLET_5, BULLET_6, BULLET_7, BULLET_8)
-    MEDIA['multi_shoot_sound'].play()      
+    MEDIA['multi_shoot_sound'].play()
 
-GAME_DICT = {
-    # Player Media, Colors, And Locations
-    'BLUE': {
-        'COLOR': G.BLUE,
-        'PLAYER_IMAGE': MEDIA['blue_face'],
-        'BULLET_IMAGE': MEDIA['blue_bullet'],
-        'LOCAL': 220,
-        'ABILITY': BIG_BULLET},
-    'ORANGE': {
-        'COLOR': G.ORANGE,
-        'PLAYER_IMAGE': MEDIA['orange_face'],
-        'BULLET_IMAGE': MEDIA['orange_bullet'],
-        'LOCAL': 220,
-        'ABILITY': BIG_BULLET},
-    'GREEN': {
-        'COLOR': G.GREEN,
-        'PLAYER_IMAGE': MEDIA['green_face'],
-        'BULLET_IMAGE': MEDIA['green_bullet'],
-        'LOCAL': 210,
-        'ABILITY': SPLIT_BULLET,
-        'SPLIT_BULLET_IMAGE': MEDIA['green_split_bullet']},
-    'PURPLE': {
-        'COLOR': G.PURPLE,
-        'PLAYER_IMAGE': MEDIA['purple_face'],
-        'BULLET_IMAGE': MEDIA['purple_bullet'],
-        'LOCAL': 210,
-        'ABILITY': LASER_BEAM},
-    'RED': {
-        'COLOR': G.RED,
-        'PLAYER_IMAGE': MEDIA['red_face'],
-        'BULLET_IMAGE': MEDIA['red_bullet'],
-        'LOCAL': 224,
-        'ABILITY': LASER_BEAM},
-    'YELLOW': {
-        'COLOR': G.YELLOW,
-        'PLAYER_IMAGE': MEDIA['yellow_face'],
-        'BULLET_IMAGE': MEDIA['yellow_bullet'],
-        'LOCAL': 209,
-        'ABILITY': SPLIT_BULLET,
-        'SPLIT_BULLET_IMAGE': MEDIA['yellow_split_bullet']},
-    'GREY': {
-        'COLOR': G.GREY,
-        'PLAYER_IMAGE': MEDIA['grey_face'],
-        'BULLET_IMAGE': MEDIA['grey_bullet'],
-        'LOCAL': 220,
-        'ABILITY': REVERSE_BULLET},
-    'WHITE': {
-        'COLOR': G.WHITE,
-        'PLAYER_IMAGE': MEDIA['white_face'],
-        'BULLET_IMAGE': MEDIA['white_bullet'],
-        'LOCAL': 210,
-        'ABILITY': REVERSE_BULLET},
-    'RAINBOW': {
-        'COLOR': GET_RANDOM(),
-        'PLAYER_IMAGE': MEDIA['rainbow_face'],
-        'BULLET_IMAGE': MEDIA['rainbow_bullet'],
-        'LOCAL': 190,
-        'ABILITY': MULTI_BULLET},
-    # HP Bars
-    'HP': {
-        0: MEDIA['hp_dead'],
-        1: MEDIA['hp_low'],
-        2: MEDIA['hp_decayed'],
-        3: MEDIA['hp_full'],
-        -1: MEDIA['hp_dead']},
-    # Mode Values [Loaded In main game depending on G.MODE]
-    'MODE': {
-        'CLASSIC': {
-            'TIMER': 30,
-            'PLAYER_VELOCITY': 6,
-            'BULLET_VELOCITY': 8,
-            'HEALTH': 3,
-            'SOUND': MEDIA['classic_sound'],
-            'MUSIC': MEDIA['classic_music'],
-            'DT': CLOCK.tick(60) / 1000},
-        'CHAOS': {
-            'TIMER': 10,
-            'PLAYER_VELOCITY': 8,
-            'BULLET_VELOCITY': 16,
-            'HEALTH': 1,
-            'SOUND': MEDIA['chaos_sound'], 
-            'MUSIC': MEDIA['chaos_music'],
-            'DT': CLOCK.tick(60) / 100}
-        },
-    # Timer Values
-    'TIMER': {
-        True: [G.RED, G.FONTB],
-        False: [G.WHITE, G.FONTNORMAL]},
-    'VEL': {
-        'CONVERT': {
-            'BIG_BULLET': {
-                (8, 0): (4, 0),
-                (-8, 0): (-4, 0),
-                (0, 8): (0, 4),
-                (0, -8): (0, -4),
-                (16, 0): (8, 0),
-                (-16, 0): (-8, 0),
-                (0, 16): (0, 8),
-                (0, -16): (0, -8)},
-            'LASER': {
-                (8, 0): lambda bullet: -(bullet.vel[0] + 10),
-                (-8, 0): lambda bullet: -(bullet.vel[0] - 10),
-                (0, 8): lambda bullet: -(bullet.vel[1] + 10),
-                (0, -8): lambda bullet: -(bullet.vel[1] - 10),
-                (16, 0): lambda bullet: -(bullet.vel[0] + 20),
-                (-16, 0): lambda bullet: -(bullet.vel[0] - 20),
-                (0, 16): lambda bullet: -(bullet.vel[1] + 20),
-                (0, -16): lambda bullet: -(bullet.vel[1] - 20)},
-            'SPLIT_BULLET': {
-                (8, 0): [(-8, 0), (-8, -5), (-8, 5)],
-                (-8, 0): [(8, 0), (8, -5), (8, 5)],
-                (0, 8): [(0, -8), (5, -8), (-5, -8)],
-                (0, -8): [(0, 8), (5, 8), (-5, 8)],
-                (16, 0): [(-16, 10), (-16, -10), (-16, 10)],
-                (-16, 0): [(16, 0), (16, -10), (16, 10)],
-                (0, 16): [(0, -16), (10, -16), (-10, -16)],
-                (0, -16): [(0, 16), (10, 16), (-10, 16)]},
-            'REVERSE_BULLET': {
-                'VEL': {
-                    (8, 0): (8, 0),
-                    (-8, 0): (-8, 0),
-                    (0, 8): (0, 8),
-                    (0, -8): (0, -8),
-                    (16, 0): (12, 0),
-                    (-16, 0): (-12, 0),
-                    (0, 16): (0, 12),
-                    (0, -16): (0, -12)},
-                'DIRECTION': {
-                    (8, 0): 'RIGHT',
-                    (-8, 0): 'LEFT',
-                    (0, 8): 'DOWN',
-                    (0, -8): 'UP',
-                    (12, 0): 'FASTRIGHT',
-                    (-12, 0): 'FASTLEFT',
-                    (0, 12): 'FASTDOWN',
-                    (0, -12): 'FASTUP'},
-                'WHITE': {
-                    'RIGHT': lambda self: (self.vel[0] - 0.2, self.vel[1] - 0.02),
-                    'LEFT': lambda self: (self.vel[0] + 0.2, self.vel[1] + 0.02),
-                    'UP': lambda self: (self.vel[0] - 0.02, self.vel[1] + 0.2),
-                    'DOWN': lambda self: (self.vel[0] - 0.02, self.vel[1] - 0.2),
-                    'FASTRIGHT': lambda self: (self.vel[0] - 0.4, self.vel[1] - 0.1),
-                    'FASTLEFT': lambda self: (self.vel[0] + 0.4, self.vel[1] + 0.1),
-                    'FASTUP': lambda self: (self.vel[0] - 0.1, self.vel[1] + 0.4),
-                    'FASTDOWN': lambda self: (self.vel[0] - 0.1, self.vel[1] - 0.4)},
-                'GREY': {
-                    'RIGHT': lambda self: (self.vel[0] - 0.2, self.vel[1] + 0.02),
-                    'LEFT': lambda self: (self.vel[0] + 0.2, self.vel[1] - 0.02),
-                    'UP': lambda self: (self.vel[0] + 0.02, self.vel[1] + 0.2),
-                    'DOWN': lambda self:(self.vel[0] + 0.02, self.vel[1] - 0.2),
-                    'FASTRIGHT': lambda self: (self.vel[0] - 0.4, self.vel[1] + 0.1),
-                    'FASTLEFT': lambda self: (self.vel[0] + 0.4, self.vel[1] - 0.1),
-                    'FASTUP': lambda self: (self.vel[0] + 0.1, self.vel[1] + 0.4),
-                    'FASTDOWN': lambda self:(self.vel[0] + 0.1, self.vel[1] - 0.4)}
-                }
-            },
-        'COMPARE': {
-            'LASER_IMAGE': {
-                'PURPLE': {
-                    (8, 0): MEDIA['purple_laser'],
-                    (-8, 0): MEDIA['purple_laser'],
-                    (0, 8): pygame.transform.rotate(MEDIA['purple_laser'], -90),
-                    (0, -8): pygame.transform.rotate(MEDIA['purple_laser'], 90),
-                    (16, 0): MEDIA['purple_laser'],
-                    (-16, 0): MEDIA['purple_laser'],
-                    (0, 16): pygame.transform.rotate(MEDIA['purple_laser'], -90),
-                    (0, -16): pygame.transform.rotate(MEDIA['purple_laser'], 90)},
-                'RED': {
-                    (8, 0): MEDIA['red_laser'],
-                    (-8, 0): MEDIA['red_laser'],
-                    (0, 8): pygame.transform.rotate(MEDIA['red_laser'], -90),
-                    (0, -8): pygame.transform.rotate(MEDIA['red_laser'], 90),
-                    (16, 0): MEDIA['red_laser'],
-                    (-16, 0): MEDIA['red_laser'],
-                    (0, 16): pygame.transform.rotate(MEDIA['red_laser'], -90),
-                    (0, -16): pygame.transform.rotate(MEDIA['red_laser'], 90)},                    
-                }
-            }
-        }
+FUNC_DICT = {
+    'BLUE': BIG_BULLET,
+    'ORANGE': BIG_BULLET,
+    'GREEN': SPLIT_BULLET,
+    'YELLOW': SPLIT_BULLET,
+    'RED': LASER_BEAM,
+    'PURPLE': LASER_BEAM,
+    'GREY': REVERSE_BULLET,
+    'WHITE': REVERSE_BULLET,
+    'RAINBOW': MULTI_BULLET
     }
+    
 
+    

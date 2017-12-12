@@ -77,7 +77,7 @@ def MODE_SELECT():
                 if event.key == pygame.K_SPACE:
                     # Load Mode into variable to use later
                     G.MODE = MODE_CHOICES[SELECTOR]
-                    D.GAME_DICT['MODE'][G.MODE]['SOUND'].play()
+                    D.MODE_DICT[G.MODE]['SOUND'].play()
                     LOOP = False
                 if event.key in (pygame.K_UP, pygame.K_DOWN):
                     SELECTOR %= len(MODE_CHOICES)
@@ -99,8 +99,8 @@ def MODE_SELECT():
 # CHARACTER SELECT
 def CHARACTER_SELECT():
     def GET(INSERT):
-        IMAGE = D.GAME_DICT[INSERT.upper()]['PLAYER_IMAGE']
-        COLOR = D.GAME_DICT[INSERT.upper()]['COLOR']
+        IMAGE = D.PLAYER_DICT[INSERT.upper()]['PLAYER_IMAGE']
+        COLOR = D.PLAYER_DICT[INSERT.upper()]['COLOR']
         TEXT = G.FONTNORMAL.render(INSERT, True, COLOR)
         return IMAGE, TEXT
     COLOR_CHOICES = ['Blue', 'Orange', 'Green', 'Yellow', 'Red', 'Purple', 'Grey', 'White', 'Rainbow']
@@ -155,8 +155,8 @@ def CHARACTER_SELECT():
         G.SCREEN.blit(TEXTS1, (90, 50))
         G.SCREEN.blit(TEXTS2, (120, 500))
         G.SCREEN.blit(TEXTS3, (230, 275))
-        G.SCREEN.blit(TEXT1, (D.GAME_DICT[COLOR_CHOICES[PLAYER1].upper()]['LOCAL'], 218))
-        G.SCREEN.blit(TEXT2, (D.GAME_DICT[COLOR_CHOICES[PLAYER2].upper()]['LOCAL'], 330))
+        G.SCREEN.blit(TEXT1, (D.PLAYER_DICT[COLOR_CHOICES[PLAYER1].upper()]['LOCAL'], 218))
+        G.SCREEN.blit(TEXT2, (D.PLAYER_DICT[COLOR_CHOICES[PLAYER2].upper()]['LOCAL'], 330))
         
         G.SCREEN.blit(D.MEDIA['blue_face'], (5, 163))
         G.SCREEN.blit(D.MEDIA['orange_face'], (60, 163))
@@ -190,20 +190,20 @@ def GAME():
     BULLETS_1 = pygame.sprite.Group()
     BULLETS_2 = pygame.sprite.Group()
     CLOCK = pygame.time.Clock()
-    TEXTS1 = G.FONTSMALL.render('Player 1', True, D.GAME_DICT[G.P1CHAR.upper()]['COLOR'])
-    TEXTS2 = G.FONTSMALL.render('Player 2', True, D.GAME_DICT[G.P2CHAR.upper()]['COLOR'])
+    TEXTS1 = G.FONTSMALL.render('Player 1', True, D.PLAYER_DICT[G.P1CHAR.upper()]['COLOR'])
+    TEXTS2 = G.FONTSMALL.render('Player 2', True, D.PLAYER_DICT[G.P2CHAR.upper()]['COLOR'])
     TEXTS3 = G.FONTSMALL.render('Escape to leave', True, G.WHITE)
     TEXTS4 = G.FONTSMALL.render('Enter to restart', True, G.WHITE)        
     # Using the variable where mode is stored to set game conditions
-    GAME_MUSIC = D.GAME_DICT['MODE'][G.MODE]['MUSIC']
-    TIMER = D.GAME_DICT['MODE'][G.MODE]['TIMER']
-    PLAYER_VELOCITY = D.GAME_DICT['MODE'][G.MODE]['PLAYER_VELOCITY']
-    BULLET_VELOCITY = D.GAME_DICT['MODE'][G.MODE]['BULLET_VELOCITY']
+    GAME_MUSIC = D.MODE_DICT[G.MODE]['MUSIC']
+    TIMER = D.MODE_DICT[G.MODE]['TIMER']
+    PLAYER_VELOCITY = D.MODE_DICT[G.MODE]['PLAYER_VELOCITY']
+    BULLET_VELOCITY = D.MODE_DICT[G.MODE]['BULLET_VELOCITY']
     PLAYER_1 = S.RECT((35, 35), BULLETS_2, (BULLET_VELOCITY, 0), G.P1CHAR, ALL_SPRITES)
     PLAYER_2 = S.RECT((465, 465), BULLETS_1, (-BULLET_VELOCITY, 0), G.P2CHAR, ALL_SPRITES)
-    PLAYER_1.health = D.GAME_DICT['MODE'][G.MODE]['HEALTH']
-    PLAYER_2.health = D.GAME_DICT['MODE'][G.MODE]['HEALTH']
-    DT_COOLDOWN = D.GAME_DICT['MODE'][G.MODE]['DT']
+    PLAYER_1.health = D.MODE_DICT[G.MODE]['HEALTH']
+    PLAYER_2.health = D.MODE_DICT[G.MODE]['HEALTH']
+    DT_COOLDOWN = D.MODE_DICT[G.MODE]['DT']
     # Bools
     LOOP = True
     TIME = True
@@ -226,11 +226,11 @@ def GAME():
         # PARAMS [NEEDS TO BE REFRESHED
         ARGS_DICT = {
             'BLUE': {
-                'PLAYER1': [BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center, (PLAYER_1.fire_direction), D.MEDIA['blue_big_bullet'], 'BIG_BULLET', D.GAME_DICT],
-                'PLAYER2': [BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center, (PLAYER_2.fire_direction), D.MEDIA['blue_big_bullet'], 'BIG_BULLET', D.GAME_DICT]},
+                'PLAYER1': [BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center, (PLAYER_1.fire_direction), D.MEDIA['blue_big_bullet'], 'BIG_BULLET'],
+                'PLAYER2': [BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center, (PLAYER_2.fire_direction), D.MEDIA['blue_big_bullet'], 'BIG_BULLET']},
             'ORANGE': {
-                'PLAYER1': [BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center, (PLAYER_1.fire_direction), D.MEDIA['orange_big_bullet'], 'BIG_BULLET', D.GAME_DICT],
-                'PLAYER2': [BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center, (PLAYER_2.fire_direction), D.MEDIA['orange_big_bullet'], 'BIG_BULLET', D.GAME_DICT]},
+                'PLAYER1': [BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center, (PLAYER_1.fire_direction), D.MEDIA['orange_big_bullet'], 'BIG_BULLET'],
+                'PLAYER2': [BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center, (PLAYER_2.fire_direction), D.MEDIA['orange_big_bullet'], 'BIG_BULLET']},
             'GREEN': {
                 'PLAYER1': [BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center, (PLAYER_1.fire_direction), D.MEDIA['green_split_bullet'], 'GREEN'],
                 'PLAYER2': [BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center, (PLAYER_2.fire_direction), D.MEDIA['green_split_bullet'], 'GREEN']},
@@ -244,14 +244,14 @@ def GAME():
                 'PLAYER1': [BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center, (PLAYER_1.fire_direction), D.MEDIA['yellow_split_bullet'], 'YELLOW'],
                 'PLAYER2': [BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center, (PLAYER_2.fire_direction), D.MEDIA['yellow_split_bullet'], 'YELLOW']},
             'GREY': {
-                'PLAYER1': [BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center, (PLAYER_1.fire_direction), D.MEDIA['grey_boomerang_bullet'], 'GREY', D.GAME_DICT],
-                'PLAYER2': [BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center, (PLAYER_2.fire_direction), D.MEDIA['grey_boomerang_bullet'], 'GREY', D.GAME_DICT]},
+                'PLAYER1': [BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center, (PLAYER_1.fire_direction), D.MEDIA['grey_boomerang_bullet'], 'GREY'],
+                'PLAYER2': [BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center, (PLAYER_2.fire_direction), D.MEDIA['grey_boomerang_bullet'], 'GREY']},
             'RAINBOW': {
                 'PLAYER1': [BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center],
                 'PLAYER2': [BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center]},
             'WHITE': {
-                'PLAYER1': [BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center, (PLAYER_1.fire_direction), D.MEDIA['white_boomerang_bullet'], 'WHITE', D.GAME_DICT],
-                'PLAYER2': [BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center, (PLAYER_2.fire_direction), D.MEDIA['white_boomerang_bullet'], 'WHITE', D.GAME_DICT]},
+                'PLAYER1': [BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center, (PLAYER_1.fire_direction), D.MEDIA['white_boomerang_bullet'], 'WHITE'],
+                'PLAYER2': [BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center, (PLAYER_2.fire_direction), D.MEDIA['white_boomerang_bullet'], 'WHITE']},
         }
         P1_PARAMS = ARGS_DICT[G.P1CHAR.upper()]['PLAYER1']
         P2_PARAMS = ARGS_DICT[G.P2CHAR.upper()]['PLAYER2']
@@ -272,12 +272,12 @@ def GAME():
                     ALL_SPRITES.add(BULLET)
                     D.MEDIA['shoot_sound'].play()
                 if event.key == pygame.K_e and not PLAYER_1.toggle and ABILITY_1:
-                    D.GAME_DICT[G.P1CHAR.upper()]['ABILITY'](*P1_PARAMS)
+                    D.FUNC_DICT[G.P1CHAR.upper()](*P1_PARAMS)
                     TIME_1 = True
                     ABILITY_1 = False
                     COOLDOWN_1 = 3
                 if event.key == pygame.K_RCTRL and not PLAYER_2.toggle and ABILITY_2:
-                    D.GAME_DICT[G.P2CHAR.upper()]['ABILITY'](*P2_PARAMS)
+                    D.FUNC_DICT[G.P2CHAR.upper()](*P2_PARAMS)
                     TIME_2 = True
                     ABILITY_2 = False
                     COOLDOWN_2 = 3
@@ -365,7 +365,7 @@ def GAME():
         # Subtracting time, setting text, checking if timer has run out, more leaving/restart functions
         if TIME:
             TIMER -= DT
-            TXT = D.GAME_DICT['TIMER'][TIMER < 10][1].render(str(round(TIMER, 1)), True, D.GAME_DICT['TIMER'][TIMER < 10][0])
+            TXT = D.TIMER_DICT[TIMER < 10][1].render(str(round(TIMER, 1)), True, D.TIMER_DICT[TIMER < 10][0])
             if TIMER <= 0:
                 for SPRITE in ALL_SPRITES:
                     SPRITE.toggle = True
@@ -446,8 +446,8 @@ def GAME():
         # Drawing Sprites/Bullets/GUI
         G.SCREEN.fill(G.BLACK)
         G.SCREEN.blit(D.MEDIA['wall'], (0, 0))
-        G.SCREEN.blit(pygame.transform.flip(D.GAME_DICT['HP'][PLAYER_1.health], True, False), (20, 530))
-        G.SCREEN.blit(D.GAME_DICT['HP'][PLAYER_2.health], (380, 530))
+        G.SCREEN.blit(pygame.transform.flip(D.HP_DICT[PLAYER_1.health], True, False), (20, 530))
+        G.SCREEN.blit(D.HP_DICT[PLAYER_2.health], (380, 530))
         G.SCREEN.blit(TXT, TEXT_LOCAL)
         G.SCREEN.blit(TEXTS1, (19, 515))
         G.SCREEN.blit(TEXTS2, (429, 515))
