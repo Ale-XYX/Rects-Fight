@@ -1,7 +1,8 @@
 import pygame
 import DICTIONARY as D
 
-'''Ability Functions, they all create bullets and add them, sometimes a velocity convert.'''
+# Ability Functions
+# First converts velocities, then creates bullet instances and spawns them.
 def BIG_BULLET(GROUP_A, GROUP_B, POS, VEL, IMG, TYPE):
     VEL = D.VEL_DICT['CONVERT']['BIG_BULLET'][VEL]        
     BIGBULLET = D.S.BULLET(POS, VEL, IMG, TYPE)
@@ -38,34 +39,21 @@ def REVERSE_BULLET(GROUP_A, GROUP_B, POS, VEL, IMG, COLOR):
     REVERSE_BULLET = D.S.REVERSE_BULLET(POS, VEL, IMG, COLOR)
     GROUP_A.add(REVERSE_BULLET)
     GROUP_B.add(REVERSE_BULLET)
-    D.MEDIA['reverse_shoot_sound'].play()
-    
+    D.MEDIA['reverse_shoot_sound'].play()    
 
-def MULTI_BULLET(GROUP_A, GROUP_B, POS):
-    BULLET_1 = D.S.BULLET(POS, (6, 0), D.MEDIA['red_bullet'], 'BULLET')
-    BULLET_2 = D.S.BULLET(POS, (6, -6), D.MEDIA['orange_bullet'], 'BULLET')
-    BULLET_3 = D.S.BULLET(POS, (0, -6), D.MEDIA['yellow_bullet'], 'BULLET')
-    BULLET_4 = D.S.BULLET(POS, (-6, -6), D.MEDIA['green_bullet'], 'BULLET')
-    BULLET_5 = D.S.BULLET(POS, (-6, 0), D.MEDIA['blue_bullet'], 'BULLET')
-    BULLET_6 = D.S.BULLET(POS, (-6, 6), D.MEDIA['purple_bullet'], 'BULLET')
-    BULLET_7 = D.S.BULLET(POS, (0, 6), D.MEDIA['white_bullet'], 'BULLET')
-    BULLET_8 = D.S.BULLET(POS, (6, 6), D.MEDIA['grey_bullet'], 'BULLET')
+def MULTI_BULLET(GROUP_A, GROUP_B, POS, FIRE_DIRECTION, PLACEHOLDER):
+    # Fire_direction and placeholder are placeholders
+    BULLET_1 = D.S.BULLET(POS, (5, 0), D.MEDIA['red_bullet'], 'BULLET')
+    BULLET_2 = D.S.BULLET(POS, (5, -5), D.MEDIA['orange_bullet'], 'BULLET')
+    BULLET_3 = D.S.BULLET(POS, (0, -5), D.MEDIA['yellow_bullet'], 'BULLET')
+    BULLET_4 = D.S.BULLET(POS, (-5, -5), D.MEDIA['green_bullet'], 'BULLET')
+    BULLET_5 = D.S.BULLET(POS, (-5, 0), D.MEDIA['blue_bullet'], 'BULLET')
+    BULLET_6 = D.S.BULLET(POS, (-5, 5), D.MEDIA['purple_bullet'], 'BULLET')
+    BULLET_7 = D.S.BULLET(POS, (0, 5), D.MEDIA['white_bullet'], 'BULLET')
+    BULLET_8 = D.S.BULLET(POS, (5, 5), D.MEDIA['grey_bullet'], 'BULLET')
     GROUP_A.add(BULLET_1, BULLET_2, BULLET_3, BULLET_4, BULLET_5, BULLET_6, BULLET_7, BULLET_8)
     GROUP_B.add(BULLET_1, BULLET_2, BULLET_3, BULLET_4, BULLET_5, BULLET_6, BULLET_7, BULLET_8)
     D.MEDIA['multi_shoot_sound'].play()
-
-'''Function dictionary [Its not in dictionary.py because import order :/]'''
-FUNC_DICT = {
-    'BLUE': BIG_BULLET,
-    'ORANGE': BIG_BULLET,
-    'GREEN': SPLIT_BULLET,
-    'YELLOW': SPLIT_BULLET,
-    'RED': LASER_BEAM,
-    'PURPLE': LASER_BEAM,
-    'GREY': REVERSE_BULLET,
-    'WHITE': REVERSE_BULLET,
-    'RAINBOW': MULTI_BULLET
-    }
     
 
     

@@ -6,6 +6,18 @@ import FUNCTION as F
 
 pygame.init()
 
+FUNC_DICT = {
+    'BLUE': F.BIG_BULLET,
+    'ORANGE': F.BIG_BULLET,
+    'GREEN': F.SPLIT_BULLET,
+    'YELLOW': F.SPLIT_BULLET,
+    'RED': F.LASER_BEAM,
+    'PURPLE': F.LASER_BEAM,
+    'GREY': F.REVERSE_BULLET,
+    'WHITE': F.REVERSE_BULLET,
+    'RAINBOW': F.MULTI_BULLET
+    }
+
 # Player Sprite
 class RECT(pygame.sprite.Sprite):
     def __init__(self, pos, enemy_bullets, direction, color, *groups):
@@ -13,6 +25,8 @@ class RECT(pygame.sprite.Sprite):
         self.image = D.PLAYER_DICT[color.upper()]['PLAYER_IMAGE']
         self.color = D.PLAYER_DICT[color.upper()]['COLOR']
         self.bullet_image = D.PLAYER_DICT[color.upper()]['BULLET_IMAGE']
+        self.params = D.PLAYER_DICT[color.upper()]['PARAMS']
+        self.ability = FUNC_DICT[color.upper()]
         self.rect = self.image.get_rect(center = pos)
         self.vel = pygame.math.Vector2(0, 0)
         self.pos = pygame.math.Vector2(pos)
@@ -25,7 +39,7 @@ class RECT(pygame.sprite.Sprite):
         self.rect.center = self.pos
         self.rect.clamp_ip(G.PLAY_AREA)
         collided = pygame.sprite.spritecollide(self, self.enemy_bullets, True)
-        
+        '''Detects when a bullet is collided and then works out corresponding actions'''
         for bullet in collided:
             if bullet.type == 'BULLET':
                 self.health -= 1
@@ -108,6 +122,7 @@ class SPLIT_BULLET(pygame.sprite.Sprite):
             self.pos += self.vel
             self.rect.center = self.pos
             if not G.PLAY_AREA.contains(self):
+                '''Runs ON_SPLIT Function, which creates three bullet instances and shoots them'''
                 PARAMS = D.VEL_DICT['CONVERT']['SPLIT_BULLET'][self.vel]
                 F.ON_SPLIT(self, D.MEDIA, self.groupa, self.groupb, *PARAMS)
                 self.kill()
@@ -126,6 +141,7 @@ class REVERSE_BULLET(pygame.sprite.Sprite):
         self.direction = D.VEL_DICT['CONVERT']['REVERSE_BULLET']['DIRECTION'][self.vel]
     def update(self):
         if self.toggle == False:
+            '''Using VEL_DICT, slowly decreases velocity and creates an arc'''
             self.vel = D.VEL_DICT['CONVERT']['REVERSE_BULLET'][self.color][self.direction](self)
             self.pos += self.vel
             self.rect.center = self.pos

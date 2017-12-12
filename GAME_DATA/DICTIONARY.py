@@ -11,7 +11,7 @@ pygame.mixer.init()
 
 CLOCK = pygame.time.Clock()
 
-'''Media Dictionary [Loads sounds/images into dictionary based on filename]'''
+# Media Dictionary [Loads sounds/images into dictionary based on filename]
 MEDIA = {}
 FILES = glob.glob(os.path.join(os.path.dirname(__file__), 'MEDIA_DATA', 'IMAGE', '*.png'))
 FILES2 = glob.glob(os.path.join(os.path.dirname(__file__), 'MEDIA_DATA', 'AUDIO', '*.wav'))
@@ -26,57 +26,68 @@ for FILE_NAME in FILES2:
     OBJ = pygame.mixer.Sound(FILE_NAME)
     MEDIA[os.path.split(FILE_NAME)[-1][:-4]] = OBJ
 
-'''Player Media Dictionary [When accsessed, returns images for characters]'''
+# Player Media Dictionary [When accsessed, returns images for characters]
 PLAYER_DICT = {
     'BLUE': {
         'COLOR': G.BLUE,
         'PLAYER_IMAGE': MEDIA['blue_face'],
         'BULLET_IMAGE': MEDIA['blue_bullet'],
-        'LOCAL': 220},
+        'LOCAL': 220,
+        'PARAMS': [MEDIA['blue_big_bullet'], 'BIG_BULLET']},
     'ORANGE': {
         'COLOR': G.ORANGE,
         'PLAYER_IMAGE': MEDIA['orange_face'],
         'BULLET_IMAGE': MEDIA['orange_bullet'],
-        'LOCAL': 220},
+        'LOCAL': 220,
+        'PARAMS': [MEDIA['orange_big_bullet'], 'BIG_BULLET']},
     'GREEN': {
         'COLOR': G.GREEN,
         'PLAYER_IMAGE': MEDIA['green_face'],
         'BULLET_IMAGE': MEDIA['green_bullet'],
         'LOCAL': 210,
-        'SPLIT_BULLET_IMAGE': MEDIA['green_split_bullet']},
-    'PURPLE': {
-        'COLOR': G.PURPLE,
-        'PLAYER_IMAGE': MEDIA['purple_face'],
-        'BULLET_IMAGE': MEDIA['purple_bullet'],
-        'LOCAL': 210},
-    'RED': {
-        'COLOR': G.RED,
-        'PLAYER_IMAGE': MEDIA['red_face'],
-        'BULLET_IMAGE': MEDIA['red_bullet'],
-        'LOCAL': 224},
+        'SPLIT_BULLET_IMAGE': MEDIA['green_split_bullet'],
+        'PARAMS': [MEDIA['green_split_bullet'], 'GREEN']},
     'YELLOW': {
         'COLOR': G.YELLOW,
         'PLAYER_IMAGE': MEDIA['yellow_face'],
         'BULLET_IMAGE': MEDIA['yellow_bullet'],
         'LOCAL': 209,
-        'SPLIT_BULLET_IMAGE': MEDIA['yellow_split_bullet']},
+        'SPLIT_BULLET_IMAGE': MEDIA['yellow_split_bullet'],
+        'PARAMS': [MEDIA['yellow_split_bullet'], 'YELLOW']},
+    'PURPLE': {
+        'COLOR': G.PURPLE,
+        'PLAYER_IMAGE': MEDIA['purple_face'],
+        'BULLET_IMAGE': MEDIA['purple_bullet'],
+        'LOCAL': 210,
+        'PARAMS': ['PURPLE']},
+    'RED': {
+        'COLOR': G.RED,
+        'PLAYER_IMAGE': MEDIA['red_face'],
+        'BULLET_IMAGE': MEDIA['red_bullet'],
+        'LOCAL': 224,
+        'PARAMS': ['RED']
+        },
     'GREY': {
         'COLOR': G.GREY,
         'PLAYER_IMAGE': MEDIA['grey_face'],
         'BULLET_IMAGE': MEDIA['grey_bullet'],
-        'LOCAL': 220},
+        'LOCAL': 220,
+        'PARAMS': [MEDIA['grey_boomerang_bullet'], 'GREY']},
     'WHITE': {
         'COLOR': G.WHITE,
         'PLAYER_IMAGE': MEDIA['white_face'],
         'BULLET_IMAGE': MEDIA['white_bullet'],
-        'LOCAL': 210},
+        'LOCAL': 210,
+        'PARAMS': [MEDIA['white_boomerang_bullet'], 'GREY']},
     'RAINBOW': {
         'COLOR': random.choice((G.BLUE, G.ORANGE, G.GREEN, G.PURPLE, G.RED, G.YELLOW, G.WHITE)),
         'PLAYER_IMAGE': MEDIA['rainbow_face'],
         'BULLET_IMAGE': MEDIA['rainbow_bullet'],
-        'LOCAL': 190},
+        'LOCAL': 190,
+        'PARAMS': ['PLACEHOLDER']},
     }
-'''Velocity Dictionary [Converts and compares velocities (for abilities)]'''
+
+# Velocity Dictionary [Converts and compares velocities (for abilities)]
 VEL_DICT = {
     'CONVERT': {
         'BIG_BULLET': {
@@ -169,7 +180,7 @@ VEL_DICT = {
         }
     }
 
-'''Mode Values [Based on G.MODE]'''
+# Mode Values [Based on G.MODE]
 MODE_DICT = {
     'CLASSIC': {
         'TIMER': 30,
@@ -177,8 +188,7 @@ MODE_DICT = {
         'BULLET_VELOCITY': 8,
         'HEALTH': 3,
         'SOUND': MEDIA['classic_sound'],
-        'MUSIC': MEDIA['classic_music'],
-        'DT': CLOCK.tick(60) / 1000},
+        'MUSIC': MEDIA['classic_music']},
     'CHAOS': {
         'TIMER': 10,
         'PLAYER_VELOCITY': 8,
@@ -189,7 +199,7 @@ MODE_DICT = {
         'DT': CLOCK.tick(60) / 100}
     }
     
-'''HP Bars [Works like PLAYER_DICT, but with player.health]'''
+# HP Bars [Works like PLAYER_DICT, but with player.health]
 HP_DICT = {
     0: MEDIA['hp_dead'],
     1: MEDIA['hp_low'],
@@ -198,7 +208,7 @@ HP_DICT = {
     -1: MEDIA['hp_dead']
     }
 
-'''Timer [Works as HP bars and player_dict]'''
+# Timer [Works as HP bars and player_dict]
 TIMER_DICT = {
     True: [G.RED, G.FONTB],
     False: [G.WHITE, G.FONTNORMAL]

@@ -1,7 +1,6 @@
 # GAME
 import pygame
 import sys
-import random
 
 import GLOBAL as G
 import SPRITES as S
@@ -19,7 +18,7 @@ def TITLE_SCREEN():
     LOOP = True
     TIME = True
     TIMER = 10
-    DT = CLOCK.tick(60) / 1000
+    DT = CLOCK.tick(60) / 10000
 
     while LOOP:
         for event in pygame.event.get():
@@ -33,7 +32,6 @@ def TITLE_SCREEN():
                 elif event.key == pygame.K_ESCAPE:
                     pygame.quit()
         keys = pygame.key.get_pressed()
-        # Subtract Time/Detect When Timer Ends
         if TIME:
             TIMER -= DT
             if TIMER <= 0:
@@ -58,7 +56,7 @@ def MODE_SELECT():
     SELECTOR_BIG = S.SELECTOR_BIG((250, 250))
     MODE_CHOICES = ['CLASSIC', 'CHAOS']
     ALL_SPRITES.add(SELECTOR_BIG)
-    SELECTOR = 0
+    SELECTINT = 0
 
     while LOOP:
         for event in pygame.event.get():
@@ -68,19 +66,19 @@ def MODE_SELECT():
             # Keymap
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
-                    SELECTOR += 1
+                    SELECTINT += 1
                     SELECTOR_BIG.pos[1] -= 100
                 if event.key == pygame.K_DOWN:
-                    SELECTOR -= 1
+                    SELECTINT -= 1
                     SELECTOR_BIG.pos[1] += 100
                 if event.key == pygame.K_SPACE:
-                    # Load Mode into variable to use later
-                    G.MODE = MODE_CHOICES[SELECTOR]
+                    '''Loads values into G.MODE'''
+                    G.MODE = MODE_CHOICES[SELECTINT]
                     D.MODE_DICT[G.MODE]['SOUND'].play()
                     LOOP = False
                 if event.key in (pygame.K_UP, pygame.K_DOWN):
-                    SELECTOR %= len(MODE_CHOICES)
-                    G.MODE = MODE_CHOICES[SELECTOR]
+                    SELECTINT %= len(MODE_CHOICES)
+                    G.MODE = MODE_CHOICES[SELECTINT]
                     D.MEDIA['select_sound'].play()
         ALL_SPRITES.update()
 
@@ -96,11 +94,13 @@ def MODE_SELECT():
 
 # CHARACTER SELECT
 def CHARACTER_SELECT():
+    '''Gets images and returns them'''
     def GET(INSERT):
         IMAGE = D.PLAYER_DICT[INSERT.upper()]['PLAYER_IMAGE']
         COLOR = D.PLAYER_DICT[INSERT.upper()]['COLOR']
         TEXT = G.FONTNORMAL.render(INSERT, True, COLOR)
         return IMAGE, TEXT
+    
     COLOR_CHOICES = ['Blue', 'Orange', 'Green', 'Yellow', 'Red', 'Purple', 'Grey', 'White', 'Rainbow']
     PLAYER1 = 0
     PLAYER2 = 1
@@ -136,7 +136,7 @@ def CHARACTER_SELECT():
                     PLAYER2 -= 1
                     SELECTORB.pos[0] -= 55
                 if event.key == pygame.K_SPACE:
-                    # Load Character choice into variable to use later
+                    #Loads character values based on Player 1 and Player 2's choices.
                     G.P1CHAR = COLOR_CHOICES[PLAYER1]
                     G.P2CHAR = COLOR_CHOICES[PLAYER2]
                     LOOP = False
@@ -192,7 +192,7 @@ def GAME():
     TEXTS2 = G.FONTSMALL.render('Player 2', True, D.PLAYER_DICT[G.P2CHAR.upper()]['COLOR'])
     TEXTS3 = G.FONTSMALL.render('Escape to leave', True, G.WHITE)
     TEXTS4 = G.FONTSMALL.render('Enter to restart', True, G.WHITE)        
-    # Using the variable where mode is stored to set game conditions
+    # Using G.MODE, selects attributes to use for game
     GAME_MUSIC = D.MODE_DICT[G.MODE]['MUSIC']
     TIMER = D.MODE_DICT[G.MODE]['TIMER']
     PLAYER_VELOCITY = D.MODE_DICT[G.MODE]['PLAYER_VELOCITY']
@@ -201,7 +201,11 @@ def GAME():
     PLAYER_2 = S.RECT((465, 465), BULLETS_1, (-BULLET_VELOCITY, 0), G.P2CHAR, ALL_SPRITES)
     PLAYER_1.health = D.MODE_DICT[G.MODE]['HEALTH']
     PLAYER_2.health = D.MODE_DICT[G.MODE]['HEALTH']
-    DT_COOLDOWN = D.MODE_DICT[G.MODE]['DT']
+    # DT is broken on classic so I added this :///
+    if G.MODE == 'CLASSIC':
+        DT_COOLDOWN = CLOCK.tick(60) / 1000
+    else:
+        DT_COOLDOWN = D.MODE_DICT[G.MODE]['DT']    
     # Bools
     LOOP = True
     TIME = True
@@ -212,7 +216,7 @@ def GAME():
     TIME_1 = True
     TIME_2 = True
     ON_START = True
-    ON_END = True
+    ON_END = False
     CONFIRM = False
     # Integers
     VELOCITY_RESET = 0
@@ -221,38 +225,6 @@ def GAME():
     
     while LOOP:
         keys = pygame.key.get_pressed()
-        # PARAMS [NEEDS TO BE REFRESHED
-        ARGS_DICT = {
-            'BLUE': {
-                'PLAYER1': [BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center, (PLAYER_1.fire_direction), D.MEDIA['blue_big_bullet'], 'BIG_BULLET'],
-                'PLAYER2': [BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center, (PLAYER_2.fire_direction), D.MEDIA['blue_big_bullet'], 'BIG_BULLET']},
-            'ORANGE': {
-                'PLAYER1': [BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center, (PLAYER_1.fire_direction), D.MEDIA['orange_big_bullet'], 'BIG_BULLET'],
-                'PLAYER2': [BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center, (PLAYER_2.fire_direction), D.MEDIA['orange_big_bullet'], 'BIG_BULLET']},
-            'GREEN': {
-                'PLAYER1': [BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center, (PLAYER_1.fire_direction), D.MEDIA['green_split_bullet'], 'GREEN'],
-                'PLAYER2': [BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center, (PLAYER_2.fire_direction), D.MEDIA['green_split_bullet'], 'GREEN']},
-            'PURPLE': {
-                'PLAYER1': [BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center, (PLAYER_1.fire_direction), 'PURPLE'],
-                'PLAYER2': [BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center, (PLAYER_2.fire_direction), 'PURPLE']},
-            'RED': {
-                'PLAYER1': [BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center, (PLAYER_1.fire_direction), 'RED'],
-                'PLAYER2': [BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center, (PLAYER_2.fire_direction), 'RED']},
-            'YELLOW': {
-                'PLAYER1': [BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center, (PLAYER_1.fire_direction), D.MEDIA['yellow_split_bullet'], 'YELLOW'],
-                'PLAYER2': [BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center, (PLAYER_2.fire_direction), D.MEDIA['yellow_split_bullet'], 'YELLOW']},
-            'GREY': {
-                'PLAYER1': [BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center, (PLAYER_1.fire_direction), D.MEDIA['grey_boomerang_bullet'], 'GREY'],
-                'PLAYER2': [BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center, (PLAYER_2.fire_direction), D.MEDIA['grey_boomerang_bullet'], 'GREY']},
-            'RAINBOW': {
-                'PLAYER1': [BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center],
-                'PLAYER2': [BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center]},
-            'WHITE': {
-                'PLAYER1': [BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center, (PLAYER_1.fire_direction), D.MEDIA['white_boomerang_bullet'], 'WHITE'],
-                'PLAYER2': [BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center, (PLAYER_2.fire_direction), D.MEDIA['white_boomerang_bullet'], 'WHITE']},
-        }
-        P1_PARAMS = ARGS_DICT[G.P1CHAR.upper()]['PLAYER1']
-        P2_PARAMS = ARGS_DICT[G.P2CHAR.upper()]['PLAYER2']
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 G.SUPERLOOP = False
@@ -270,12 +242,12 @@ def GAME():
                     ALL_SPRITES.add(BULLET)
                     D.MEDIA['shoot_sound'].play()
                 if event.key == pygame.K_e and not PLAYER_1.toggle and ABILITY_1:
-                    F.FUNC_DICT[G.P1CHAR.upper()](*P1_PARAMS)
+                    PLAYER_1.ability(BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center, (PLAYER_1.fire_direction), *PLAYER_1.params)
                     TIME_1 = True
                     ABILITY_1 = False
                     COOLDOWN_1 = 3
                 if event.key == pygame.K_RCTRL and not PLAYER_2.toggle and ABILITY_2:
-                    F.FUNC_DICT[G.P2CHAR.upper()](*P2_PARAMS)
+                    PLAYER_2.ability(BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center, (PLAYER_2.fire_direction), *PLAYER_2.params)
                     TIME_2 = True
                     ABILITY_2 = False
                     COOLDOWN_2 = 3
@@ -320,16 +292,19 @@ def GAME():
                     PLAYER_2.vel.y = VELOCITY_RESET
                 if event.key == pygame.K_UP:
                     PLAYER_2.vel.y = VELOCITY_RESET
-        # Code that runs on first iteration
+                    
+        # Code that runs on first iteration, runs music and the "FIGHT!" announcer but only once
         if ON_START:
             D.MEDIA['fight_sound'].play()
             GAME_MUSIC.play()
             ON_START = False
-            
-        # Pause Function, stops all game movement
-        if keys[pygame.K_TAB] and not CONFIRM and ON_END:
-            PLAYER_1.toggle = True
-            PLAYER_2.toggle = True
+
+        # On TAB keypress, all game functions cease and pause screen appears until LSHIFT/ESC/ENTER is pressed
+        # ESC: Game leaves, both superloop and loop are declared false as the game ends
+        # ENTER: Restarts, only loop ends, restarting the game
+        # LSHIFT: Continues operation of game
+        
+        if keys[pygame.K_TAB] and not CONFIRM and not ON_END:
             CONFIRM = True
             TIME = False
             TIME_1 = False
@@ -338,11 +313,8 @@ def GAME():
                 SPRITE.toggle = True
             pygame.mixer.pause()
             D.MEDIA['pause_sound'].play()
-
-        # Cancel Pause
+            
         elif keys[pygame.K_LSHIFT] and CONFIRM:
-            PLAYER_1.toggle = False
-            PLAYER_2.toggle = False
             CONFIRM = False
             TIME = True
             TIME_1 = True
@@ -352,17 +324,15 @@ def GAME():
             pygame.mixer.unpause()
             D.MEDIA['pause_sound'].play()
 
-        # Exit Game
         elif keys[pygame.K_ESCAPE] and CONFIRM:
             G.SUPERLOOP = False
             LOOP = False
 
-        # Restarting Game
         elif keys[pygame.K_RETURN] and CONFIRM:
             GAME_MUSIC.stop()
             LOOP = False
 
-        # Subtracting time, setting text, checking if timer has run out, more leaving/restart functions
+        # Time code, subtracts timer and cooldown, detects when time is @0 and does according actions, and contains more action code       
         if TIME:
             TIMER -= DT
             TXT = D.TIMER_DICT[TIMER < 10][1].render(str(round(TIMER, 1)), True, D.TIMER_DICT[TIMER < 10][0])
@@ -373,18 +343,18 @@ def GAME():
                 TIME = False
                 TIME_1 = False
                 TIME_2 = False
-                ON_END = False
+                ON_END = True
                 TEXT_LOCAL = (190, 530)
                 TXT = G.FONTNORMAL.render('Times Up!', True, G.GREY)
                 D.MEDIA['die_sound'].play()
+                
         if not TIME and keys[pygame.K_ESCAPE]:
             G.SUPERLOOP = False
-            LOOP = False
+            LOOP = False         
         elif not TIME and keys[pygame.K_RETURN] and not CONFIRM:
             GAME_MUSIC.stop()
             LOOP = False
-                
-        # Subtracts cooldown/detects when cooldown is 0       
+                    
         if TIME_1:
             COOLDOWN_1 -= DT_COOLDOWN
             if COOLDOWN_1 <= 0:
@@ -396,14 +366,14 @@ def GAME():
                 TIME_2 = False
                 ABILITY_2 = True
             
-        # Outcome is Player 2 Wins
+        # Outcome code, when health of a player(s) is at 0, code is run that shows outcome on timer area, stops time, and also contains key actions
         if PLAYER_1.health <= 0:
             TXT = G.FONTNORMAL.render('Player 2 Wins!', True, PLAYER_2.color)
             TEXT_LOCAL = (155, 530)
             TIME = False
             TIME_1 = False
             TIME_2 = False
-            ON_END = False
+            ON_END = True
             GAME_MUSIC.stop()
             if keys[pygame.K_ESCAPE] and not CONFIRM:
                 G.SUPERLOOP = False
@@ -411,14 +381,13 @@ def GAME():
             elif keys[pygame.K_RETURN] and not CONFIRM:
                 LOOP = False
                 
-        # Outcome if Player 1 Wins
         if PLAYER_2.health <= 0:
             TXT = G.FONTNORMAL.render('Player 1 Wins!', True, PLAYER_1.color)
             TEXT_LOCAL = (155, 530)
             TIME = False
             TIME_1 = False
             TIME_2 = False
-            ON_END = False
+            ON_END = True
             GAME_MUSIC.stop()
             if keys[pygame.K_ESCAPE] and not CONFIRM:
                 G.SUPERLOOP = False
@@ -426,14 +395,13 @@ def GAME():
             elif keys[pygame.K_RETURN] and not CONFIRM:
                 LOOP = False
 
-        # Outcome of draw
         if PLAYER_1.health <= 0 and PLAYER_2.health <= 0:
             TXT = G.FONTNORMAL.render('Draw!', True, G.GREY)
             TEXT_LOCAL = (210, 530)
             TIME = False
             TIME_1 = False
             TIME_2 = False
-            ON_END = False
+            ON_END = True
             GAME_MUSIC.stop()
             if keys[pygame.K_ESCAPE] and not CONFIRM:
                 G.SUPERLOOP = False
@@ -443,7 +411,9 @@ def GAME():
             
         ALL_SPRITES.update()
         
-        # Drawing Sprites/Bullets/GUI
+        # Drawing code, draws media, hp bars, text, sprites, etc.
+        # Cooldown drawing is still if statements as there is no convenient way to get instant draw code by using dictionaries
+
         G.SCREEN.fill(G.BLACK)
         G.SCREEN.blit(D.MEDIA['wall'], (0, 0))
         G.SCREEN.blit(pygame.transform.flip(D.HP_DICT[PLAYER_1.health], True, False), (20, 530))
@@ -452,7 +422,6 @@ def GAME():
         G.SCREEN.blit(TEXTS1, (19, 515))
         G.SCREEN.blit(TEXTS2, (429, 515))
         
-        # Cooldown drawing
         if COOLDOWN_1 <= 3 and COOLDOWN_1 >= 2:
             G.SCREEN.blit(D.MEDIA['cooldown4'], (100, 515))
         elif COOLDOWN_1 <= 2 and COOLDOWN_1 >= 1:
@@ -473,7 +442,7 @@ def GAME():
 
         ALL_SPRITES.draw(G.SCREEN)
         
-        if not ON_END:
+        if ON_END:
             G.SCREEN.blit(TEXTS3, (395, 10))
             G.SCREEN.blit(TEXTS4, (10, 10))
         if CONFIRM:
@@ -492,6 +461,7 @@ def EGG():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+                
         G.SCREEN.fill(G.BLACK)
         G.SCREEN.blit(D.MEDIA['egg'], (0, 100))
         G.SCREEN.blit(FONTS1, (40, 10))
