@@ -11,7 +11,7 @@ if __name__ == '__main__':
     
     if str(sys.platform) == 'win32' or 'win64':
         try:
-            import h
+            import pygame
         except ModuleNotFoundError:
             print('Pygame is not installed! Installing...')
             
