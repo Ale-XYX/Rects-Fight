@@ -9,7 +9,9 @@ import glob
 pygame.init()
 pygame.mixer.init()
 
-# Setting Up Items
+CLOCK = pygame.time.Clock()
+
+'''Media Dictionary [Loads sounds/images into dictionary based on filename]'''
 MEDIA = {}
 FILES = glob.glob(os.path.join(os.path.dirname(__file__), 'MEDIA_DATA', 'IMAGE', '*.png'))
 FILES2 = glob.glob(os.path.join(os.path.dirname(__file__), 'MEDIA_DATA', 'AUDIO', '*.wav'))
@@ -23,9 +25,58 @@ for FILE_NAME in FILES:
 for FILE_NAME in FILES2:
     OBJ = pygame.mixer.Sound(FILE_NAME)
     MEDIA[os.path.split(FILE_NAME)[-1][:-4]] = OBJ
-    
-CLOCK = pygame.time.Clock()
 
+'''Player Media Dictionary [When accsessed, returns images for characters]'''
+PLAYER_DICT = {
+    'BLUE': {
+        'COLOR': G.BLUE,
+        'PLAYER_IMAGE': MEDIA['blue_face'],
+        'BULLET_IMAGE': MEDIA['blue_bullet'],
+        'LOCAL': 220},
+    'ORANGE': {
+        'COLOR': G.ORANGE,
+        'PLAYER_IMAGE': MEDIA['orange_face'],
+        'BULLET_IMAGE': MEDIA['orange_bullet'],
+        'LOCAL': 220},
+    'GREEN': {
+        'COLOR': G.GREEN,
+        'PLAYER_IMAGE': MEDIA['green_face'],
+        'BULLET_IMAGE': MEDIA['green_bullet'],
+        'LOCAL': 210,
+        'SPLIT_BULLET_IMAGE': MEDIA['green_split_bullet']},
+    'PURPLE': {
+        'COLOR': G.PURPLE,
+        'PLAYER_IMAGE': MEDIA['purple_face'],
+        'BULLET_IMAGE': MEDIA['purple_bullet'],
+        'LOCAL': 210},
+    'RED': {
+        'COLOR': G.RED,
+        'PLAYER_IMAGE': MEDIA['red_face'],
+        'BULLET_IMAGE': MEDIA['red_bullet'],
+        'LOCAL': 224},
+    'YELLOW': {
+        'COLOR': G.YELLOW,
+        'PLAYER_IMAGE': MEDIA['yellow_face'],
+        'BULLET_IMAGE': MEDIA['yellow_bullet'],
+        'LOCAL': 209,
+        'SPLIT_BULLET_IMAGE': MEDIA['yellow_split_bullet']},
+    'GREY': {
+        'COLOR': G.GREY,
+        'PLAYER_IMAGE': MEDIA['grey_face'],
+        'BULLET_IMAGE': MEDIA['grey_bullet'],
+        'LOCAL': 220},
+    'WHITE': {
+        'COLOR': G.WHITE,
+        'PLAYER_IMAGE': MEDIA['white_face'],
+        'BULLET_IMAGE': MEDIA['white_bullet'],
+        'LOCAL': 210},
+    'RAINBOW': {
+        'COLOR': random.choice((G.BLUE, G.ORANGE, G.GREEN, G.PURPLE, G.RED, G.YELLOW, G.WHITE)),
+        'PLAYER_IMAGE': MEDIA['rainbow_face'],
+        'BULLET_IMAGE': MEDIA['rainbow_bullet'],
+        'LOCAL': 190},
+    }
+'''Velocity Dictionary [Converts and compares velocities (for abilities)]'''
 VEL_DICT = {
     'CONVERT': {
         'BIG_BULLET': {
@@ -117,67 +168,8 @@ VEL_DICT = {
             }
         }
     }
-PLAYER_DICT = {
-    # Player Media, Colors, And Locations
-    'BLUE': {
-        'COLOR': G.BLUE,
-        'PLAYER_IMAGE': MEDIA['blue_face'],
-        'BULLET_IMAGE': MEDIA['blue_bullet'],
-        'LOCAL': 220},
-    'ORANGE': {
-        'COLOR': G.ORANGE,
-        'PLAYER_IMAGE': MEDIA['orange_face'],
-        'BULLET_IMAGE': MEDIA['orange_bullet'],
-        'LOCAL': 220},
-    'GREEN': {
-        'COLOR': G.GREEN,
-        'PLAYER_IMAGE': MEDIA['green_face'],
-        'BULLET_IMAGE': MEDIA['green_bullet'],
-        'LOCAL': 210,
-        'SPLIT_BULLET_IMAGE': MEDIA['green_split_bullet']},
-    'PURPLE': {
-        'COLOR': G.PURPLE,
-        'PLAYER_IMAGE': MEDIA['purple_face'],
-        'BULLET_IMAGE': MEDIA['purple_bullet'],
-        'LOCAL': 210},
-    'RED': {
-        'COLOR': G.RED,
-        'PLAYER_IMAGE': MEDIA['red_face'],
-        'BULLET_IMAGE': MEDIA['red_bullet'],
-        'LOCAL': 224},
-    'YELLOW': {
-        'COLOR': G.YELLOW,
-        'PLAYER_IMAGE': MEDIA['yellow_face'],
-        'BULLET_IMAGE': MEDIA['yellow_bullet'],
-        'LOCAL': 209,
-        'SPLIT_BULLET_IMAGE': MEDIA['yellow_split_bullet']},
-    'GREY': {
-        'COLOR': G.GREY,
-        'PLAYER_IMAGE': MEDIA['grey_face'],
-        'BULLET_IMAGE': MEDIA['grey_bullet'],
-        'LOCAL': 220},
-    'WHITE': {
-        'COLOR': G.WHITE,
-        'PLAYER_IMAGE': MEDIA['white_face'],
-        'BULLET_IMAGE': MEDIA['white_bullet'],
-        'LOCAL': 210},
-    'RAINBOW': {
-        'COLOR': random.choice((G.BLUE, G.ORANGE, G.GREEN, G.PURPLE, G.RED, G.YELLOW, G.WHITE)),
-        'PLAYER_IMAGE': MEDIA['rainbow_face'],
-        'BULLET_IMAGE': MEDIA['rainbow_bullet'],
-        'LOCAL': 190},
-    }
-    
-# HP BARS
-HP_DICT = {
-    0: MEDIA['hp_dead'],
-    1: MEDIA['hp_low'],
-    2: MEDIA['hp_decayed'],
-    3: MEDIA['hp_full'],
-    -1: MEDIA['hp_dead']
-    }
 
-# Mode Select [selects on G.MODE]
+'''Mode Values [Based on G.MODE]'''
 MODE_DICT = {
     'CLASSIC': {
         'TIMER': 30,
@@ -196,76 +188,20 @@ MODE_DICT = {
         'MUSIC': MEDIA['chaos_music'],
         'DT': CLOCK.tick(60) / 100}
     }
+    
+'''HP Bars [Works like PLAYER_DICT, but with player.health]'''
+HP_DICT = {
+    0: MEDIA['hp_dead'],
+    1: MEDIA['hp_low'],
+    2: MEDIA['hp_decayed'],
+    3: MEDIA['hp_full'],
+    -1: MEDIA['hp_dead']
+    }
 
-# Timer Values
+'''Timer [Works as HP bars and player_dict]'''
 TIMER_DICT = {
     True: [G.RED, G.FONTB],
     False: [G.WHITE, G.FONTNORMAL]
-}
-
-# Blue/Orange Big bullet
-def BIG_BULLET(GROUP_A, GROUP_B, POS, VEL, IMG, TYPE):
-    VEL = VEL_DICT['CONVERT']['BIG_BULLET'][VEL]        
-    BIGBULLET = S.BULLET(POS, VEL, IMG, TYPE)
-    GROUP_A.add(BIGBULLET)
-    GROUP_B.add(BIGBULLET)
-    MEDIA['big_shoot_sound'].play()
-
-# Green/Yellow Split Bullet    
-def SPLIT_BULLET(GROUP_A, GROUP_B, POS, VEL, IMG, COLOR):
-    SPLIT_BULLET = S.SPLIT_BULLET(POS, VEL, IMG, GROUP_A, GROUP_B, COLOR)
-    GROUP_A.add(SPLIT_BULLET)
-    GROUP_B.add(SPLIT_BULLET)
-    MEDIA['split_shoot_sound'].play()
-
-# OnSplit Function
-def ON_SPLIT(SELF, DICT, GROUP_A, GROUP_B, VEL_A, VEL_B, VEL_C):
-    BULLET_A = S.BULLET(SELF.rect.center, VEL_A, SELF.alt_image, 'BULLET')
-    BULLET_B = S.BULLET(SELF.rect.center, VEL_B, SELF.alt_image, 'BULLET')
-    BULLET_C = S.BULLET(SELF.rect.center, VEL_C, SELF.alt_image, 'BULLET')
-    GROUP_A.add(BULLET_A, BULLET_B, BULLET_C)
-    GROUP_B.add(BULLET_A, BULLET_B, BULLET_C)
-    DICT['bullet_split_sound'].play()    
-    
-# Red/Purple Laser Beam
-def LASER_BEAM(GROUP_A, GROUP_B, POS, VEL, COLOR):
-    BEAM = S.BEAM(POS, VEL, COLOR)
-    GROUP_A.add(BEAM)
-    GROUP_B.add(BEAM)
-    MEDIA['laser_shoot_sound'].play()
-
-# Grey/White reverse bullet        
-def REVERSE_BULLET(GROUP_A, GROUP_B, POS, VEL, IMG, COLOR):
-    VEL = VEL_DICT['CONVERT']['REVERSE_BULLET']['VEL'][VEL]
-    REVERSE_BULLET = S.REVERSE_BULLET(POS, VEL, IMG, COLOR)
-    GROUP_A.add(REVERSE_BULLET)
-    GROUP_B.add(REVERSE_BULLET)
-    MEDIA['reverse_shoot_sound'].play()
-    
-# Rainbow Multi-bullet
-def MULTI_BULLET(GROUP_A, GROUP_B, POS):
-    BULLET_1 = S.BULLET(POS, (6, 0), MEDIA['red_bullet'], 'BULLET')
-    BULLET_2 = S.BULLET(POS, (6, -6), MEDIA['orange_bullet'], 'BULLET')
-    BULLET_3 = S.BULLET(POS, (0, -6), MEDIA['yellow_bullet'], 'BULLET')
-    BULLET_4 = S.BULLET(POS, (-6, -6), MEDIA['green_bullet'], 'BULLET')
-    BULLET_5 = S.BULLET(POS, (-6, 0), MEDIA['blue_bullet'], 'BULLET')
-    BULLET_6 = S.BULLET(POS, (-6, 6), MEDIA['purple_bullet'], 'BULLET')
-    BULLET_7 = S.BULLET(POS, (0, 6), MEDIA['white_bullet'], 'BULLET')
-    BULLET_8 = S.BULLET(POS, (6, 6), MEDIA['grey_bullet'], 'BULLET')
-    GROUP_A.add(BULLET_1, BULLET_2, BULLET_3, BULLET_4, BULLET_5, BULLET_6, BULLET_7, BULLET_8)
-    GROUP_B.add(BULLET_1, BULLET_2, BULLET_3, BULLET_4, BULLET_5, BULLET_6, BULLET_7, BULLET_8)
-    MEDIA['multi_shoot_sound'].play()
-
-FUNC_DICT = {
-    'BLUE': BIG_BULLET,
-    'ORANGE': BIG_BULLET,
-    'GREEN': SPLIT_BULLET,
-    'YELLOW': SPLIT_BULLET,
-    'RED': LASER_BEAM,
-    'PURPLE': LASER_BEAM,
-    'GREY': REVERSE_BULLET,
-    'WHITE': REVERSE_BULLET,
-    'RAINBOW': MULTI_BULLET
     }
     
 

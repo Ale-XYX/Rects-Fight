@@ -6,6 +6,7 @@ import random
 import GLOBAL as G
 import SPRITES as S
 import DICTIONARY as D
+import FUNCTION as F
 
 pygame.init()
 
@@ -57,8 +58,6 @@ def MODE_SELECT():
     SELECTOR_BIG = S.SELECTOR_BIG((250, 250))
     MODE_CHOICES = ['CLASSIC', 'CHAOS']
     ALL_SPRITES.add(SELECTOR_BIG)
-    TEXTS1 = G.FONTNORMAL.render('Choose Mode', True, G.WHITE)
-    TEXTS2 = G.FONTNORMAL.render('Space To Continue', True, G.WHITE) 
     SELECTOR = 0
 
     while LOOP:
@@ -89,9 +88,8 @@ def MODE_SELECT():
         G.SCREEN.fill(G.BLACK)
         G.SCREEN.blit(D.MEDIA['classic_card'], (150, 200))
         G.SCREEN.blit(D.MEDIA['chaos_card'], (150, 300))
-        G.SCREEN.blit(TEXTS1, (155, 100))
-        G.SCREEN.blit(TEXTS2, (120, 500))
         ALL_SPRITES.draw(G.SCREEN)
+        G.SCREEN.blit(D.MEDIA['mode_select_border'], (0, 0))
 
         pygame.display.flip()
         CLOCK.tick(60)
@@ -272,12 +270,12 @@ def GAME():
                     ALL_SPRITES.add(BULLET)
                     D.MEDIA['shoot_sound'].play()
                 if event.key == pygame.K_e and not PLAYER_1.toggle and ABILITY_1:
-                    D.FUNC_DICT[G.P1CHAR.upper()](*P1_PARAMS)
+                    F.FUNC_DICT[G.P1CHAR.upper()](*P1_PARAMS)
                     TIME_1 = True
                     ABILITY_1 = False
                     COOLDOWN_1 = 3
                 if event.key == pygame.K_RCTRL and not PLAYER_2.toggle and ABILITY_2:
-                    D.FUNC_DICT[G.P2CHAR.upper()](*P2_PARAMS)
+                    F.FUNC_DICT[G.P2CHAR.upper()](*P2_PARAMS)
                     TIME_2 = True
                     ABILITY_2 = False
                     COOLDOWN_2 = 3
@@ -334,6 +332,8 @@ def GAME():
             PLAYER_2.toggle = True
             CONFIRM = True
             TIME = False
+            TIME_1 = False
+            TIME_2 = False
             for SPRITE in ALL_SPRITES:
                 SPRITE.toggle = True
             pygame.mixer.pause()
@@ -345,8 +345,8 @@ def GAME():
             PLAYER_2.toggle = False
             CONFIRM = False
             TIME = True
-            TIME_1 = False
-            TIME_2 = False
+            TIME_1 = True
+            TIME_2 = True
             for SPRITE in ALL_SPRITES:
                 SPRITE.toggle = False
             pygame.mixer.unpause()

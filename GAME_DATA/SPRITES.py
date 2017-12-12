@@ -2,6 +2,7 @@
 import pygame
 import GLOBAL as G
 import DICTIONARY as D
+import FUNCTION as F
 
 pygame.init()
 
@@ -48,9 +49,9 @@ class RECT(pygame.sprite.Sprite):
                     self.kill()
                     self.toggle = True
                 else:
-                    if bullet.vel[0] == 8 or -8:
+                    if bullet.vel[0] == 8 or -8 and bullet.vel[1] == 0:
                         self.pos[0] -= D.VEL_DICT['CONVERT']['LASER'][bullet.vel](bullet)
-                    else:
+                    elif bullet.vel[1] == 8 or -8 and bullet.vel[0] == 0:
                         self.pos[1] -= D.VEL_DICT['CONVERT']['LASER'][bullet.vel](bullet)                   
 
 # Bullet
@@ -108,7 +109,7 @@ class SPLIT_BULLET(pygame.sprite.Sprite):
             self.rect.center = self.pos
             if not G.PLAY_AREA.contains(self):
                 PARAMS = D.VEL_DICT['CONVERT']['SPLIT_BULLET'][self.vel]
-                D.ON_SPLIT(self, D.MEDIA, self.groupa, self.groupb, *PARAMS)
+                F.ON_SPLIT(self, D.MEDIA, self.groupa, self.groupb, *PARAMS)
                 self.kill()
 
 # Grey/White Reverse Bullet
