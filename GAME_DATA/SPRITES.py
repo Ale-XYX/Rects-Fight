@@ -172,8 +172,8 @@ class SELECTOR_BIG(pygame.sprite.Sprite):
         self.pos = pygame.math.Vector2(pos)
     def update(self):
         self.rect.center = self.pos
-        if self.pos[1] > 350:
-            self.pos[1] = 250
-        elif self.pos[1] <= 150:
-            self.pos[1] = 350
+        if self.pos[1] >= 500:
+            self.pos[1] = 200
+        elif self.pos[1] <= 100:
+            self.pos[1] = 400
     

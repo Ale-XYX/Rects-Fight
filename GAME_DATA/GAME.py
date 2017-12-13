@@ -53,10 +53,12 @@ def MODE_SELECT():
     CLOCK = pygame.time.Clock()
     LOOP = True
     ALL_SPRITES = pygame.sprite.Group()
-    SELECTOR_BIG = S.SELECTOR_BIG((250, 250))
-    MODE_CHOICES = ['CLASSIC', 'CHAOS']
+    SELECTOR_BIG = S.SELECTOR_BIG((250, 200))
     ALL_SPRITES.add(SELECTOR_BIG)
     SELECTINT = 0
+    MODE_CHOICES = ['CLASSIC', 'TENSE', 'CHAOS']
+    TEXTS1 = G.FONTNORMAL.render('Choose your difficulty', True, G.WHITE)
+    TEXTS1 = G.FONTNORMAL.render('Space to continue', True, G.WHITE)    
 
     while LOOP:
         for event in pygame.event.get():
@@ -66,26 +68,35 @@ def MODE_SELECT():
             # Keymap
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
-                    SELECTINT += 1
-                    SELECTOR_BIG.pos[1] -= 100
-                if event.key == pygame.K_DOWN:
                     SELECTINT -= 1
+                    SELECTOR_BIG.pos[1] -= 100
+
+                    
+                if event.key == pygame.K_DOWN:
+                    SELECTINT += 1
                     SELECTOR_BIG.pos[1] += 100
+                    
                 if event.key == pygame.K_SPACE:
                     '''Loads values into G.MODE'''
                     G.MODE = MODE_CHOICES[SELECTINT]
                     D.MODE_DICT[G.MODE]['SOUND'].play()
                     LOOP = False
+                    
                 if event.key in (pygame.K_UP, pygame.K_DOWN):
-                    SELECTINT %= len(MODE_CHOICES)
-                    G.MODE = MODE_CHOICES[SELECTINT]
+                    print(SELECTINT)
+                    if SELECTINT  == -1:
+                        SELECTINT = 2
+                    elif SELECTINT == 3:
+                        SELECTINT = 0
+                    print(SELECTINT)
                     D.MEDIA['select_sound'].play()
         ALL_SPRITES.update()
 
         # Drawing
         G.SCREEN.fill(G.BLACK)
-        G.SCREEN.blit(D.MEDIA['classic_card'], (150, 200))
-        G.SCREEN.blit(D.MEDIA['chaos_card'], (150, 300))
+        G.SCREEN.blit(D.MEDIA['classic_card'], (150, 150))
+        G.SCREEN.blit(D.MEDIA['tense_card'], (150, 250))
+        G.SCREEN.blit(D.MEDIA['chaos_card'], (150, 350))
         ALL_SPRITES.draw(G.SCREEN)
         G.SCREEN.blit(D.MEDIA['mode_select_border'], (0, 0))
 
