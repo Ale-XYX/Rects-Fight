@@ -17,13 +17,7 @@ First, Get and install python from python.org
 
 ![1](https://i.imgur.com/Dy3sHw3.png)
 
-Second, Go into command prompt and install python and glob
-
-![2](https://i.imgur.com/8QTTkZ7.png)
-
-![3](https://i.imgur.com/aG21YOt.png)
-
-Third, Run Rects Fight.py and you are ready
+Second, Run Rects Fight.py and you are ready
 
 ![4](https://i.imgur.com/Ixv1vJf.png)
 

@@ -39,7 +39,7 @@ class RECT(pygame.sprite.Sprite):
         self.rect.center = self.pos
         self.rect.clamp_ip(G.PLAY_AREA)
         collided = pygame.sprite.spritecollide(self, self.enemy_bullets, True)
-        '''Detects when a bullet is collided and then works out corresponding actions'''
+        # Detects when a bullet is collided and then works out corresponding actions
         for bullet in collided:
             if bullet.type == 'BULLET':
                 self.health -= 1
@@ -141,7 +141,7 @@ class REVERSE_BULLET(pygame.sprite.Sprite):
         self.direction = D.VEL_DICT['CONVERT']['REVERSE_BULLET']['DIRECTION'][self.vel]
     def update(self):
         if self.toggle == False:
-            '''Using VEL_DICT, slowly decreases velocity and creates an arc'''
+            # Using VEL_DICT, slowly decreases velocity and creates an arc
             self.vel = D.VEL_DICT['CONVERT']['REVERSE_BULLET'][self.color][self.direction](self)
             self.pos += self.vel
             self.rect.center = self.pos
