@@ -1,3 +1,9 @@
 To Do 2.0:
-Add "Best Of Three" Mode [Best of three rounds, rounds get progressively harder]
-By then the FCC would have repealed net neutrality so probaly no more :(
+Redesign mode card
+Redesign rainbow sprite
+Redesign laser sprites
+Redesign big bullet sprite
+Redesign reverse bullet sprite
+Redesign icon
+remove easter egg
+Wrap up production

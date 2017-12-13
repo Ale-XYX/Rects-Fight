@@ -30,3 +30,6 @@ FONTIB = pygame.font.SysFont(None, 40, True, True)
 PLAY_AREA = pygame.Rect(5, 5, 490, 490)
 SCREEN = pygame.display.set_mode((500, 600))
 
+print('█', end='', flush=True)
+
+

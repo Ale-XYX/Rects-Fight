@@ -25,6 +25,8 @@ for FILE_NAME in FILES:
 for FILE_NAME in FILES2:
     OBJ = pygame.mixer.Sound(FILE_NAME)
     MEDIA[os.path.split(FILE_NAME)[-1][:-4]] = OBJ
+    
+print('█', end='', flush=True)
 
 # Player Media Dictionary [When accsessed, returns images for characters]
 PLAYER_DICT = {
@@ -87,6 +89,8 @@ PLAYER_DICT = {
         'PARAMS': ['PLACEHOLDER']},
     }
 
+print('█', end='', flush=True)
+
 # Velocity Dictionary [Converts and compares velocities (for abilities)]
 VEL_DICT = {
     'CONVERT': {
@@ -126,15 +130,15 @@ VEL_DICT = {
             (0, 8): [(0, -8), (5, -8), (-5, -8)],
             (0, -8): [(0, 8), (5, 8), (-5, 8)],
 
-            (12, 0): [(-12, 8), (-12, -8), (-12, 8)],
+            (12, 0): [(-12, 0), (-12, -8), (-12, 8)],
             (-12, 0): [(12, 0), (12, -8), (12, 8)],
             (0, 12): [(0, -12), (8, -12), (-8, -12)],
-            (0, -12): [(0, 12), (8, 12), (-8, 12)]},
+            (0, -12): [(0, 12), (8, 12), (-8, 12)],
         
-            (16, 0): [(-16, 10), (-16, -10), (-16, 10)],
+            (16, 0): [(-16, 0), (-16, -10), (-16, 10)],
             (-16, 0): [(16, 0), (16, -10), (16, 10)],
             (0, 16): [(0, -16), (10, -16), (-10, -16)],
-            (0, -16): [(0, 16), (10, 16), (-10, 16)],
+            (0, -16): [(0, 16), (10, 16), (-10, 16)]},
         'REVERSE_BULLET': {
             'VEL': {
                 (8, 0): (8, 0),
@@ -230,6 +234,8 @@ VEL_DICT = {
         }
     }
 
+print('█', end='', flush=True)
+
 # Mode Values [Based on G.MODE]
 MODE_DICT = {
     'CLASSIC': {
@@ -256,7 +262,9 @@ MODE_DICT = {
         'MUSIC': MEDIA['chaos_music'],
         'DT': CLOCK.tick(60) / 100}
     }
-    
+
+print('█', end='', flush=True)
+
 # HP Bars [Works like PLAYER_DICT, but with player.health]
 HP_DICT = {
     0: MEDIA['hp_dead'],
@@ -266,11 +274,14 @@ HP_DICT = {
     -1: MEDIA['hp_dead']
     }
 
+print('█', end='', flush=True)
+
 # Timer [Works as HP bars and player_dict]
 TIMER_DICT = {
     True: [G.RED, G.FONTB],
     False: [G.WHITE, G.FONTNORMAL]
     }
-    
+
+print('█', end='', flush=True)
 
     

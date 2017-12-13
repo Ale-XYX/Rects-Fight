@@ -18,7 +18,7 @@ def TITLE_SCREEN():
     LOOP = True
     TIME = True
     TIMER = 10
-    DT = CLOCK.tick(60) / 10000
+    DT = CLOCK.tick(60) / 1000
 
     while LOOP:
         for event in pygame.event.get():
@@ -48,6 +48,8 @@ def TITLE_SCREEN():
         pygame.display.flip()
         CLOCK.tick(60)
 
+print('█', end='', flush=True)
+
 # MODE SELECT
 def MODE_SELECT():
     CLOCK = pygame.time.Clock()
@@ -58,7 +60,7 @@ def MODE_SELECT():
     SELECTINT = 0
     MODE_CHOICES = ['CLASSIC', 'TENSE', 'CHAOS']
     TEXTS1 = G.FONTNORMAL.render('Choose your difficulty', True, G.WHITE)
-    TEXTS1 = G.FONTNORMAL.render('Space to continue', True, G.WHITE)    
+    TEXTS2 = G.FONTNORMAL.render('Space to continue', True, G.WHITE)    
 
     while LOOP:
         for event in pygame.event.get():
@@ -83,12 +85,10 @@ def MODE_SELECT():
                     LOOP = False
                     
                 if event.key in (pygame.K_UP, pygame.K_DOWN):
-                    print(SELECTINT)
                     if SELECTINT  == -1:
                         SELECTINT = 2
                     elif SELECTINT == 3:
                         SELECTINT = 0
-                    print(SELECTINT)
                     D.MEDIA['select_sound'].play()
         ALL_SPRITES.update()
 
@@ -98,10 +98,14 @@ def MODE_SELECT():
         G.SCREEN.blit(D.MEDIA['tense_card'], (150, 250))
         G.SCREEN.blit(D.MEDIA['chaos_card'], (150, 350))
         ALL_SPRITES.draw(G.SCREEN)
-        G.SCREEN.blit(D.MEDIA['mode_select_border'], (0, 0))
+        # G.SCREEN.blit(D.MEDIA['mode_select_border'], (0, 0))
+        G.SCREEN.blit(TEXTS1, (100, 50))
+        G.SCREEN.blit(TEXTS2, (125, 500))
 
         pygame.display.flip()
         CLOCK.tick(60)
+
+print('█', end='', flush=True)
 
 # CHARACTER SELECT
 def CHARACTER_SELECT():
@@ -191,6 +195,8 @@ def CHARACTER_SELECT():
         
         pygame.display.flip()
         CLOCK.tick(60)
+
+print('█', end='', flush=True)
 
 # GAME
 def GAME():
@@ -461,6 +467,8 @@ def GAME():
                 
         pygame.display.flip()
         CLOCK.tick(60)
+        
+print('█', end='', flush=True)
 
 # Easter egg page :)            
 def EGG():
@@ -478,7 +486,9 @@ def EGG():
         G.SCREEN.blit(FONTS1, (40, 10))
         
         pygame.display.flip()
-        CLOCK.tick(60)            
+        CLOCK.tick(60)
+
+print('█', end='', flush=True)
             
             
             
