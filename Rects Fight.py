@@ -8,7 +8,6 @@ if __name__ == '__main__':
     
     # Check if pygame is installed, if not install pygame
     # If os is not windows, then tell to manually install
-    
     if str(sys.platform) == 'win32' or 'win64':
         try:
             import pygame
