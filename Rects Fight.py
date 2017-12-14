@@ -38,8 +38,6 @@ if __name__ == '__main__':
 
     # Game sequence [Runs all parts of the game in order
     G.TITLE_SCREEN()
-    if G.G.EGG:
-        G.EGG()
     G.MODE_SELECT()
     G.CHARACTER_SELECT()
     while G.G.SUPERLOOP:
