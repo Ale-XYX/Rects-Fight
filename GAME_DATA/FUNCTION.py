@@ -9,8 +9,6 @@ def BIG_BULLET(GROUP_A, GROUP_B, POS, VEL, IMG, TYPE):
     GROUP_A.add(BIGBULLET)
     GROUP_B.add(BIGBULLET)
     D.MEDIA['big_shoot_sound'].play()
-
-print('█', end='', flush=True)
     
 def SPLIT_BULLET(GROUP_A, GROUP_B, POS, VEL, IMG, COLOR):
     SPLIT_BULLET = D.S.SPLIT_BULLET(POS, VEL, IMG, GROUP_A, GROUP_B, COLOR)
@@ -18,27 +16,19 @@ def SPLIT_BULLET(GROUP_A, GROUP_B, POS, VEL, IMG, COLOR):
     GROUP_B.add(SPLIT_BULLET)
     D.MEDIA['split_shoot_sound'].play()
 
-print('█', end='', flush=True)
-
 def ON_SPLIT(SELF, DICT, GROUP_A, GROUP_B, VEL_A, VEL_B, VEL_C):
     BULLET_A = D.S.BULLET(SELF.rect.center, VEL_A, SELF.alt_image, 'BULLET')
     BULLET_B = D.S.BULLET(SELF.rect.center, VEL_B, SELF.alt_image, 'BULLET')
     BULLET_C = D.S.BULLET(SELF.rect.center, VEL_C, SELF.alt_image, 'BULLET')
     GROUP_A.add(BULLET_A, BULLET_B, BULLET_C)
     GROUP_B.add(BULLET_A, BULLET_B, BULLET_C)
-    D.MEDIA['bullet_split_sound'].play()
-
-print('█', end='', flush=True)
-    
+    D.MEDIA['bullet_split_sound'].play()   
 
 def LASER_BEAM(GROUP_A, GROUP_B, POS, VEL, COLOR):
     BEAM = D.S.BEAM(POS, VEL, COLOR)
     GROUP_A.add(BEAM)
     GROUP_B.add(BEAM)
     D.MEDIA['laser_shoot_sound'].play()
-
-print('█', end='', flush=True)
-
         
 def REVERSE_BULLET(GROUP_A, GROUP_B, POS, VEL, IMG, COLOR):
     VEL = D.VEL_DICT['CONVERT']['REVERSE_BULLET']['VEL'][VEL]
@@ -46,8 +36,6 @@ def REVERSE_BULLET(GROUP_A, GROUP_B, POS, VEL, IMG, COLOR):
     GROUP_A.add(REVERSE_BULLET)
     GROUP_B.add(REVERSE_BULLET)
     D.MEDIA['reverse_shoot_sound'].play()
-
-print('█', end='', flush=True)
 
 def MULTI_BULLET(GROUP_A, GROUP_B, POS, FIRE_DIRECTION, PLACEHOLDER):
     # Fire_direction and placeholder are placeholders
@@ -62,8 +50,5 @@ def MULTI_BULLET(GROUP_A, GROUP_B, POS, FIRE_DIRECTION, PLACEHOLDER):
     GROUP_A.add(BULLET_1, BULLET_2, BULLET_3, BULLET_4, BULLET_5, BULLET_6, BULLET_7, BULLET_8)
     GROUP_B.add(BULLET_1, BULLET_2, BULLET_3, BULLET_4, BULLET_5, BULLET_6, BULLET_7, BULLET_8)
     D.MEDIA['multi_shoot_sound'].play()
-
-print('█', end='', flush=True)
-    
 
     

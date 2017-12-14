@@ -36,8 +36,6 @@ def TITLE_SCREEN():
         pygame.display.flip()
         CLOCK.tick(60)
 
-print('█', end='', flush=True)
-
 # MODE SELECT
 def MODE_SELECT():
     CLOCK = pygame.time.Clock()
@@ -92,9 +90,7 @@ def MODE_SELECT():
 
         pygame.display.flip()
         CLOCK.tick(60)
-
-print('█', end='', flush=True)
-
+        
 # CHARACTER SELECT
 def CHARACTER_SELECT():
     '''Gets images and returns them'''
@@ -183,8 +179,6 @@ def CHARACTER_SELECT():
         
         pygame.display.flip()
         CLOCK.tick(60)
-
-print('█', end='', flush=True)
 
 # GAME
 def GAME():
@@ -456,7 +450,6 @@ def GAME():
         pygame.display.flip()
         CLOCK.tick(60)
 
-print('█', end='', flush=True)
             
             
             

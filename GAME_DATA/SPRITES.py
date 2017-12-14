@@ -68,8 +68,6 @@ class RECT(pygame.sprite.Sprite):
                     elif bullet.vel[1] == 8 or -8 and bullet.vel[0] == 0:
                         self.pos[1] -= D.VEL_DICT['CONVERT']['LASER'][bullet.vel](bullet)                   
 
-print('█', end='', flush=True)
-
 # Bullet
 class BULLET(pygame.sprite.Sprite):
     def __init__(self, pos, vel, image, bullet_type):
@@ -86,8 +84,6 @@ class BULLET(pygame.sprite.Sprite):
             self.rect.center = self.pos
             if not G.PLAY_AREA.contains(self):
                 self.kill()
-
-print('█', end='', flush=True)
 
 # Red/Purple Laser Beam
 class BEAM(pygame.sprite.Sprite):
@@ -106,8 +102,6 @@ class BEAM(pygame.sprite.Sprite):
             self.rect.center = self.pos
             if not G.PLAY_AREA.contains(self):
                 self.kill()
-
-print('█', end='', flush=True)
 
 # Green/Yellow Split Bullet
 class SPLIT_BULLET(pygame.sprite.Sprite):
@@ -133,8 +127,6 @@ class SPLIT_BULLET(pygame.sprite.Sprite):
                 F.ON_SPLIT(self, D.MEDIA, self.groupa, self.groupb, *PARAMS)
                 self.kill()
 
-print('█', end='', flush=True)
-
 # Grey/White Reverse Bullet
 class REVERSE_BULLET(pygame.sprite.Sprite):
     def __init__(self, pos, vel, image, color):
@@ -157,8 +149,6 @@ class REVERSE_BULLET(pygame.sprite.Sprite):
             if not G.PLAY_AREA.contains(self):
                 self.kill()
 
-print('█', end='', flush=True)
-
 # Selector
 class SELECTOR(pygame.sprite.Sprite):
     def __init__(self, pos):
@@ -173,8 +163,6 @@ class SELECTOR(pygame.sprite.Sprite):
         elif self.pos[0] < 0:
             self.pos[0] = 470
 
-print('█', end='', flush=True)
-
 # Larger Selector
 class SELECTOR_BIG(pygame.sprite.Sprite):
     def __init__(self, pos):
@@ -188,5 +176,3 @@ class SELECTOR_BIG(pygame.sprite.Sprite):
             self.pos[1] = 200
         elif self.pos[1] <= 100:
             self.pos[1] = 400
-    
-print('█', end='', flush=True)
