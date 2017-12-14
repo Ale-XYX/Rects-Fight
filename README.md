@@ -29,13 +29,13 @@ Title Screen : Space To Continue
 
 ![5](https://i.imgur.com/uk1GMKk.png)
 
-Mode Select [Choose From Normal and CHAOS] : Space To Continue
+Mode Select [Choose From Normal, Tense, and Chaos] : Space To Continue
 
-![6](https://i.imgur.com/yPTGWau.png)
+![6](https://i.imgur.com/1gV6Tg5.png)
 
 Character Select [9 Characters with unique abilities!] : A/D to move P1 Slider, LEFT/RIGHT to move P2 Slider
 
-![7](https://i.imgur.com/2OW69lV.png)
+![7](https://i.imgur.com/aVZfBLl.png)
 
 Main Game [WASD/F/G to Move, shoot, and use ability [P1] : ARROWS/SPACE/RCTRL to Move, shoot, and use ability [P2]]
 
@@ -79,6 +79,6 @@ Grey/White shoot bullets that curve straight back, like a boomarang
 
 Rainbow shoots eight bullets at once in all directions!
 
-![17](https://i.imgur.com/uQh88W4.png)
+![17](https://i.imgur.com/55I64lI.png)
 
 *Quick credit to skrx with helping me with alot of issues + huge improvements/ideas*
