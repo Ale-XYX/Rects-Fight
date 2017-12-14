@@ -7,6 +7,8 @@ Version 2.0: SnivyDroid
 # Changelog 2.0
 - Many Optimizations!
 - Abilities Now complete!
+- Redesigned mode select
+- Redesigned sprites
 - Redesigned README
 
 # HOW TO PLAY

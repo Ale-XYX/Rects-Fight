@@ -19,7 +19,6 @@ SUPERLOOP = True
 P1CHAR = None
 P2CHAR = None
 MODE = None
-EGG = False
 
 # Fonts and other game items
 FONTNORMAL = pygame.font.Font(None, 40)

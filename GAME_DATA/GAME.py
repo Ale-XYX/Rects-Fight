@@ -84,7 +84,6 @@ def MODE_SELECT():
         G.SCREEN.blit(D.MEDIA['tense_card'], (150, 250))
         G.SCREEN.blit(D.MEDIA['chaos_card'], (150, 350))
         ALL_SPRITES.draw(G.SCREEN)
-        # G.SCREEN.blit(D.MEDIA['mode_select_border'], (0, 0))
         G.SCREEN.blit(TEXTS1, (100, 50))
         G.SCREEN.blit(TEXTS2, (120, 500))
 
@@ -135,7 +134,7 @@ def CHARACTER_SELECT():
                     PLAYER2 -= 1
                     SELECTORB.pos[0] -= 55
                 if event.key == pygame.K_SPACE:
-                    #Loads character values based on Player 1 and Player 2's choices.
+                    # Loads character values based on Player 1 and Player 2's choices.
                     G.P1CHAR = COLOR_CHOICES[PLAYER1]
                     G.P2CHAR = COLOR_CHOICES[PLAYER2]
                     LOOP = False
@@ -200,18 +199,13 @@ def GAME():
     PLAYER_2 = S.RECT((465, 465), BULLETS_1, (-BULLET_VELOCITY, 0), G.P2CHAR, ALL_SPRITES)
     PLAYER_1.health = D.MODE_DICT[G.MODE]['HEALTH']
     PLAYER_2.health = D.MODE_DICT[G.MODE]['HEALTH']
-    # DT is broken on classic so I added this :///
-    if G.MODE == 'CLASSIC':
-        DT_COOLDOWN = CLOCK.tick(60) / 1000
-    else:
-        DT_COOLDOWN = D.MODE_DICT[G.MODE]['DT']    
+    COOLDOWN_1 = D.MODE_DICT[G.MODE]['COOLDOWN']
+    COOLDOWN_2 = D.MODE_DICT[G.MODE]['COOLDOWN']   
     # Bools
     LOOP = True
     TIME = True
     ABILITY_1 = False
     ABILITY_2 = False
-    COOLDOWN_1 = 3
-    COOLDOWN_2 = 3
     TIME_1 = True
     TIME_2 = True
     ON_START = True
@@ -244,12 +238,12 @@ def GAME():
                     PLAYER_1.ability(BULLETS_1, ALL_SPRITES, PLAYER_1.rect.center, (PLAYER_1.fire_direction), *PLAYER_1.params)
                     TIME_1 = True
                     ABILITY_1 = False
-                    COOLDOWN_1 = 3
+                    COOLDOWN_1 = D.MODE_DICT[G.MODE]['COOLDOWN']
                 if event.key == pygame.K_RCTRL and not PLAYER_2.toggle and ABILITY_2:
                     PLAYER_2.ability(BULLETS_2, ALL_SPRITES, PLAYER_2.rect.center, (PLAYER_2.fire_direction), *PLAYER_2.params)
                     TIME_2 = True
                     ABILITY_2 = False
-                    COOLDOWN_2 = 3
+                    COOLDOWN_2 = D.MODE_DICT[G.MODE]['COOLDOWN']
                 if event.key == pygame.K_d and not PLAYER_1.toggle and PLAYER_1.vel.x == 0:
                     PLAYER_1.vel.x = PLAYER_VELOCITY
                     PLAYER_1.fire_direction = (BULLET_VELOCITY, 0)
@@ -301,8 +295,7 @@ def GAME():
         # On TAB keypress, all game functions cease and pause screen appears until LSHIFT/ESC/ENTER is pressed
         # ESC: Game leaves, both superloop and loop are declared false as the game ends
         # ENTER: Restarts, only loop ends, restarting the game
-        # LSHIFT: Continues operation of game
-        
+        # LSHIFT: Continues operation of game        
         if keys[pygame.K_TAB] and not CONFIRM and not ON_END:
             CONFIRM = True
             TIME = False
@@ -355,12 +348,12 @@ def GAME():
             LOOP = False
                     
         if TIME_1:
-            COOLDOWN_1 -= DT_COOLDOWN
+            COOLDOWN_1 -= DT
             if COOLDOWN_1 <= 0:
                 TIME_1 = False
                 ABILITY_1 = True         
         if TIME_2:
-            COOLDOWN_2 -= DT_COOLDOWN
+            COOLDOWN_2 -= DT
             if COOLDOWN_2 <= 0:
                 TIME_2 = False
                 ABILITY_2 = True
@@ -411,8 +404,6 @@ def GAME():
         ALL_SPRITES.update()
         
         # Drawing code, draws media, hp bars, text, sprites, etc.
-        # Cooldown drawing is still if statements as there is no convenient way to get instant draw code by using dictionaries
-
         G.SCREEN.fill(G.BLACK)
         G.SCREEN.blit(D.MEDIA['wall'], (0, 0))
         G.SCREEN.blit(pygame.transform.flip(D.HP_DICT[PLAYER_1.health], True, False), (20, 530))
@@ -420,25 +411,11 @@ def GAME():
         G.SCREEN.blit(TXT, TEXT_LOCAL)
         G.SCREEN.blit(TEXTS1, (19, 515))
         G.SCREEN.blit(TEXTS2, (429, 515))
-        
-        if COOLDOWN_1 <= 3 and COOLDOWN_1 >= 2:
-            G.SCREEN.blit(D.MEDIA['cooldown4'], (100, 515))
-        elif COOLDOWN_1 <= 2 and COOLDOWN_1 >= 1:
-            G.SCREEN.blit(D.MEDIA['cooldown3'], (100, 515))
-        elif COOLDOWN_1 <= 1 and COOLDOWN_1 >= 0:
-            G.SCREEN.blit(D.MEDIA['cooldown2'], (100, 515))
-        elif COOLDOWN_1 <= 0:
-            G.SCREEN.blit(D.MEDIA['cooldown1'], (100, 515))
-            
-        if COOLDOWN_2 <= 3 and COOLDOWN_2 >= 2:
-            G.SCREEN.blit(D.MEDIA['cooldown4'], (380, 515))
-        elif COOLDOWN_2 <= 2 and COOLDOWN_2 >= 1:
-            G.SCREEN.blit(D.MEDIA['cooldown3'], (380, 515))
-        elif COOLDOWN_2 <= 1 and COOLDOWN_2 >= 0:
-            G.SCREEN.blit(D.MEDIA['cooldown2'], (380, 515))
-        elif COOLDOWN_2 <= 0:
-            G.SCREEN.blit(D.MEDIA['cooldown1'], (380, 515))
-
+        DRAWPARAMS1 = [F.GET_COOLDOWN_IMG(G.MODE, COOLDOWN_1), (100, 515)]
+        DRAWPARAMS2 = [F.GET_COOLDOWN_IMG(G.MODE, COOLDOWN_2), (380, 515)]
+        G.SCREEN.blit(*DRAWPARAMS1)
+        G.SCREEN.blit(*DRAWPARAMS2)
+                
         ALL_SPRITES.draw(G.SCREEN)
         
         if ON_END:

@@ -11,7 +11,8 @@ pygame.mixer.init()
 
 CLOCK = pygame.time.Clock()
 
-# Media Dictionary [Loads sounds/images into dictionary based on filename]
+# Media Dictionary
+# Loads sounds/images into dictionary based on filename
 MEDIA = {}
 FILES = glob.glob(os.path.join(os.path.dirname(__file__), 'MEDIA_DATA', 'IMAGE', '*.png'))
 FILES2 = glob.glob(os.path.join(os.path.dirname(__file__), 'MEDIA_DATA', 'AUDIO', '*.wav'))
@@ -27,7 +28,8 @@ for FILE_NAME in FILES2:
     MEDIA[os.path.split(FILE_NAME)[-1][:-4]] = OBJ
     
 
-# Player Media Dictionary [When accsessed, returns images for characters]
+# Player Media Dictionary
+# When accsessed, returns images for characters
 PLAYER_DICT = {
     'BLUE': {
         'COLOR': G.BLUE,
@@ -88,7 +90,8 @@ PLAYER_DICT = {
         'PARAMS': ['PLACEHOLDER']},
     }
 
-# Velocity Dictionary [Converts and compares velocities (for abilities)]
+# Velocity Dictionary
+# Converts and compares velocities (for abilities)
 VEL_DICT = {
     'CONVERT': {
         'BIG_BULLET': {
@@ -167,32 +170,74 @@ VEL_DICT = {
                 'RIGHT': lambda self: (self.vel[0] - 0.2, self.vel[1] - 0.02),
                 'LEFT': lambda self: (self.vel[0] + 0.2, self.vel[1] + 0.02),
                 'UP': lambda self: (self.vel[0] - 0.02, self.vel[1] + 0.2),
-                'DOWN': lambda self: (self.vel[0] - 0.02, self.vel[1] - 0.2),
+                'DOWN': lambda self: (self.vel[0] + 0.02, self.vel[1] - 0.2),
                 
-                'MEDRIGHT': lambda self: (self.vel[0] - 0.4, self.vel[1] - 0.05),
-                'MEDLEFT': lambda self: (self.vel[0] + 0.4, self.vel[1] + 0.05),
-                'MEDUP': lambda self: (self.vel[0] - 0.05, self.vel[1] + 0.4),
-                'MEDDOWN': lambda self: (self.vel[0] - 0.1, self.vel[1] - 0.4),
+                'MEDRIGHT': lambda self: (self.vel[0] - 0.4, self.vel[1] - 0.1),
+                'MEDLEFT': lambda self: (self.vel[0] + 0.4, self.vel[1] + 0.1),
+                'MEDUP': lambda self: (self.vel[0] - 0.1, self.vel[1] + 0.4),
+                'MEDDOWN': lambda self: (self.vel[0] + 0.1, self.vel[1] - 0.4),
                 
-                'FASTRIGHT': lambda self: (self.vel[0] - 0.4, self.vel[1] - 0.1),
-                'FASTLEFT': lambda self: (self.vel[0] + 0.4, self.vel[1] + 0.1),
-                'FASTUP': lambda self: (self.vel[0] - 0.1, self.vel[1] + 0.4),
-                'FASTDOWN': lambda self: (self.vel[0] - 0.1, self.vel[1] - 0.4)},
+                'FASTRIGHT': lambda self: (self.vel[0] - 0.6, self.vel[1] - 0.15),
+                'FASTLEFT': lambda self: (self.vel[0] + 0.6, self.vel[1] + 0.15),
+                'FASTUP': lambda self: (self.vel[0] - 0.15, self.vel[1] + 0.6),
+                'FASTDOWN': lambda self: (self.vel[0] + 0.15, self.vel[1] - 0.6)},
             'GREY': {
                 'RIGHT': lambda self: (self.vel[0] - 0.2, self.vel[1] + 0.02),
                 'LEFT': lambda self: (self.vel[0] + 0.2, self.vel[1] - 0.02),
                 'UP': lambda self: (self.vel[0] + 0.02, self.vel[1] + 0.2),
-                'DOWN': lambda self:(self.vel[0] + 0.02, self.vel[1] - 0.2),
+                'DOWN': lambda self:(self.vel[0] - 0.02, self.vel[1] - 0.2),
                 
-                'MEDRIGHT': lambda self: (self.vel[0] - 0.4, self.vel[1] + 0.05),
-                'MEDLEFT': lambda self: (self.vel[0] + 0.4, self.vel[1] - 0.05),
-                'MEDUP': lambda self: (self.vel[0] + 0.05, self.vel[1] + 0.4),
-                'MEDDOWN': lambda self: (self.vel[0] + 0.1, self.vel[1] - 0.4),
+                'MEDRIGHT': lambda self: (self.vel[0] - 0.4, self.vel[1] + 0.1),
+                'MEDLEFT': lambda self: (self.vel[0] + 0.4, self.vel[1] - 0.1),
+                'MEDUP': lambda self: (self.vel[0] + 0.1, self.vel[1] + 0.4),
+                'MEDDOWN': lambda self: (self.vel[0] - 0.1, self.vel[1] - 0.4),
                 
-                'FASTRIGHT': lambda self: (self.vel[0] - 0.4, self.vel[1] + 0.1),
-                'FASTLEFT': lambda self: (self.vel[0] + 0.4, self.vel[1] - 0.1),
-                'FASTUP': lambda self: (self.vel[0] + 0.1, self.vel[1] + 0.4),
-                'FASTDOWN': lambda self:(self.vel[0] + 0.1, self.vel[1] - 0.4)}
+                'FASTRIGHT': lambda self: (self.vel[0] - 0.6, self.vel[1] + 0.15),
+                'FASTLEFT': lambda self: (self.vel[0] + 0.6, self.vel[1] - 0.15),
+                'FASTUP': lambda self: (self.vel[0] + 0.15, self.vel[1] + 0.6),
+                'FASTDOWN': lambda self:(self.vel[0] - 0.15, self.vel[1] - 0.6)}
+            },
+        'MULTI_BULLET': {
+            'CLASSIC': {
+                1: (5, 0),
+                2: (5, -5),
+                3: (0, -5),
+                4: (-5, -5),
+                5: (-5, 0),
+                6: (-5, 5),
+                7: (0, 5),
+                8: (5, 5)
+                },
+            'TENSE': {
+                1: (7, 0),
+                2: (7, -7),
+                3: (0, -7),
+                4: (-7, -7),
+                5: (-7, 0),
+                6: (-7, 7),
+                7: (0, 7),
+                8: (7, 7)
+                },
+            'CHAOS': {
+                1: (9, 0),
+                2: (9, -9),
+                3: (0, -9),
+                4: (-9, -9),
+                5: (-9, 0),
+                6: (-9, 9),
+                7: (0, 9),
+                8: (9, 9)
+                },
+            None: {
+                1: (5, 0),
+                2: (5, -5),
+                3: (0, -5),
+                4: (-5, -5),
+                5: (-5, 0),
+                6: (-5, 5),
+                7: (0, 5),
+                8: (5, 5)
+                },
             }
         },
     'COMPARE': {
@@ -231,7 +276,8 @@ VEL_DICT = {
         }
     }
 
-# Mode Values [Based on G.MODE]
+# Mode Values
+# Values are accsessed based on G.MODE]
 MODE_DICT = {
     'CLASSIC': {
         'TIMER': 30,
@@ -239,7 +285,8 @@ MODE_DICT = {
         'BULLET_VELOCITY': 8,
         'HEALTH': 3,
         'SOUND': MEDIA['classic_sound'],
-        'MUSIC': MEDIA['classic_music']},
+        'MUSIC': MEDIA['classic_music'],
+        'COOLDOWN': 3},
     'TENSE': {
         'TIMER': 20,
         'PLAYER_VELOCITY': 7,
@@ -247,7 +294,7 @@ MODE_DICT = {
         'HEALTH': 2,
         'SOUND': MEDIA['tense_sound'],
         'MUSIC': MEDIA['tense_music'],
-        'DT': CLOCK.tick(60) / 750},
+        'COOLDOWN': 1},
     'CHAOS': {
         'TIMER': 10,
         'PLAYER_VELOCITY': 8,
@@ -255,10 +302,11 @@ MODE_DICT = {
         'HEALTH': 1,
         'SOUND': MEDIA['chaos_sound'], 
         'MUSIC': MEDIA['chaos_music'],
-        'DT': CLOCK.tick(60) / 100}
+        'COOLDOWN': 0.3}
     }
 
-# HP Bars [Works like PLAYER_DICT, but with player.health]
+# HP Bars
+# Works like PLAYER_DICT, but with player.health
 HP_DICT = {
     0: MEDIA['hp_dead'],
     1: MEDIA['hp_low'],
@@ -267,7 +315,8 @@ HP_DICT = {
     -1: MEDIA['hp_dead']
     }
 
-# Timer [Works as HP bars and player_dict]
+# Timer
+# Works as HP bars and player_dict
 TIMER_DICT = {
     True: [G.RED, G.FONTB],
     False: [G.WHITE, G.FONTNORMAL]
