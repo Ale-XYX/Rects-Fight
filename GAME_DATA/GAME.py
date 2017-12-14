@@ -16,8 +16,6 @@ pygame.display.set_icon(D.MEDIA['icon'])
 def TITLE_SCREEN():
     CLOCK = pygame.time.Clock()
     LOOP = True
-    TIME = True
-    TIMER = 10
     DT = CLOCK.tick(60) / 1000
 
     while LOOP:
@@ -30,21 +28,11 @@ def TITLE_SCREEN():
                     LOOP = False
                     D.MEDIA['start_sound'].play()
                 elif event.key == pygame.K_ESCAPE:
-                    pygame.quit()
-        keys = pygame.key.get_pressed()
-        if TIME:
-            TIMER -= DT
-            if TIMER <= 0:
-                TIME = False
-        if keys[pygame.K_RSHIFT] and not TIME:
-            G.EGG = True
-            LOOP = False
-            
+                    pygame.quit()            
         # Drawing
         G.SCREEN.fill(G.BLACK)
         G.SCREEN.blit(D.MEDIA['title'], (0, 0))
-        if not TIME:
-            G.SCREEN.blit(D.MEDIA['egtg'], (200, 100))
+        
         pygame.display.flip()
         CLOCK.tick(60)
 
@@ -59,8 +47,8 @@ def MODE_SELECT():
     ALL_SPRITES.add(SELECTOR_BIG)
     SELECTINT = 0
     MODE_CHOICES = ['CLASSIC', 'TENSE', 'CHAOS']
-    TEXTS1 = G.FONTNORMAL.render('Choose your difficulty', True, G.WHITE)
-    TEXTS2 = G.FONTNORMAL.render('Space to continue', True, G.WHITE)    
+    TEXTS1 = G.FONTNORMAL.render('Choose Your Difficulty', True, G.WHITE)
+    TEXTS2 = G.FONTNORMAL.render('Space To Continue', True, G.WHITE)    
 
     while LOOP:
         for event in pygame.event.get():
@@ -100,7 +88,7 @@ def MODE_SELECT():
         ALL_SPRITES.draw(G.SCREEN)
         # G.SCREEN.blit(D.MEDIA['mode_select_border'], (0, 0))
         G.SCREEN.blit(TEXTS1, (100, 50))
-        G.SCREEN.blit(TEXTS2, (125, 500))
+        G.SCREEN.blit(TEXTS2, (120, 500))
 
         pygame.display.flip()
         CLOCK.tick(60)
@@ -465,26 +453,6 @@ def GAME():
         if CONFIRM:
             G.SCREEN.blit(D.MEDIA['paused'], (154, 165))
                 
-        pygame.display.flip()
-        CLOCK.tick(60)
-        
-print('█', end='', flush=True)
-
-# Easter egg page :)            
-def EGG():
-    LOOP = True
-    CLOCK = pygame.time.Clock()
-    FONTS1 = G.FONTNORMAL.render('All Sounds from freesound.org', True, G.WHITE)
-    while LOOP:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-                
-        G.SCREEN.fill(G.BLACK)
-        G.SCREEN.blit(D.MEDIA['egg'], (0, 100))
-        G.SCREEN.blit(FONTS1, (40, 10))
-        
         pygame.display.flip()
         CLOCK.tick(60)
 

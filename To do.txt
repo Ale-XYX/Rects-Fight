@@ -1,9 +1,2 @@
 To Do 2.0:
-Redesign mode card
-Redesign rainbow sprite
-Redesign laser sprites
-Redesign big bullet sprite
-Redesign reverse bullet sprite
-Redesign icon
-remove easter egg
 Wrap up production
