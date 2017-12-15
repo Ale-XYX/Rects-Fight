@@ -177,10 +177,10 @@ VEL_DICT = {
                 'MEDUP': lambda self: (self.vel[0] - 0.1, self.vel[1] + 0.4),
                 'MEDDOWN': lambda self: (self.vel[0] + 0.1, self.vel[1] - 0.4),
                 
-                'FASTRIGHT': lambda self: (self.vel[0] - 0.6, self.vel[1] - 0.15),
-                'FASTLEFT': lambda self: (self.vel[0] + 0.6, self.vel[1] + 0.15),
-                'FASTUP': lambda self: (self.vel[0] - 0.15, self.vel[1] + 0.6),
-                'FASTDOWN': lambda self: (self.vel[0] + 0.15, self.vel[1] - 0.6)},
+                'FASTRIGHT': lambda self: (self.vel[0] - 0.6, self.vel[1] - 0.2),
+                'FASTLEFT': lambda self: (self.vel[0] + 0.6, self.vel[1] + 0.2),
+                'FASTUP': lambda self: (self.vel[0] - 0.2, self.vel[1] + 0.6),
+                'FASTDOWN': lambda self: (self.vel[0] + 0.2, self.vel[1] - 0.6)},
             'GREY': {
                 'RIGHT': lambda self: (self.vel[0] - 0.2, self.vel[1] + 0.02),
                 'LEFT': lambda self: (self.vel[0] + 0.2, self.vel[1] - 0.02),
@@ -192,10 +192,10 @@ VEL_DICT = {
                 'MEDUP': lambda self: (self.vel[0] + 0.1, self.vel[1] + 0.4),
                 'MEDDOWN': lambda self: (self.vel[0] - 0.1, self.vel[1] - 0.4),
                 
-                'FASTRIGHT': lambda self: (self.vel[0] - 0.6, self.vel[1] + 0.15),
-                'FASTLEFT': lambda self: (self.vel[0] + 0.6, self.vel[1] - 0.15),
-                'FASTUP': lambda self: (self.vel[0] + 0.15, self.vel[1] + 0.6),
-                'FASTDOWN': lambda self:(self.vel[0] - 0.15, self.vel[1] - 0.6)}
+                'FASTRIGHT': lambda self: (self.vel[0] - 0.6, self.vel[1] + 0.2),
+                'FASTLEFT': lambda self: (self.vel[0] + 0.6, self.vel[1] - 0.2),
+                'FASTUP': lambda self: (self.vel[0] + 0.2, self.vel[1] + 0.6),
+                'FASTDOWN': lambda self:(self.vel[0] - 0.2, self.vel[1] - 0.6)}
             },
         'MULTI_BULLET': {
             'CLASSIC': {
