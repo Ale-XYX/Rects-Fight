@@ -21,7 +21,7 @@ FONT_ITALIC = pygame.font.SysFont(None, 40, False, True)
 FONT_BOLD_ITALIC = pygame.font.SysFont(None, 40, True, True)
 
 # Variables
-client_superloop = True
+superloop = True
 playero_charvalue = None
 playert_charvalue = None
 game_modevalue = None

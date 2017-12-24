@@ -36,5 +36,6 @@ if __name__ == '__main__':
     game.title_screen()
     game.mode_select()
     game.char_select()
-    game.main()
+    while game.globals.superloop:
+        game.main()
     pygame.quit()
