@@ -1,16 +1,13 @@
 ![Title](https://i.imgur.com/pvWhary.png) 
 
-Version 2.0: SnivyDroid
+Version 2.1: SnivyDroid
 
 ***REQUIRES PYTHON/PYGAME LIBRARY***
 
-# Changelog 2.0
-- Many Optimizations!
-- Abilities Now complete!
-- Redesigned mode select
-- Redesigned sprites
-- Redesigned README
-
+# Changelog 2.1
+- Complete PEP-8 Rewrite
+- Abilities are now shown in character select
+- Optimizations
 # HOW TO PLAY
 
 **Install**
