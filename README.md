@@ -32,7 +32,7 @@ Mode Select [Choose From Normal, Tense, and Chaos] : Space To Continue
 
 Character Select [9 Characters with unique abilities!] : A/D to move P1 Slider, LEFT/RIGHT to move P2 Slider
 
-![7](https://imgur.com/a/UnzF4)
+![7](https://i.imgur.com/eTDk7PQ.png)
 
 Main Game [WASD/F/G to Move, shoot, and use ability [P1] : ARROWS/SPACE/RCTRL to Move, shoot, and use ability [P2]]
 
