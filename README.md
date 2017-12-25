@@ -28,7 +28,7 @@ Title Screen : Space To Continue
 
 Mode Select [Choose From Normal, Tense, and Chaos] : Space To Continue
 
-![6](https://i.imgur.com/1gV6Tg5.png)
+![6](https://i.imgur.com/VXz1aPp.png)
 
 Character Select [9 Characters with unique abilities!] : A/D to move P1 Slider, LEFT/RIGHT to move P2 Slider
 
