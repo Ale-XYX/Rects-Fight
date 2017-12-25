@@ -33,12 +33,16 @@ def mode_select():
     clock = pygame.time.Clock()
     loop = True
     all_sprites = pygame.sprite.Group()
-    selector_big = sprites.SelectorBig((250, 200))
+    selector_big = sprites.SelectorBig((110, 200))
     all_sprites.add(selector_big)
     select_int = 0
     mode_choices = ['Classic', 'Tense', 'Chaos']
+    mode_desc = ['Carefree fun for all!', 'Difficulty increased!', 'Its all or nothing!']
     TEXTS1 = globals.FONT_BIG.render('Choose Your Difficulty', True, globals.WHITE)
     TEXTS2 = globals.FONT_BIG.render('Space To Continue', True, globals.WHITE)
+    txt = globals.FONT_BIG.render(
+        mode_desc[select_int], True, dictionaries.MODE_VALUES[mode_choices[select_int]]['Color']
+    )
 
     while loop:
         for event in pygame.event.get():
@@ -56,27 +60,31 @@ def mode_select():
                 if event.key == pygame.K_SPACE:
                     globals.game_modevalue = mode_choices[select_int]
                     dictionaries.MODE_VALUES[globals.game_modevalue]['Sound'].play()
-                    dictionaries.PLAYER_MEDIA['Rainbow'].update({'Parameters': [globals.game_modevalue]})
                     loop = False
                 if event.key in (pygame.K_UP, pygame.K_DOWN):
                     if select_int == -1:
                         select_int = 2
                     elif select_int == 3:
                         select_int = 0
+                    txt = globals.FONT_BIG.render(
+                        mode_desc[select_int], True, dictionaries.MODE_VALUES[mode_choices[select_int]]['Color']
+                    )
                     dictionaries.MEDIA['select_sound'].play()
         all_sprites.update()
 
         # Drawing
         globals.screen.fill(globals.BLACK)
-        globals.screen.blit(dictionaries.MEDIA['classic_card'], (150, 150))
-        globals.screen.blit(dictionaries.MEDIA['tense_card'], (150, 250))
-        globals.screen.blit(dictionaries.MEDIA['chaos_card'], (150, 350))
+        globals.screen.blit(dictionaries.MEDIA['classic_card'], (10, 150))
+        globals.screen.blit(dictionaries.MEDIA['tense_card'], (10, 250))
+        globals.screen.blit(dictionaries.MEDIA['chaos_card'], (10, 350))
+        globals.screen.blit(txt, dictionaries.MODE_VALUES[mode_choices[select_int]]['Location'])
         all_sprites.draw(globals.screen)
         globals.screen.blit(TEXTS1, (100, 50))
         globals.screen.blit(TEXTS2, (120, 500))
 
         pygame.display.flip()
         clock.tick(60)
+
 
 
 def char_select():
@@ -141,7 +149,7 @@ def char_select():
                     playero_image, chartxto, abiltxto = get(color_choices[playero_int])
                     playert_image, chartxtt, abiltxtt = get(color_choices[playert_int])
                     dictionaries.MEDIA['select_sound'].play()
-        all_sprites.update()
+        all_sprites.update(470, 30)
 
         globals.screen.fill(globals.BLACK)
         globals.screen.blit(TEXTS1, (90, 50))

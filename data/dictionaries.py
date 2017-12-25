@@ -281,7 +281,9 @@ MODE_VALUES = {
         'Health': 3,
         'Sound': MEDIA['classic_sound'],
         'Music': MEDIA['classic_music'],
-        'Cooldown': 3
+        'Cooldown': 3,
+        'Color': globals.GREEN,
+        'Location': (220, 190)
     },
     'Tense': {
         'Timer': 20,
@@ -290,7 +292,9 @@ MODE_VALUES = {
         'Health': 2,
         'Sound': MEDIA['tense_sound'],
         'Music': MEDIA['tense_music'],
-        'Cooldown': 1
+        'Cooldown': 1,
+        'Color': globals.YELLOW,
+        'Location': (220, 290)
     },
     'Chaos': {
         'Timer': 10,
@@ -299,7 +303,9 @@ MODE_VALUES = {
         'Health': 1,
         'Sound': MEDIA['chaos_sound'],
         'Music': MEDIA['chaos_music'],
-        'Cooldown': 0.3
+        'Cooldown': 0.3,
+        'Color': globals.RED,
+        'Location': (220, 390)
     }
 }
 

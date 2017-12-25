@@ -159,12 +159,14 @@ class Selector(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=pos)
         self.pos = pygame.math.Vector2(pos)
 
-    def update(self):
+    def update(self, max, min):
         self.rect.center = self.pos
-        if self.pos[0] > 470:
-            self.pos[0] = 30
-        elif self.pos[0] < 0:
-            self.pos[0] = 470
+        if self.pos[0] > max:
+            self.pos[0] = min
+        elif self.pos[0] < min:
+            self.pos[0] = max
+
+
 
 
 # Larger Selector
