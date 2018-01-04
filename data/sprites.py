@@ -17,12 +17,12 @@ class RectPlayer(pygame.sprite.Sprite):
         self.image = dictionaries.PLAYER_MEDIA[color]['Image']
         self.color = dictionaries.PLAYER_MEDIA[color]['Color']
         self.bullet_image = dictionaries.PLAYER_MEDIA[color]['Bullet_Image']
+        self.fire_direction = direction
         self.params = dictionaries.PLAYER_MEDIA[color]['Parameters']
         self.ability = ability
         self.rect = self.image.get_rect(center=pos)
         self.vel = pygame.math.Vector2(0, 0)
         self.pos = pygame.math.Vector2(pos)
-        self.fire_direction = direction
         self.health = 3
         self.enemy_bullets = enemy_bullets
         self.toggle = False

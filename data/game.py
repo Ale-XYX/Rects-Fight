@@ -59,6 +59,8 @@ def mode_select():
                     selector_big.pos[1] += 100
                 if event.key == pygame.K_SPACE:
                     globals.game_modevalue = mode_choices[select_int]
+                    dictionaries.PLAYER_MEDIA['Rainbow'].update({'Parameters': [globals.game_modevalue]})
+                    print(dictionaries.PLAYER_MEDIA['Rainbow']['Parameters'])
                     dictionaries.MODE_VALUES[globals.game_modevalue]['Sound'].play()
                     loop = False
                 if event.key in (pygame.K_UP, pygame.K_DOWN):

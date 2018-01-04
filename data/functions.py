@@ -1,9 +1,9 @@
 # Functions
 # Functions used in game
 import pygame
-import data.globals as globals
-import data.dictionaries as dictionaries
-import data.sprites as sprites
+import globals as globals
+import dictionaries as dictionaries
+import sprites as sprites
 
 pygame.init()
 
@@ -42,7 +42,6 @@ def reverse_bullet(group_a, group_b, pos, vel, img, color):
 
 
 def multi_bullet(group_a, group_b, pos, fire_direction, game_modevalue):
-    print(game_modevalue)
     bullet_1 = sprites.Bullet(
         pos,
         dictionaries.VELOCITY_VALUES['Convert']['Multi_Bullet'][game_modevalue][1],
