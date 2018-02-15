@@ -42,7 +42,6 @@ class RectPlayer(pygame.sprite.Sprite):
                     self.kill()
                     self.toggle = True
             elif bullet.type == 'Big_Bullet':
-                print('Test')
                 self.health -= 2
                 dictionaries.MEDIA['hit_sound'].play()
                 if self.health <= 0:

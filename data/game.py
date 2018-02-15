@@ -1,9 +1,9 @@
+import pygame
+import sys
 import globals
 import dictionaries
 import sprites
 import functions
-import pygame
-import sys
 
 pygame.display.set_caption('Rects Fight! 2.1')
 pygame.display.set_icon(dictionaries.MEDIA['icon'])
@@ -60,7 +60,6 @@ def mode_select():
                 if event.key == pygame.K_SPACE:
                     globals.game_modevalue = mode_choices[select_int]
                     dictionaries.PLAYER_MEDIA['Rainbow'].update({'Parameters': [globals.game_modevalue]})
-                    print(dictionaries.PLAYER_MEDIA['Rainbow']['Parameters'])
                     dictionaries.MODE_VALUES[globals.game_modevalue]['Sound'].play()
                     loop = False
                 if event.key in (pygame.K_UP, pygame.K_DOWN):
@@ -144,6 +143,8 @@ def char_select():
                     # Loads character values based on Player 1 and Player 2's choices.
                     globals.playero_charvalue = color_choices[playero_int][0]
                     globals.playert_charvalue = color_choices[playert_int][0]
+                    if globals.playero_charvalue == 'Grey' and globals.playert_charvalue == 'White':
+                        globals.mem_activate = True
                     loop = False
                 if event.key in (pygame.K_d, pygame.K_a, pygame.K_RIGHT, pygame.K_LEFT):
                     playero_int %= len(color_choices)
@@ -212,6 +213,7 @@ def main():
     on_start = True
     on_end = False
     confirm = False
+    draw = False
     # Integers
     velocity_reset = 0
     dt = clock.tick(60) / 1000
@@ -302,8 +304,8 @@ def main():
             time = False
             time_o = False
             time_t = False
-            for SPRITE in all_sprites:
-                SPRITE.toggle = True
+            for sprite in all_sprites:
+                sprite.toggle = True
             pygame.mixer.pause()
             dictionaries.MEDIA['pause_sound'].play()
 
@@ -312,8 +314,8 @@ def main():
             time = True
             time_o = True
             time_t = True
-            for SPRITE in all_sprites:
-                SPRITE.toggle = False
+            for sprite in all_sprites:
+                sprite.toggle = False
             pygame.mixer.unpause()
             dictionaries.MEDIA['pause_sound'].play()
 
@@ -330,8 +332,8 @@ def main():
             timer -= dt
             txt = dictionaries.TIMER_DICT[timer < 10][1].render(str(round(timer, 1)), True, dictionaries.TIMER_DICT[timer < 10][0])
             if timer <= 0:
-                for SPRITE in all_sprites:
-                    SPRITE.toggle = True
+                for sprite in all_sprites:
+                    sprite.toggle = True
                 game_music.stop()
                 time = False
                 time_o = False
@@ -360,7 +362,7 @@ def main():
                 ability_t = True
 
         # Outcome code, when health of a player(s) is at 0, code is run that shows outcome on timer area, stops time, and also contains key actions
-        if player_o.health <= 0:
+        if player_o.health <= 0 and not draw:
             txt = globals.FONT_BIG.render('Player 2 Wins!', True, player_t.color)
             text_location = (155, 530)
             time = False
@@ -373,8 +375,13 @@ def main():
                 loop = False
             elif keys[pygame.K_RETURN] and not confirm:
                 loop = False
+                if globals.mem_activate:
+                    globals.mem.append(1)
+                    print(globals.mem)
+                    if globals.mem == globals.mem_ideal:
+                        pygame.display.set_caption('Regg fitte')
 
-        if player_t.health <= 0:
+        if player_t.health <= 0 and not draw:
             txt = globals.FONT_BIG.render('Player 1 Wins!', True, player_o.color)
             text_location = (155, 530)
             time = False
@@ -387,6 +394,11 @@ def main():
                 loop = False
             elif keys[pygame.K_RETURN] and not confirm:
                 loop = False
+                if globals.mem_activate:
+                    globals.mem.append(0)
+                    print(globals.mem)
+                    if globals.mem == globals.mem_ideal:
+                        pygame.display.set_caption('Regg fitte')
 
         if player_o.health <= 0 and player_t.health <= 0:
             txt = globals.FONT_BIG.render('Draw!', True, globals.GREY)
@@ -395,12 +407,18 @@ def main():
             time_o = False
             time_t = False
             on_end = True
+            draw = True
             game_music.stop()
             if keys[pygame.K_ESCAPE] and not confirm:
                 globals.superloop = False
                 loop = False
             elif keys[pygame.K_RETURN] and not confirm:
                 loop = False
+                if globals.mem_activate:
+                    globals.mem.append(' ')
+                    print(globals.mem)
+                    if globals.mem == globals.mem_ideal:
+                        pygame.display.set_caption('Regg fitte')
 
         all_sprites.update()
 

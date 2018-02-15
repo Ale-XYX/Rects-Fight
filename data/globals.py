@@ -28,3 +28,6 @@ playert_charvalue = None
 game_modevalue = None
 screen = pygame.display.set_mode((500, 600))
 playarea = pygame.Rect(5, 5, 490, 490)
+mem = []
+mem_ideal = [0,1,1,0,0,1,0,1,' ',0,1,1,0,0,1,1,1,' ',0,1,1,0,0,1,1,1,' ',0,1,1,0,0,0,1,0,' ',0,1,1,0,0,0,0,1,' ',0,1,1,0,0,1,1,1]
+mem_activate = False
